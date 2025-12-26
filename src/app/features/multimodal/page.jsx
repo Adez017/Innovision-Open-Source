@@ -15,7 +15,7 @@ export default function MultimodalPage() {
   const router = useRouter();
   const [content, setContent] = useState("");
   const [contentType, setContentType] = useState("audio");
-  const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
   const [result, setResult] = useState(null);
 
   useEffect(() => {
@@ -30,13 +30,11 @@ export default function MultimodalPage() {
       return;
     }
 
-    setLoading(true);
+    setPageLoading(true);
     setResult(null);
 
     try {
-      const endpoint = contentType === "audio" 
-        ? "/api/multimodal/audio" 
-        : "/api/multimodal/video";
+      const endpoint = contentType === "audio" ? "/api/multimodal/audio" : "/api/multimodal/video";
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -46,13 +44,13 @@ export default function MultimodalPage() {
           options: {
             duration: contentType === "audio" ? "5-7 minutes" : "3-5 minutes",
             tone: "educational and friendly",
-            style: "animated explainer"
-          }
-        })
+            style: "animated explainer",
+          },
+        }),
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         setResult(data);
         toast.success(`${contentType === "audio" ? "Audio script" : "Video storyboard"} generated successfully!`);
@@ -65,11 +63,11 @@ export default function MultimodalPage() {
       console.error("Generation error:", error);
       toast.error("An error occurred while generating content");
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   };
 
-  if (loading) {
+  if (pageLoading) {
     return <div className="p-8">Loading...</div>;
   }
 
@@ -96,9 +94,7 @@ export default function MultimodalPage() {
           <Card>
             <CardHeader>
               <CardTitle>Generate Content</CardTitle>
-              <CardDescription>
-                Enter your course content and select the output format
-              </CardDescription>
+              <CardDescription>Enter your course content and select the output format</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -135,11 +131,7 @@ export default function MultimodalPage() {
                 />
               </div>
 
-              <Button 
-                onClick={generateContent} 
-                disabled={loading || !content.trim()}
-                className="w-full"
-              >
+              <Button onClick={generateContent} disabled={loading || !content.trim()} className="w-full">
                 {loading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -155,9 +147,7 @@ export default function MultimodalPage() {
           <Card>
             <CardHeader>
               <CardTitle>Generated Output</CardTitle>
-              <CardDescription>
-                Your generated content will appear here
-              </CardDescription>
+              <CardDescription>Your generated content will appear here</CardDescription>
             </CardHeader>
             <CardContent>
               {loading ? (
@@ -230,8 +220,12 @@ export default function MultimodalPage() {
           <CardContent className="text-sm text-blue-800 dark:text-blue-200">
             <p className="mb-2">To generate actual audio/video files, integrate with:</p>
             <ul className="list-disc list-inside space-y-1 ml-2">
-              <li><strong>Audio:</strong> Google Cloud Text-to-Speech, Amazon Polly, or ElevenLabs</li>
-              <li><strong>Video:</strong> Synthesia, D-ID, or Runway ML</li>
+              <li>
+                <strong>Audio:</strong> Google Cloud Text-to-Speech, Amazon Polly, or ElevenLabs
+              </li>
+              <li>
+                <strong>Video:</strong> Synthesia, D-ID, or Runway ML
+              </li>
             </ul>
           </CardContent>
         </Card>

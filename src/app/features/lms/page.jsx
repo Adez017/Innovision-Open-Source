@@ -14,7 +14,7 @@ export default function LMSPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [config, setConfig] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [courses, setCourses] = useState([]);
 
@@ -29,16 +29,16 @@ export default function LMSPage() {
       loadConfig();
       fetchCourses();
     }
-  }, [session]);
+  }, [user]);
 
   const loadConfig = async () => {
     try {
-      const savedConfig = await getLMSConfig(session.user.email);
+      const savedConfig = await getLMSConfig(user.email);
       setConfig(savedConfig);
     } catch (error) {
       console.error("Failed to load config:", error);
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   };
 
@@ -46,7 +46,7 @@ export default function LMSPage() {
     try {
       const response = await fetch("/api/roadmap/all");
       const data = await response.json();
-      setCourses(data.docs.filter(doc => doc.process === "completed"));
+      setCourses(data.docs.filter((doc) => doc.process === "completed"));
     } catch (error) {
       console.error("Failed to fetch courses:", error);
     }
@@ -71,14 +71,14 @@ export default function LMSPage() {
             course: {
               id: course.id,
               title: course.courseTitle,
-              description: course.courseDescription
-            }
-          }
-        })
+              description: course.courseDescription,
+            },
+          },
+        }),
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         toast.success(`Course synced to ${config.platform}!`);
       } else {
@@ -110,9 +110,7 @@ export default function LMSPage() {
 
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold">LMS Integration</h1>
-          <p className="text-muted-foreground">
-            Connect with Moodle or Canvas to sync courses and grades
-          </p>
+          <p className="text-muted-foreground">Connect with Moodle or Canvas to sync courses and grades</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -128,9 +126,7 @@ export default function LMSPage() {
                       <p className="font-semibold text-green-900 dark:text-green-100">
                         Connected to {config.platform === "moodle" ? "Moodle" : "Canvas"}
                       </p>
-                      <p className="text-sm text-green-800 dark:text-green-200">
-                        {config.credentials.baseUrl}
-                      </p>
+                      <p className="text-sm text-green-800 dark:text-green-200">{config.credentials.baseUrl}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -141,9 +137,7 @@ export default function LMSPage() {
           <Card>
             <CardHeader>
               <CardTitle>Sync Courses</CardTitle>
-              <CardDescription>
-                Sync your InnoVision courses to your LMS
-              </CardDescription>
+              <CardDescription>Sync your InnoVision courses to your LMS</CardDescription>
             </CardHeader>
             <CardContent>
               {!config?.enabled ? (
@@ -158,18 +152,10 @@ export default function LMSPage() {
                       className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
                     >
                       <div className="flex-1">
-                        <h4 className="font-semibold">
-                          {course.courseTitle?.split(":")[0] || "Untitled Course"}
-                        </h4>
-                        <p className="text-sm text-muted-foreground line-clamp-1">
-                          {course.courseDescription}
-                        </p>
+                        <h4 className="font-semibold">{course.courseTitle?.split(":")[0] || "Untitled Course"}</h4>
+                        <p className="text-sm text-muted-foreground line-clamp-1">{course.courseDescription}</p>
                       </div>
-                      <Button
-                        size="sm"
-                        onClick={() => syncCourse(course)}
-                        disabled={syncing}
-                      >
+                      <Button size="sm" onClick={() => syncCourse(course)} disabled={syncing}>
                         {syncing ? (
                           <>
                             <Loader2 className="w-4 h-4 mr-2 animate-spin" />

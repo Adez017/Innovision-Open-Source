@@ -23,10 +23,10 @@ export default function CreateProjectPage() {
     skills: [],
     difficulty: "beginner",
     duration: "",
-    milestones: []
+    milestones: [],
   });
   const [skillInput, setSkillInput] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [projectLoading, setProjectLoading] = useState(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -36,7 +36,7 @@ export default function CreateProjectPage() {
 
   useEffect(() => {
     if (templateId) {
-      const template = projectTemplates.find(t => t.id === templateId);
+      const template = projectTemplates.find((t) => t.id === templateId);
       if (template) {
         setFormData({
           title: template.title,
@@ -44,7 +44,7 @@ export default function CreateProjectPage() {
           skills: template.skills || [],
           difficulty: template.difficulty,
           duration: template.duration,
-          milestones: template.milestones || []
+          milestones: template.milestones || [],
         });
       }
     }
@@ -57,7 +57,7 @@ export default function CreateProjectPage() {
       return;
     }
 
-    setLoading(true);
+    setProjectLoading(true);
     try {
       const project = await createProject(session.user.email, formData);
       if (project && project.id) {
@@ -67,7 +67,7 @@ export default function CreateProjectPage() {
       }
     } catch (error) {
       alert(`Failed to create project: ${error.message}`);
-      setLoading(false);
+      setProjectLoading(false);
     }
   };
 
@@ -75,7 +75,7 @@ export default function CreateProjectPage() {
     if (skillInput.trim() && !formData.skills.includes(skillInput.trim())) {
       setFormData({
         ...formData,
-        skills: [...formData.skills, skillInput.trim()]
+        skills: [...formData.skills, skillInput.trim()],
       });
       setSkillInput("");
     }
@@ -84,11 +84,11 @@ export default function CreateProjectPage() {
   const removeSkill = (skill) => {
     setFormData({
       ...formData,
-      skills: formData.skills.filter(s => s !== skill)
+      skills: formData.skills.filter((s) => s !== skill),
     });
   };
 
-  if (loading) {
+  if (projectLoading) {
     return <div className="p-8">Loading...</div>;
   }
 
@@ -107,9 +107,7 @@ export default function CreateProjectPage() {
         <Card>
           <CardHeader>
             <CardTitle>Create New Project</CardTitle>
-            <CardDescription>
-              Start a new project to build your portfolio and gain practical experience
-            </CardDescription>
+            <CardDescription>Start a new project to build your portfolio and gain practical experience</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -194,8 +192,8 @@ export default function CreateProjectPage() {
               </div>
 
               <div className="flex gap-3 pt-4">
-                <Button type="submit" disabled={loading} className="flex-1">
-                  {loading ? "Creating..." : "Create Project"}
+                <Button type="submit" disabled={projectLoading} className="flex-1">
+                  {projectLoading ? "Creating..." : "Create Project"}
                 </Button>
                 <Link href="/features/projects">
                   <Button type="button" variant="outline">

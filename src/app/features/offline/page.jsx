@@ -14,7 +14,7 @@ export default function OfflinePage() {
   const router = useRouter();
   const { isOnline, offlineCourses, downloadCourse } = useOffline();
   const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [offlineLoading, setOfflineLoading] = useState(true);
   const [downloading, setDownloading] = useState(null);
 
   useEffect(() => {
@@ -33,11 +33,11 @@ export default function OfflinePage() {
     try {
       const response = await fetch("/api/roadmap/all");
       const data = await response.json();
-      setCourses(data.docs.filter(doc => doc.process === "completed"));
+      setCourses(data.docs.filter((doc) => doc.process === "completed"));
     } catch (error) {
       console.error("Failed to fetch courses:", error);
     } finally {
-      setLoading(false);
+      setOfflineLoading(false);
     }
   };
 
@@ -54,10 +54,10 @@ export default function OfflinePage() {
   };
 
   const isDownloaded = (courseId) => {
-    return offlineCourses.some(c => c.id === courseId);
+    return offlineCourses.some((c) => c.id === courseId);
   };
 
-  if (loading) {
+  if (offlineLoading) {
     return <div className="p-8">Loading...</div>;
   }
 
@@ -75,9 +75,7 @@ export default function OfflinePage() {
 
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold">Offline Learning</h1>
-          <p className="text-muted-foreground">
-            Download courses and learn anywhere, anytime
-          </p>
+          <p className="text-muted-foreground">Download courses and learn anywhere, anytime</p>
         </div>
 
         <Card className={isOnline ? "bg-green-50 dark:bg-green-950" : "bg-red-50 dark:bg-red-950"}>
@@ -86,9 +84,7 @@ export default function OfflinePage() {
               {isOnline ? (
                 <>
                   <Wifi className="w-6 h-6 text-green-600" />
-                  <span className="text-green-900 dark:text-green-100 font-semibold">
-                    You are online
-                  </span>
+                  <span className="text-green-900 dark:text-green-100 font-semibold">You are online</span>
                 </>
               ) : (
                 <>
@@ -106,9 +102,7 @@ export default function OfflinePage() {
           <Card>
             <CardHeader>
               <CardTitle>Available Courses</CardTitle>
-              <CardDescription>
-                Download courses for offline access
-              </CardDescription>
+              <CardDescription>Download courses for offline access</CardDescription>
             </CardHeader>
             <CardContent>
               {loading ? (
@@ -123,12 +117,8 @@ export default function OfflinePage() {
                       className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
                     >
                       <div className="flex-1">
-                        <h4 className="font-semibold">
-                          {course.courseTitle?.split(":")[0] || "Untitled Course"}
-                        </h4>
-                        <p className="text-sm text-muted-foreground line-clamp-1">
-                          {course.courseDescription}
-                        </p>
+                        <h4 className="font-semibold">{course.courseTitle?.split(":")[0] || "Untitled Course"}</h4>
+                        <p className="text-sm text-muted-foreground line-clamp-1">{course.courseDescription}</p>
                       </div>
                       {isDownloaded(course.id) ? (
                         <div className="flex items-center gap-2 text-green-600">
@@ -171,23 +161,16 @@ export default function OfflinePage() {
           <Card>
             <CardHeader>
               <CardTitle>Downloaded Courses</CardTitle>
-              <CardDescription>
-                Courses available offline ({offlineCourses.length})
-              </CardDescription>
+              <CardDescription>Courses available offline ({offlineCourses.length})</CardDescription>
             </CardHeader>
             <CardContent>
               {offlineCourses.length > 0 ? (
                 <div className="space-y-3">
                   {offlineCourses.map((course) => (
-                    <div
-                      key={course.id}
-                      className="p-4 border rounded-lg bg-green-50 dark:bg-green-950"
-                    >
+                    <div key={course.id} className="p-4 border rounded-lg bg-green-50 dark:bg-green-950">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="font-semibold">
-                            {course.courseTitle?.split(":")[0] || "Untitled Course"}
-                          </h4>
+                          <h4 className="font-semibold">{course.courseTitle?.split(":")[0] || "Untitled Course"}</h4>
                           <p className="text-sm text-muted-foreground">
                             Downloaded: {new Date(course.downloadedAt).toLocaleDateString()}
                           </p>

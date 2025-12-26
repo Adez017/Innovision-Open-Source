@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projectLoading, setProjectLoading] = useState(true);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -34,11 +34,11 @@ export default function ProjectsPage() {
     } catch (error) {
       console.error("Failed to load projects:", error);
     } finally {
-      setLoading(false);
+      setProjectLoading(false);
     }
   };
 
-  if (loading) {
+  if (projectLoading) {
     return <div className="p-8">Loading...</div>;
   }
 
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
       planning: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
       in_progress: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
       under_review: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
-      completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+      completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
     };
     return colors[status] || colors.planning;
   };
@@ -89,9 +89,7 @@ export default function ProjectsPage() {
               <div className="flex items-center gap-3">
                 <Award className="w-8 h-8 text-green-500" />
                 <div>
-                  <p className="text-2xl font-bold">
-                    {projects.filter(p => p.status === "completed").length}
-                  </p>
+                  <p className="text-2xl font-bold">{projects.filter((p) => p.status === "completed").length}</p>
                   <p className="text-sm text-muted-foreground">Completed</p>
                 </div>
               </div>
@@ -113,9 +111,7 @@ export default function ProjectsPage() {
               <div className="flex items-center gap-3">
                 <Clock className="w-8 h-8 text-orange-500" />
                 <div>
-                  <p className="text-2xl font-bold">
-                    {projects.filter(p => p.status === "under_review").length}
-                  </p>
+                  <p className="text-2xl font-bold">{projects.filter((p) => p.status === "under_review").length}</p>
                   <p className="text-sm text-muted-foreground">Under Review</p>
                 </div>
               </div>
@@ -140,7 +136,7 @@ export default function ProjectsPage() {
             </div>
           </CardHeader>
           <CardContent>
-            {loading ? (
+            {projectLoading ? (
               <div className="text-center p-8">Loading projects...</div>
             ) : projects.length > 0 ? (
               <div className="space-y-4">
@@ -152,7 +148,9 @@ export default function ProjectsPage() {
                           <h3 className="font-semibold text-lg">{project.title}</h3>
                           <p className="text-sm text-muted-foreground">{project.description}</p>
                         </div>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}
+                        >
                           {project.status.replace("_", " ").toUpperCase()}
                         </span>
                       </div>
@@ -165,7 +163,10 @@ export default function ProjectsPage() {
                       </div>
                       <div className="flex gap-2 mt-3">
                         {project.skills?.slice(0, 3).map((skill, i) => (
-                          <span key={i} className="px-2 py-1 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 rounded text-xs">
+                          <span
+                            key={i}
+                            className="px-2 py-1 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 rounded text-xs"
+                          >
                             {skill}
                           </span>
                         ))}

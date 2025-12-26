@@ -12,7 +12,7 @@ import SkillTree from "@/components/gamification/SkillTree";
 export default function GamificationPage() {
   const { user } = useAuth();
 
-  if (!session) {
+  if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-muted-foreground">Please login to view your progress</p>
@@ -25,9 +25,7 @@ export default function GamificationPage() {
       <div className="max-w-[1600px] mx-auto">
         <div className="mb-4">
           <h1 className="text-2xl font-bold mb-1">Your Progress</h1>
-          <p className="text-sm text-muted-foreground">
-            Track achievements, compete, and level up!
-          </p>
+          <p className="text-sm text-muted-foreground">Track achievements, compete, and level up!</p>
         </div>
 
         <Tabs defaultValue="overview" className="space-y-4">
@@ -55,7 +53,7 @@ export default function GamificationPage() {
               <div className="lg:col-span-3">
                 <GamificationDashboard userId={session.user.email} />
               </div>
-              
+
               <div className="lg:col-span-1">
                 <Leaderboard currentUserId={session.user.email} />
               </div>
