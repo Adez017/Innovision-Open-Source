@@ -84,12 +84,12 @@ export async function POST(request) {
 
     // Award XP based on action (removed daily_login)
     const xpRewards = {
-      complete_chapter: 50,
-      complete_course: 500,
+      complete_chapter: 5,
+      complete_course: 50,
       perfect_quiz: 2,
-      help_student: 75,
+      help_student: 15,
       view_course: 10,
-      complete_lesson: 50,
+      complete_lesson: 5,
       correct_answer: 2, // 2 XP per correct answer
       generate_course: 10,
     };

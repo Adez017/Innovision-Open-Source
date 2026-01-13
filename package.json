@@ -27,6 +27,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/postcss7-compat": "^2.2.17",
+    "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -61,7 +62,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.1.18",
     "tailwindcss": "^4"
   },
   "description": "InnoVision is committed to revolutionizing education through intelligent and personalized learning. Our platform breaks the limitations of traditional courses by dynamically generating structured, engaging courses from any user-defined topic. By leveraging AI and machine learning, we create a flexible and adaptive learning environment that tailors content to individual needs.",
