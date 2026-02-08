@@ -25,7 +25,7 @@ const Page = () => {
 
   useEffect(() => {
     // Set random thought only on client side to avoid hydration mismatch
-    setText(thoughts[Math.floor(Math.random() * 10)]);
+    setText(thoughts[Math.floor(Math.random() * thoughts.length)]);
   }, []);
 
   useEffect(() => {
@@ -33,21 +33,6 @@ const Page = () => {
       router.replace("/roadmap");
     }
   }, [user, router]);
-
-  useEffect(() => {
-    const t1 = setTimeout(() => {
-      setText("Please wait while we load your data.");
-    }, 6000);
-
-    const t2 = setTimeout(() => {
-      setText("Almost there...");
-    }, 13000);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, []);
 
   if (loading) {
     return (
