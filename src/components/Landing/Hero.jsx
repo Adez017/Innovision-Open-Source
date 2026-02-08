@@ -28,7 +28,11 @@ const Hero = () => {
             className={`${components.badge.base} ${components.badge.hover} mb-6 sm:mb-8 animate-fade-in`}
             style={{ animationDelay: animations.delay.badge }}
           >
-            <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" style={{ color: colors.primary.blue }} />
+            <Sparkles
+              aria-hidden="true"
+              className="h-3 w-3 sm:h-4 sm:w-4"
+              style={{ color: colors.primary.blue }}
+            />
             <span>AI-Powered Learning Platform</span>
             <span className="px-1.5 sm:px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] sm:text-xs">New</span>
           </div>
@@ -84,7 +88,10 @@ const Hero = () => {
               const Icon = icons[i];
               return (
                 <div key={i} className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 ${landingTheme.radius.full} border border-border bg-card/30 backdrop-blur-sm hover:bg-card/50 ${landingTheme.hover.scale.sm} transition-all duration-300`}>
-                  <Icon className={`h-3 w-3 sm:h-4 sm:w-4 ${item.color}`} />
+                  <Icon
+                    aria-hidden="true"
+                    className={`h-3 w-3 sm:h-4 sm:w-4 ${item.color}`}
+                  />
                   <span>{item.text}</span>
                 </div>
               );
@@ -98,7 +105,11 @@ const Hero = () => {
           >
             <MagneticButton strength={0.2}>
               <Link href="/login" className="w-full sm:w-auto">
-                <Button size="lg" className={`h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-light gap-2 ${components.button.primary} w-full sm:w-auto`}>
+                <Button
+                  size="lg"
+                  aria-label="Get started with InnoVision for free"
+                  className={`h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-light gap-2 ${components.button.primary} w-full sm:w-auto`}
+                >
                   Get Started Free
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -106,7 +117,12 @@ const Hero = () => {
             </MagneticButton>
             <MagneticButton strength={0.2}>
               <Link href="/demo" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className={`h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-light gap-2 ${components.button.secondary} w-full sm:w-auto group`}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  aria-label="Watch product demo"
+                  className={`h-11 sm:h-12 px-6 sm:px-8 text-sm sm:text-base font-light gap-2 ${components.button.secondary} w-full sm:w-auto group`}
+                >
                   <Play className="h-4 w-4 group-hover:scale-110 transition-transform" />
                   See Demo
                 </Button>
@@ -125,8 +141,14 @@ const Hero = () => {
               return (
                 <div key={i} className="text-center group hover:scale-105 transition-transform duration-300">
                   <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-1">
-                    <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${stat.color} group-hover:scale-110 transition-transform`} />
-                    <span className="text-xl sm:text-2xl md:text-3xl font-light text-foreground">
+                    <Icon
+                      aria-hidden="true"
+                      className={`h-4 w-4 sm:h-5 sm:w-5 ${stat.color} group-hover:scale-110 transition-transform`}
+                    />
+                    <span
+                      className="text-xl sm:text-2xl md:text-3xl font-light text-foreground"
+                      aria-label={`${stat.end}${stat.suffix} ${stat.label}`}
+                    >
                       <AnimatedCounter end={stat.end} suffix={stat.suffix} />
                     </span>
                   </div>
