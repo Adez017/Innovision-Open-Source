@@ -71,13 +71,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden bg-black relative">
+    <div className="flex flex-col min-h-screen overflow-hidden bg-background relative transition-colors duration-300">
       {/* Animated dots background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {[...Array(100)].map((_, i) => (
           <div
             key={i}
-            className="dot absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
+            className="dot absolute w-1 h-1 bg-foreground/20 rounded-full animate-pulse"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -93,11 +93,11 @@ export default function ContactPage() {
         <div className="bg-transparent py-12 px-4">
           <ScrollReveal>
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 border border-white/10 rounded-full mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 border border-border rounded-full mb-6">
                 <Mail className="h-7 w-7 text-blue-500" />
               </div>
-              <h1 className="text-white text-4xl md:text-5xl font-light mb-4">Get in Touch</h1>
-              <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light">
+              <h1 className="text-foreground text-4xl md:text-5xl font-light mb-4">Get in Touch</h1>
+              <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto font-light">
                 Have questions? The quickest way to get in touch with us is using the contact information below.
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
                   <input
                     type="email"
                     placeholder="Email"
-                    className="w-full px-5 py-3.5 rounded-full bg-black border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-light"
+                    className="w-full px-5 py-3.5 rounded-full bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-light"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -122,7 +122,7 @@ export default function ContactPage() {
                   <textarea
                     placeholder="Message"
                     rows="5"
-                    className="w-full px-5 py-3.5 rounded-2xl bg-black border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all resize-none font-light"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all resize-none font-light"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     required
@@ -141,20 +141,20 @@ export default function ContactPage() {
                 </div>
               </form>
 
-              <div className="flex justify-center text-gray-400 space-x-6 mt-12">
-                <a href="https://www.instagram.com/hands_on_coding_028/#" className="text-2xl hover:text-white hover:scale-110 transition-all duration-300">
+              <div className="flex justify-center text-muted-foreground space-x-6 mt-12">
+                <a href="https://www.instagram.com/hands_on_coding_028/#" className="text-2xl hover:text-foreground hover:scale-110 transition-all duration-300">
                   <FaInstagram />
                 </a>
-                <a href="https://wa.me/7019003366" className="text-2xl hover:text-white hover:scale-110 transition-all duration-300">
+                <a href="https://wa.me/7019003366" className="text-2xl hover:text-foreground hover:scale-110 transition-all duration-300">
                   <IoLogoWhatsapp />
                 </a>
-                <a href="https://github.com/ItsVikasA" className="text-2xl hover:text-white hover:scale-110 transition-all duration-300">
+                <a href="https://github.com/ItsVikasA" className="text-2xl hover:text-foreground hover:scale-110 transition-all duration-300">
                   <FaGithub />
                 </a>
-                <a href="https://www.linkedin.com/in/vikas028/" className="text-2xl hover:text-white hover:scale-110 transition-all duration-300">
+                <a href="https://www.linkedin.com/in/vikas028/" className="text-2xl hover:text-foreground hover:scale-110 transition-all duration-300">
                   <FaLinkedin />
                 </a>
-                <a href="https://www.youtube.com/@hands_on_coding_028" className="text-2xl hover:text-white hover:scale-110 transition-all duration-300">
+                <a href="https://www.youtube.com/@hands_on_coding_028" className="text-2xl hover:text-foreground hover:scale-110 transition-all duration-300">
                   <FaYoutube />
                 </a>
               </div>
