@@ -12,18 +12,18 @@ export default function PremiumCelebration({ isOpen, onClose }) {
     if (isOpen) {
       // Play celebration sound
       playSound();
-      
+
       // Fire confetti sequence
       fireConfettiSequence();
-      
+
       // Show content after a delay
       setTimeout(() => setShowContent(true), 500);
-      
+
       // Auto close after 6 seconds
       const timer = setTimeout(() => {
         onClose?.();
       }, 6000);
-      
+
       return () => clearTimeout(timer);
     } else {
       setShowContent(false);
@@ -34,25 +34,25 @@ export default function PremiumCelebration({ isOpen, onClose }) {
     try {
       // Create audio context for celebration sound
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      
+
       // Play a victory fanfare sequence
       const playNote = (frequency, startTime, duration, gain = 0.3) => {
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(audioContext.destination);
-        
+
         oscillator.frequency.value = frequency;
         oscillator.type = "sine";
-        
+
         gainNode.gain.setValueAtTime(gain, audioContext.currentTime + startTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + startTime + duration);
-        
+
         oscillator.start(audioContext.currentTime + startTime);
         oscillator.stop(audioContext.currentTime + startTime + duration);
       };
-      
+
       // Victory fanfare notes
       playNote(523.25, 0, 0.15);     // C5
       playNote(659.25, 0.15, 0.15);  // E5
@@ -60,7 +60,7 @@ export default function PremiumCelebration({ isOpen, onClose }) {
       playNote(1046.50, 0.45, 0.4);  // C6 (longer)
       playNote(783.99, 0.85, 0.15);  // G5
       playNote(1046.50, 1.0, 0.6);   // C6 (final, longest)
-      
+
     } catch (error) {
       console.log("Audio not supported");
     }
@@ -154,13 +154,13 @@ export default function PremiumCelebration({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+    <div className="fixed inset-0 z-9999 flex items-center justify-center">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
-      
+
       {/* Content */}
       <div className={`
         relative z-10 text-center transition-all duration-700
@@ -174,7 +174,7 @@ export default function PremiumCelebration({ isOpen, onClose }) {
           <div className="relative animate-bounce-slow">
             <Crown className="h-24 w-24 text-yellow-500 drop-shadow-[0_0_30px_rgba(255,215,0,0.8)]" />
           </div>
-          
+
           {/* Floating sparkles */}
           <Sparkles className="absolute -top-4 -left-4 h-8 w-8 text-yellow-400 animate-float-sparkle" />
           <Sparkles className="absolute -top-2 -right-6 h-6 w-6 text-yellow-300 animate-float-sparkle-delayed" />
@@ -186,7 +186,7 @@ export default function PremiumCelebration({ isOpen, onClose }) {
         <h1 className="text-5xl font-bold text-white mb-4 animate-slide-up">
           Welcome to <span className="text-yellow-500">Premium!</span>
         </h1>
-        
+
         <p className="text-xl text-gray-300 mb-6 animate-slide-up-delayed">
           You now have unlimited access to all features
         </p>
@@ -194,7 +194,7 @@ export default function PremiumCelebration({ isOpen, onClose }) {
         {/* Features unlocked */}
         <div className="flex flex-wrap justify-center gap-3 animate-slide-up-delayed-2">
           {["Unlimited Courses", "Full Curriculum", "All Features", "Priority Support"].map((feature, i) => (
-            <span 
+            <span
               key={feature}
               className="px-4 py-2 bg-yellow-500/20 border border-yellow-500/50 rounded-full text-yellow-400 text-sm font-medium"
               style={{ animationDelay: `${i * 100}ms` }}

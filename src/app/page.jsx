@@ -25,7 +25,7 @@ const Page = () => {
 
   useEffect(() => {
     // Set random thought only on client side to avoid hydration mismatch
-    setText(thoughts[Math.floor(Math.random() * 10)]);
+    setText(thoughts[Math.floor(Math.random() * thoughts.length)]);
   }, []);
 
   useEffect(() => {
@@ -34,26 +34,11 @@ const Page = () => {
     }
   }, [user, router]);
 
-  useEffect(() => {
-    const t1 = setTimeout(() => {
-      setText("Please wait while we load your data.");
-    }, 6000);
-
-    const t2 = setTimeout(() => {
-      setText("Almost there...");
-    }, 13000);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, []);
-
   if (loading) {
     return (
       <div className="relative text-center">
         <Loading />
-        <p className="absolute z-[5] top-1/2 left-1/2 translate-y-1/2 -translate-x-1/2">{text}</p>
+        <p className="absolute z-5 top-1/2 left-1/2 translate-y-1/2 -translate-x-1/2">{text}</p>
       </div>
     );
   }
@@ -62,7 +47,7 @@ const Page = () => {
     return (
       <div className="relative text-center">
         <Loading />
-        <p className="absolute z-[5] top-1/2 left-1/2 translate-y-1/2 -translate-x-1/2">{text}</p>
+        <p className="absolute z-5 top-1/2 left-1/2 translate-y-1/2 -translate-x-1/2">{text}</p>
       </div>
     );
   }

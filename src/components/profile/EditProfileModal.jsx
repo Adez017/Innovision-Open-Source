@@ -135,7 +135,7 @@ export default function EditProfileModal({ open, onOpenChange, user, onUpdate })
           {/* Social Links */}
           <div className="space-y-4 pt-4 border-t">
             <h3 className="text-sm font-medium">Social Media Links</h3>
-            
+
             <div className="space-y-2">
               <Label htmlFor="github" className="flex items-center gap-2">
                 <GithubIcon className="h-4 w-4" />

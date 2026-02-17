@@ -17,8 +17,8 @@ const processQuestionsData = (questions) => {
   for (let i = 0; i < 12; i++) {
     const month = new Date(now.getFullYear(), currentMonth - 11 + i, 1);
     const monthName = month.toLocaleString("default", { month: "short" });
-    const question=questions[((currentMonth - 11 + i)<0?12+(currentMonth - 11 + i):currentMonth - 11 + i)] ;
-    
+    const question = questions[((currentMonth - 11 + i) < 0 ? 12 + (currentMonth - 11 + i) : currentMonth - 11 + i)];
+
     data.push({
       name: monthName,
       totalQuestions: question,
@@ -65,15 +65,15 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 export function ProblemSolvedChart({ questions }) {
   const [data, setData] = useState([]);
-  
-  
+
+
   useEffect(() => {
     setData(processQuestionsData(questions));
-    
+
   }, [questions]);
 
   return (
-    <div className="h-[300px] w-full">
+    <div className="h-75 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}

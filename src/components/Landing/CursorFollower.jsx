@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 
-const CursorFollower = ({ 
-  size = 20, 
+const CursorFollower = ({
+  size = 20,
   color = "rgba(59, 130, 246, 0.5)",
   delay = 0.1,
-  showOnMobile = false 
+  showOnMobile = false
 }) => {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isVisible, setIsVisible] = useState(false);
@@ -36,7 +36,7 @@ const CursorFollower = ({
     // Check for hoverable elements
     const handleElementHover = (e) => {
       const target = e.target;
-      const isHoverable = 
+      const isHoverable =
         target.tagName === "BUTTON" ||
         target.tagName === "A" ||
         target.closest("button") ||
@@ -49,10 +49,10 @@ const CursorFollower = ({
     const animate = () => {
       const dx = targetRef.current.x - currentRef.current.x;
       const dy = targetRef.current.y - currentRef.current.y;
-      
+
       currentRef.current.x += dx * (1 - delay);
       currentRef.current.y += dy * (1 - delay);
-      
+
       setPosition({ ...currentRef.current });
       frameRef.current = requestAnimationFrame(animate);
     };
@@ -61,7 +61,7 @@ const CursorFollower = ({
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
     document.addEventListener("mouseover", handleElementHover);
-    
+
     frameRef.current = requestAnimationFrame(animate);
 
     return () => {
@@ -79,7 +79,7 @@ const CursorFollower = ({
     <>
       {/* Main cursor dot */}
       <div
-        className="fixed pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed pointer-events-none z-9999 mix-blend-difference"
         style={{
           left: position.x,
           top: position.y,
@@ -93,7 +93,7 @@ const CursorFollower = ({
       />
       {/* Outer ring */}
       <div
-        className="fixed pointer-events-none z-[9998] border-2 border-blue-500/30"
+        className="fixed pointer-events-none z-9998 border-2 border-blue-500/30"
         style={{
           left: position.x,
           top: position.y,

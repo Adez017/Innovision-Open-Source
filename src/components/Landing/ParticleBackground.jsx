@@ -20,7 +20,7 @@ const ParticleBackground = () => {
     const createParticles = () => {
       particles = [];
       const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
-      
+
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,

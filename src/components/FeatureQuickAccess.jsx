@@ -47,7 +47,7 @@ export default function FeatureQuickAccess() {
       {features.map((feature) => {
         const Icon = feature.icon;
         return (
-          <Card 
+          <Card
             key={feature.href}
             className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
             onClick={() => router.push(feature.href)}

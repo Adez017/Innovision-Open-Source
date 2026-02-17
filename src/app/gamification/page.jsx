@@ -26,10 +26,10 @@ export default function GamificationPage() {
     <div className="min-h-screen bg-background p-4 relative">
       <PageBackground />
       <GridPattern opacity={0.02} />
-      
-      <div className="max-w-[1600px] mx-auto relative z-10">
-        <PageHeader 
-          title="Your Progress" 
+
+      <div className="max-w-400 mx-auto relative z-10">
+        <PageHeader
+          title="Your Progress"
           description="Track achievements, compete, and level up!"
           icon={Trophy}
           iconColor="text-yellow-500"

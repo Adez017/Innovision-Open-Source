@@ -30,7 +30,7 @@ export default function CurriculumSelector({ onSelectionChange }) {
     if (selectedClass && selectedBoard) {
       const streams = getAvailableStreams(selectedClass, selectedBoard);
       setAvailableStreams(streams);
-      
+
       if (!streams) {
         // No streams, load subjects directly
         const subs = getSubjectsByClassAndBoard(selectedClass, selectedBoard);

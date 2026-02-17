@@ -10,9 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { 
-  Plus, Trash2, Link as LinkIcon, FileText, 
-  Video, Image as ImageIcon, Download 
+import {
+  Plus, Trash2, Link as LinkIcon, FileText,
+  Video, Image as ImageIcon, Download
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -44,7 +44,7 @@ export default function ResourceManager({ chapter, onUpdate }) {
     const updated = [...resources, resource];
     setResources(updated);
     onUpdate(updated);
-    
+
     setNewResource({ type: "link", title: "", url: "" });
     toast.success("Resource added");
   };
@@ -57,7 +57,7 @@ export default function ResourceManager({ chapter, onUpdate }) {
   };
 
   const getResourceIcon = (type) => {
-    switch(type) {
+    switch (type) {
       case 'video': return Video;
       case 'document': return FileText;
       case 'image': return ImageIcon;
@@ -85,12 +85,12 @@ export default function ResourceManager({ chapter, onUpdate }) {
         {/* Add New Resource */}
         <div className="space-y-4 p-4 border rounded-lg bg-muted/50">
           <h3 className="font-semibold">Add New Resource</h3>
-          
+
           <div>
             <label className="text-sm font-medium">Resource Type</label>
             <Select
               value={newResource.type}
-              onValueChange={(value) => setNewResource({...newResource, type: value})}
+              onValueChange={(value) => setNewResource({ ...newResource, type: value })}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select resource type" />
@@ -109,7 +109,7 @@ export default function ResourceManager({ chapter, onUpdate }) {
             <label className="text-sm font-medium">Title</label>
             <Input
               value={newResource.title}
-              onChange={(e) => setNewResource({...newResource, title: e.target.value})}
+              onChange={(e) => setNewResource({ ...newResource, title: e.target.value })}
               placeholder="Resource title"
             />
           </div>
@@ -118,7 +118,7 @@ export default function ResourceManager({ chapter, onUpdate }) {
             <label className="text-sm font-medium">URL</label>
             <Input
               value={newResource.url}
-              onChange={(e) => setNewResource({...newResource, url: e.target.value})}
+              onChange={(e) => setNewResource({ ...newResource, url: e.target.value })}
               placeholder="https://..."
             />
           </div>
@@ -132,7 +132,7 @@ export default function ResourceManager({ chapter, onUpdate }) {
         {/* Resources List */}
         <div className="space-y-2">
           <h3 className="font-semibold">Current Resources ({resources.length})</h3>
-          
+
           {resources.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
               No resources added yet

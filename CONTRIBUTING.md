@@ -2,6 +2,8 @@
 
 Thank you for your interest in contributing to InnoVision! 🎉 We're excited to have you as part of our community. This document provides guidelines and instructions for contributing to this project.
 
+---
+
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
@@ -16,6 +18,8 @@ Thank you for your interest in contributing to InnoVision! 🎉 We're excited to
 - [Documentation](#documentation)
 - [Community](#community)
 
+---
+
 ## Code of Conduct
 
 By participating in this project, you agree to maintain a respectful and inclusive environment. We expect all contributors to:
@@ -24,6 +28,8 @@ By participating in this project, you agree to maintain a respectful and inclusi
 - Welcome newcomers and help them get started
 - Focus on what is best for the community
 - Show empathy towards other community members
+
+---
 
 ## Getting Started
 
@@ -36,6 +42,8 @@ Before you begin, ensure you have the following installed:
 - **Git**
 - A code editor (VS Code recommended)
 
+---
+
 ### First-Time Contributors
 
 If you're new to open source, here are some good first issues to get started:
@@ -44,6 +52,8 @@ If you're new to open source, here are some good first issues to get started:
 2. Read through the project documentation
 3. Set up the development environment
 4. Make your first contribution!
+
+---
 
 ## How to Contribute
 
@@ -59,6 +69,8 @@ If you find a bug, please create an issue with:
 - **Screenshots**: If applicable
 - **Environment**: Browser, OS, Node version, etc.
 
+---
+
 ### Suggesting Features
 
 We welcome feature suggestions! Please create an issue with:
@@ -69,26 +81,37 @@ We welcome feature suggestions! Please create an issue with:
 - **Alternatives**: Other approaches you've considered
 - **Additional context**: Screenshots, mockups, examples
 
+---
+
 ### Contributing Code
 
 1. **Fork the repository**
+
 2. **Clone your fork**
    ```bash
    git clone https://github.com/YOUR_USERNAME/Innovision-Open-Source.git
    cd Innovision-Open-Source
    ```
+
 3. **Create a new branch**
    ```bash
    git checkout -b feature/your-feature-name
    ```
+
 4. **Make your changes**
+
 5. **Test your changes**
+
 6. **Commit your changes**
+
 7. **Push to your fork**
    ```bash
    git push origin feature/your-feature-name
    ```
+
 8. **Create a Pull Request**
+
+---
 
 ## Development Setup
 
@@ -101,6 +124,7 @@ yarn install
 # or
 pnpm install
 ```
+---
 
 ### 2. Environment Variables
 
@@ -122,6 +146,7 @@ NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
 NEXTAUTH_SECRET=your_nextauth_secret
 NEXTAUTH_URL=http://localhost:3000
 ```
+---
 
 ### 3. Run Development Server
 
@@ -135,12 +160,15 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+---
+
 ### 4. Build for Production
 
 ```bash
 npm run build
 npm start
 ```
+---
 
 ## Project Structure
 
@@ -156,6 +184,7 @@ InnoVision/
 ├── README.md             # Project documentation
 └── package.json          # Dependencies and scripts
 ```
+---
 
 ### Key Directories
 
@@ -163,6 +192,8 @@ InnoVision/
 - **`src/components/`**: UI components organized by feature
 - **`src/contexts/`**: Global state management (Auth, XP, Theme)
 - **`src/lib/`**: Firebase config, data files, utilities
+
+---
 
 ## Coding Standards
 
@@ -174,12 +205,16 @@ InnoVision/
 - Keep components small and focused (single responsibility)
 - Use **PropTypes** or **TypeScript** for type checking
 
+---
+
 ### File Naming
 
 - Components: `PascalCase.jsx` (e.g., `UserProfile.jsx`)
 - Utilities: `camelCase.js` (e.g., `formatDate.js`)
 - Hooks: `useCamelCase.js` (e.g., `useAuth.js`)
 - Context: `camelCase.jsx` (e.g., `auth.jsx`)
+
+---
 
 ### Code Style
 
@@ -200,6 +235,7 @@ function calculateProgress(currentXP, requiredXP) {
   return Math.min((currentXP / requiredXP) * 100, 100);
 }
 ```
+---
 
 ### React Best Practices
 
@@ -227,6 +263,7 @@ function mycomponent(props) {
   return <div><h1>{props.title}</h1></div>
 }
 ```
+---
 
 ### Styling
 
@@ -241,6 +278,7 @@ function mycomponent(props) {
   <h2 className="text-xl font-bold">Title</h2>
 </div>
 ```
+---
 
 ## Commit Guidelines
 
@@ -255,6 +293,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) specifica
 
 <footer>
 ```
+---
 
 ### Types
 
@@ -266,6 +305,8 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) specifica
 - **perf**: Performance improvements
 - **test**: Adding or updating tests
 - **chore**: Maintenance tasks
+
+---
 
 ### Examples
 
@@ -280,6 +321,7 @@ refactor(api): simplify course generation logic
 
 style(navbar): improve mobile responsive layout
 ```
+---
 
 ### Commit Message Rules
 
@@ -292,6 +334,8 @@ style(navbar): improve mobile responsive layout
 - Wrap body at 72 characters
 - Explain **what** and **why**, not **how**
 
+---
+
 ## Pull Request Process
 
 ### Before Submitting
@@ -303,6 +347,8 @@ style(navbar): improve mobile responsive layout
 5. ✅ Ensure no console errors or warnings
 6. ✅ Check responsiveness (mobile, tablet, desktop)
 
+---
+
 ### PR Title Format
 
 Use the same format as commit messages:
@@ -311,6 +357,7 @@ Use the same format as commit messages:
 feat(component): add new feature
 fix(api): resolve bug in endpoint
 ```
+---
 
 ### PR Description Template
 
@@ -341,6 +388,7 @@ How did you test this?
 - [ ] No new warnings
 - [ ] Tested on multiple browsers
 ```
+---
 
 ### Review Process
 
@@ -348,6 +396,8 @@ How did you test this?
 2. Address any requested changes
 3. Once approved, a maintainer will merge your PR
 4. Your contribution will be credited in the release notes
+
+---
 
 ## Testing
 
@@ -361,6 +411,8 @@ Before submitting, test:
 4. **Dark Mode**: Toggle between light/dark themes
 5. **Features**: Test the specific feature you modified
 
+---
+
 ### Browser Testing
 
 Test on:
@@ -370,11 +422,15 @@ Test on:
 - Safari (latest)
 - Edge (latest)
 
+---
+
 ### Mobile Testing
 
 - iOS Safari
 - Chrome Mobile
 - Responsive mode in DevTools
+
+---
 
 ## Documentation
 
@@ -388,12 +444,16 @@ Update documentation when:
 - Modifying environment variables
 - Changing dependencies
 
+---
+
 ### Documentation Files
 
 - **README.md**: Project overview and setup
 - **CONTRIBUTING.md**: This file
 - **Code comments**: Inline documentation
 - **JSDoc**: Function documentation
+
+---
 
 ## Community
 
@@ -403,6 +463,8 @@ Update documentation when:
 - **GitHub Discussions**: For questions and general discussion
 - **Pull Requests**: For code reviews and collaboration
 
+---
+
 ### Recognition
 
 Contributors will be recognized:
@@ -411,12 +473,16 @@ Contributors will be recognized:
 - Mentioned in release notes
 - Featured in the project website (if applicable)
 
+---
+
 ### Communication
 
 - Be patient and respectful
 - Provide constructive feedback
 - Help others when you can
 - Celebrate successes together
+
+---
 
 ## Development Tips
 
@@ -438,6 +504,7 @@ npm run format
 # Lint code (if ESLint is configured)
 npm run lint
 ```
+---
 
 ### Debugging
 
@@ -447,16 +514,23 @@ npm run lint
 - Check Network tab for API calls
 - Review Firebase console for backend issues
 
+---
+
 ### Common Issues
 
 **Issue**: Firebase authentication not working
-- **Solution**: Check `.env.local` has correct Firebase config
+
+**Solution**: Check `.env.local` has correct Firebase config
 
 **Issue**: Gemini API errors
-- **Solution**: Verify API key is valid and has proper permissions
+
+**Solution**: Verify API key is valid and has proper permissions
 
 **Issue**: Styles not applying
-- **Solution**: Ensure Tailwind classes are correct, restart dev server
+
+**Solution**: Ensure Tailwind classes are correct, restart dev server
+
+---
 
 ## Questions?
 

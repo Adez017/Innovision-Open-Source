@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  Clock, BookOpen, Flame, Trophy, TrendingUp, 
+import {
+  Clock, BookOpen, Flame, Trophy, TrendingUp,
   Calendar, Target, Zap, Award
 } from "lucide-react";
 import CalendarHeatmap from "react-calendar-heatmap";
@@ -76,7 +76,7 @@ export default function StatsCard({ userId }) {
   const generateActivityData = (achievements) => {
     const activityMap = {};
     const today = new Date();
-    
+
     // Initialize last 365 days with 0
     for (let i = 0; i < 365; i++) {
       const date = new Date(today);
@@ -206,7 +206,7 @@ export default function StatsCard({ userId }) {
               <span>More</span>
             </div>
           </div>
-          
+
           <div className="heatmap-container overflow-x-auto">
             <CalendarHeatmap
               startDate={startDate}

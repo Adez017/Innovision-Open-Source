@@ -25,51 +25,59 @@ const FillUps = ({ task, roadmapId, chapterNumber }) => {
   const checkAnswer = async () => {
     let correct = false;
     setSubmitting(true);
-    const normalizedUserAnswer = task.caseSensitive ? userAnswer.trim() : userAnswer.trim().toLowerCase();
+    
+    try {
+      const normalizedUserAnswer = task.caseSensitive ? userAnswer.trim() : userAnswer.trim().toLowerCase();
 
-    const normalizedAcceptableAnswers = task.acceptableAnswers.map((answer) =>
-      task.caseSensitive ? answer.trim() : answer.trim().toLowerCase()
-    );
+      const normalizedAcceptableAnswers = (task.acceptableAnswers || []).map((answer) =>
+        task.caseSensitive ? answer.trim() : answer.trim().toLowerCase()
+      );
 
-    correct = normalizedAcceptableAnswers.includes(normalizedUserAnswer);
+      correct = normalizedAcceptableAnswers.includes(normalizedUserAnswer);
 
-    const res = await fetch(`/api/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        task,
-        isCorrect: correct,
-        roadmap: roadmapId,
-        chapter: chapterNumber,
-        userAnswer,
-      }),
-    });
-    if (res.ok) {
-      setIsCorrect(correct);
-      setIsAnswered(true);
+      const res = await fetch(`/api/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          task,
+          isCorrect: correct,
+          roadmap: roadmapId,
+          chapter: chapterNumber,
+          userAnswer,
+        }),
+      });
+      
+      if (res.ok) {
+        setIsCorrect(correct);
+        setIsAnswered(true);
 
-      // Handle combo system
-      if (correct) {
-        incrementCombo();
-        // Show toast for combo XP after a small delay so combo updates first
-        setTimeout(() => {
-          const multiplier = getCurrentMultiplier();
-          if (multiplier > 1) {
-            toast.success(`+${2 * multiplier} XP (${multiplier}x combo!)`, {
-              icon: <Zap className="h-4 w-4 text-yellow-500" />,
-            });
-          }
-        }, 100);
+        // Handle combo system
+        if (correct) {
+          incrementCombo();
+          // Show toast for combo XP after a small delay so combo updates first
+          setTimeout(() => {
+            const multiplier = getCurrentMultiplier();
+            if (multiplier > 1) {
+              toast.success(`+${2 * multiplier} XP (${multiplier}x combo!)`, {
+                icon: <Zap className="h-4 w-4 text-yellow-500" />,
+              });
+            }
+          }, 100);
+        } else {
+          resetCombo();
+        }
+
+        // XP is now awarded server-side in /api/tasks
+        getXp();
       } else {
-        resetCombo();
+        const errorData = await res.json().catch(() => ({}));
+        toast.error(errorData.error || "Failed to submit task. Try again.");
       }
-
-      // XP is now awarded server-side in /api/tasks
-      getXp();
-    } else {
-      toast.error("Failed to submit task, Try again.");
+    } catch (error) {
+      console.error("Error submitting answer:", error);
+      toast.error("Network error. Please check your connection and try again.");
     }
     setSubmitting(false);
   };
@@ -105,16 +113,16 @@ const FillUps = ({ task, roadmapId, chapterNumber }) => {
                   value={userAnswer}
                   onChange={handleInputChange}
                   disabled={isAnswered}
-                  className={`text-center mx-2 max-w-24 font-medium ${
-                    isAnswered
-                      ? isCorrect
-                        ? "border-green-500 bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400"
-                        : "border-red-500 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400"
-                      : "border-blue-300 focus:border-blue-500"
-                  }`}
+                  className={`text-center mx-2 max-w-24 font-medium ${isAnswered
+                    ? isCorrect
+                      ? "border-green-500 bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400"
+                      : "border-red-500 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400"
+                    : "border-blue-300 focus:border-blue-500"
+                    }`}
                   placeholder="Answer"
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && userAnswer.trim() !== "") {
+                      e.preventDefault();
                       checkAnswer();
                     }
                   }}
@@ -125,7 +133,7 @@ const FillUps = ({ task, roadmapId, chapterNumber }) => {
             {isAnswered && (
               <div>
                 <div className="flex items-center mt-4">
-                  <div className="flex-shrink-0 mr-3">
+                  <div className="shrink-0 mr-3">
                     {isCorrect ? (
                       <CheckCircle className="h-6 w-6 text-green-500" />
                     ) : (
@@ -141,11 +149,10 @@ const FillUps = ({ task, roadmapId, chapterNumber }) => {
                 </div>
                 <div className="mt-6 space-y-4 animate-fadeIn">
                   <div
-                    className={`p-4 rounded-lg border-l-4 ${
-                      isCorrect
-                        ? "bg-green-50 dark:bg-green-950/30 border-green-500 text-green-700 dark:text-green-400"
-                        : "bg-red-50 dark:bg-red-950/30 border-red-500 text-red-700 dark:text-red-400"
-                    }`}
+                    className={`p-4 rounded-lg border-l-4 ${isCorrect
+                      ? "bg-green-50 dark:bg-green-950/30 border-green-500 text-green-700 dark:text-green-400"
+                      : "bg-red-50 dark:bg-red-950/30 border-red-500 text-red-700 dark:text-red-400"
+                      }`}
                   >
                     <div className="font-bold text-lg mb-1">Explanation</div>
                     <p>{task.explanation}</p>

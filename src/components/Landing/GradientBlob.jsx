@@ -47,7 +47,7 @@ const GradientBlob = () => {
       {/* Blob 1 - Blue/Cyan */}
       <div
         ref={blob1Ref}
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full opacity-30 dark:opacity-20"
+        className="absolute top-1/4 left-1/4 w-150 h-150 rounded-full opacity-30 dark:opacity-20"
         style={{
           background: "radial-gradient(circle, rgba(59,130,246,0.8) 0%, rgba(6,182,212,0.4) 50%, transparent 70%)",
           filter: "blur(60px)",
@@ -57,7 +57,7 @@ const GradientBlob = () => {
       {/* Blob 2 - Purple/Pink */}
       <div
         ref={blob2Ref}
-        className="absolute top-1/2 right-1/4 w-[500px] h-[500px] rounded-full opacity-30 dark:opacity-20"
+        className="absolute top-1/2 right-1/4 w-125 h-125 rounded-full opacity-30 dark:opacity-20"
         style={{
           background: "radial-gradient(circle, rgba(168,85,247,0.8) 0%, rgba(236,72,153,0.4) 50%, transparent 70%)",
           filter: "blur(60px)",
@@ -67,7 +67,7 @@ const GradientBlob = () => {
       {/* Blob 3 - Cyan/Green */}
       <div
         ref={blob3Ref}
-        className="absolute bottom-1/4 left-1/3 w-[450px] h-[450px] rounded-full opacity-25 dark:opacity-15"
+        className="absolute bottom-1/4 left-1/3 w-112.5 h-112.5 rounded-full opacity-25 dark:opacity-15"
         style={{
           background: "radial-gradient(circle, rgba(6,182,212,0.8) 0%, rgba(34,197,94,0.4) 50%, transparent 70%)",
           filter: "blur(60px)",

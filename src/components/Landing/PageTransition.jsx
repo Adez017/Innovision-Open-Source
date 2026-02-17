@@ -110,8 +110,8 @@ export const CurtainTransition = ({ children }) => {
       <div
         className="fixed inset-0 z-50 bg-primary pointer-events-none"
         style={{
-          transform: phase === "hiding" || phase === "hidden" 
-            ? "translateY(0)" 
+          transform: phase === "hiding" || phase === "hidden"
+            ? "translateY(0)"
             : "translateY(-100%)",
           transition: "transform 0.4s cubic-bezier(0.65, 0, 0.35, 1)",
         }}

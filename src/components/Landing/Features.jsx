@@ -26,13 +26,13 @@ const FeatureCard3D = ({ feature, premium, index = 0 }) => {
 
   return (
     <ScrollReveal delay={index * 100} direction="up">
-      <Card 
+      <Card
         className="group relative overflow-hidden border border-border bg-background backdrop-blur-sm transition-all duration-500 hover:border-border/60 hover:-translate-y-2 h-full cursor-pointer"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{
-          transform: isHovered 
+          transform: isHovered
             ? `perspective(1000px) rotateX(${(mousePosition.y - 150) / 30}deg) rotateY(${(mousePosition.x - 150) / 30}deg) scale3d(1.02, 1.02, 1.02)`
             : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
         }}
@@ -46,7 +46,7 @@ const FeatureCard3D = ({ feature, premium, index = 0 }) => {
             }}
           />
         )}
-        
+
         {premium && (
           <div className="absolute top-3 right-3 z-10">
             <span className="px-2 py-0.5 rounded-full border border-yellow-500/20 bg-yellow-500/10 text-yellow-400 text-xs font-light flex items-center gap-1 backdrop-blur-sm">
@@ -55,9 +55,9 @@ const FeatureCard3D = ({ feature, premium, index = 0 }) => {
           </div>
         )}
         <CardHeader className="relative z-10">
-          <div 
+          <div
             className="w-12 h-12 rounded-xl border border-border flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 group-hover:rotate-6"
-            style={{ 
+            style={{
               borderColor: `${feature.color}20`,
               boxShadow: isHovered ? `0 0 20px ${feature.color}40` : 'none'
             }}
@@ -167,7 +167,7 @@ const Features = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-32">
           {whyChooseFeatures.map((feature, index) => (
             <FeatureCard key={feature.title} feature={feature} index={index} />
           ))}

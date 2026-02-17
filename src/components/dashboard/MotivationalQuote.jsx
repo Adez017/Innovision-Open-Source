@@ -51,7 +51,7 @@ export default function MotivationalQuote({ variant = "default" }) {
   const changeQuote = () => {
     setIsChanging(true);
     setIsVisible(false);
-    
+
     setTimeout(() => {
       setQuote(getRandomQuote());
       setIsVisible(true);
@@ -62,7 +62,7 @@ export default function MotivationalQuote({ variant = "default" }) {
   useEffect(() => {
     // Get a random quote on mount
     setQuote(getRandomQuote());
-    
+
     // Fade in after a short delay
     setTimeout(() => setIsVisible(true), 100);
   }, []);
@@ -71,7 +71,7 @@ export default function MotivationalQuote({ variant = "default" }) {
 
   if (variant === "minimal") {
     return (
-      <div 
+      <div
         className={`
           text-center py-4 transition-all duration-500 ease-out
           ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}
@@ -89,9 +89,9 @@ export default function MotivationalQuote({ variant = "default" }) {
 
   if (variant === "compact") {
     return (
-      <div 
+      <div
         className={`
-          flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-blue-500/10 to-purple-500/10 
+          flex items-center gap-3 p-3 rounded-lg bg-linear-to-r from-blue-500/10 to-purple-500/10 
           border border-blue-500/20 transition-all duration-500 ease-out
           ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}
         `}
@@ -106,21 +106,21 @@ export default function MotivationalQuote({ variant = "default" }) {
   }
 
   return (
-    <Card 
+    <Card
       className={`
         relative overflow-hidden transition-all duration-500 ease-out
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
       `}
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5" />
-      
+      <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5" />
+
       <div className="relative p-6">
         <div className="flex items-start gap-4">
-          <div className="p-2 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 shrink-0">
+          <div className="p-2 rounded-full bg-linear-to-br from-blue-500 to-purple-600 shrink-0">
             <Quote className="h-5 w-5 text-white" />
           </div>
-          
+
           <div className="flex-1 min-w-0">
             <p className="text-lg font-medium leading-relaxed mb-3">
               "{quote.text}"

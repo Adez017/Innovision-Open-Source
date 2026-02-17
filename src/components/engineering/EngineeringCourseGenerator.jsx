@@ -5,12 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
 } from "@/components/ui/select";
 import { Upload, FileText, Sparkles, Search } from "lucide-react";
 import { KARNATAKA_COLLEGES, ENGINEERING_BRANCHES, SEMESTERS } from "@/lib/engineering-data";
@@ -21,7 +21,7 @@ export default function EngineeringCourseGenerator() {
   const [selectedSemester, setSelectedSemester] = useState("");
   const [syllabusFile, setSyllabusFile] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  
+
   // Search states
   const [collegeSearch, setCollegeSearch] = useState("");
   const [showCollegeDropdown, setShowCollegeDropdown] = useState(false);
@@ -51,7 +51,7 @@ export default function EngineeringCourseGenerator() {
     }
 
     setIsGenerating(true);
-    
+
     // Simulate course generation
     setTimeout(() => {
       alert(`Course generated successfully!\n\nCollege: ${selectedCollege}\nBranch: ${selectedBranch}\nSemester: ${selectedSemester}\nSyllabus: ${syllabusFile.name}`);
@@ -97,7 +97,7 @@ export default function EngineeringCourseGenerator() {
                 className="pl-10"
               />
             </div>
-            
+
             {showCollegeDropdown && filteredColleges.length > 0 && (
               <div className="absolute z-50 w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
                 {filteredColleges.slice(0, 50).map((college, index) => (
@@ -117,7 +117,7 @@ export default function EngineeringCourseGenerator() {
               </div>
             )}
           </div>
-          
+
           {/* Alternative: Dropdown Select */}
           <div className="mt-2">
             <Select value={selectedCollege} onValueChange={setSelectedCollege}>

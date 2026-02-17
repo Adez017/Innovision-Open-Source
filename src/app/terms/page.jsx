@@ -6,7 +6,7 @@ export default function TermsOfService() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        
+
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-2xl mb-6">
             <Scale className="w-10 h-10 text-primary" />
@@ -21,30 +21,30 @@ export default function TermsOfService() {
           <h2 className="text-2xl font-bold mb-4">The Short Version</h2>
           <div className="space-y-3 text-muted-foreground">
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>Be respectful to others and don't cheat the system</p>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>You own your content, but we need permission to host it</p>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>We own the platform and courses - please don't steal them</p>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>Use InnoVision for learning, not for anything illegal or harmful</p>
             </div>
           </div>
         </div>
 
         <div className="prose prose-lg max-w-none">
-          
+
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-4">What is InnoVision?</h2>
             <p className="text-muted-foreground mb-4">
-              InnoVision is a learning platform that helps you master any concept through interactive courses, 
+              InnoVision is a learning platform that helps you master any concept through interactive courses,
               gamification, and hands-on practice. Think of it as your personal learning companion.
             </p>
             <div className="bg-primary/10 border border-primary/20 rounded-lg p-5">
@@ -103,35 +103,35 @@ export default function TermsOfService() {
             </p>
             <div className="space-y-3">
               <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+                <XCircle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-foreground">Cheat or exploit:</strong>
                   <span className="text-muted-foreground"> Gaming the XP system, using bots, or hacking features</span>
                 </div>
               </div>
               <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+                <XCircle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-foreground">Harass others:</strong>
                   <span className="text-muted-foreground"> No hate speech, bullying, or spam</span>
                 </div>
               </div>
               <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+                <XCircle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-foreground">Steal content:</strong>
                   <span className="text-muted-foreground"> Don't copy courses or materials and claim them as yours</span>
                 </div>
               </div>
               <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+                <XCircle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-foreground">Break stuff:</strong>
                   <span className="text-muted-foreground"> No hacking, DDoS attacks, or trying to break our systems</span>
                 </div>
               </div>
               <div className="flex items-start gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+                <XCircle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-foreground">Scrape data:</strong>
                   <span className="text-muted-foreground"> Don't use bots to extract content or user data</span>
@@ -173,11 +173,11 @@ export default function TermsOfService() {
               The InnoVision platform, courses, design, and features belong to us or our licensors.
             </p>
             <p className="text-muted-foreground mb-4">
-              <strong className="text-foreground">You can:</strong> Use the platform for personal learning, 
+              <strong className="text-foreground">You can:</strong> Use the platform for personal learning,
               share your progress, and reference what you learned (with attribution).
             </p>
             <p className="text-muted-foreground">
-              <strong className="text-foreground">You can't:</strong> Copy our courses, reverse engineer our code, 
+              <strong className="text-foreground">You can't:</strong> Copy our courses, reverse engineer our code,
               or create a competing platform using our content.
             </p>
           </section>
@@ -186,11 +186,11 @@ export default function TermsOfService() {
             <h2 className="text-3xl font-bold mb-4">Disclaimers</h2>
             <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-5 mb-4">
               <div className="flex items-start gap-3">
-                <AlertTriangle className="w-6 h-6 text-yellow-600 flex-shrink-0" />
+                <AlertTriangle className="w-6 h-6 text-yellow-600 shrink-0" />
                 <div>
                   <p className="font-semibold mb-2">Use at Your Own Risk</p>
                   <p className="text-sm text-muted-foreground m-0">
-                    We work hard to make InnoVision reliable, but we can't guarantee it'll be perfect 100% of the time. 
+                    We work hard to make InnoVision reliable, but we can't guarantee it'll be perfect 100% of the time.
                     The platform is provided "as is."
                   </p>
                 </div>

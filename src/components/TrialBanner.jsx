@@ -37,7 +37,7 @@ export default function TrialBanner({ onStatusChange }) {
   // In trial period
   if (status.isInTrial) {
     return (
-      <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-2 border-blue-500/30 mb-6">
+      <Card className="bg-linear-to-r from-blue-500/10 to-purple-500/10 border-2 border-blue-500/30 mb-6">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
@@ -67,7 +67,7 @@ export default function TrialBanner({ onStatusChange }) {
   // Trial expired
   if (status.trialExpired) {
     return (
-      <Card className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-2 border-yellow-500/30 mb-6">
+      <Card className="bg-linear-to-r from-yellow-500/10 to-orange-500/10 border-2 border-yellow-500/30 mb-6">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">

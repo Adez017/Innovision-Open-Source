@@ -123,7 +123,7 @@ export default function LMSPage() {
     <div className="min-h-screen bg-background relative">
       <PageBackground variant="default" />
       <GridPattern opacity={0.02} />
-      
+
       <div className="max-w-6xl mx-auto p-6 space-y-6 relative z-10">
         <ScrollReveal>
           <div className="mb-6">
@@ -152,15 +152,15 @@ export default function LMSPage() {
 
         {!premiumStatus.isPremium ? (
           <ScrollReveal delay={100}>
-            <div className="text-center p-12 border-2 border-dashed rounded-xl bg-card/50 backdrop-blur-sm">
+            <div className="text-center p-6 sm:p-12 border-2 border-dashed rounded-xl bg-card/50 backdrop-blur-sm">
               <RefreshCw className="w-16 h-16 mx-auto mb-4 text-muted-foreground opacity-50" />
               <h2 className="text-2xl font-bold mb-4">Premium Feature</h2>
               <p className="text-muted-foreground mb-6">
                 LMS Integration is only available for Premium users.
               </p>
-              <Button 
-                onClick={() => router.push("/premium")} 
-                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-semibold"
+              <Button
+                onClick={() => router.push("/premium")}
+                className="bg-linear-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-semibold"
               >
                 <Crown className="w-4 h-4 mr-2" />
                 Upgrade to Premium
@@ -172,109 +172,109 @@ export default function LMSPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-6">
                 <ScrollReveal delay={100}>
-                <LMSConfig />
+                  <LMSConfig />
                 </ScrollReveal>
 
                 {config?.enabled && (
                   <ScrollReveal delay={150}>
-                  <Card className="bg-green-50/80 dark:bg-green-950/80 border-green-200 dark:border-green-800 backdrop-blur-sm">
-                    <CardContent className="pt-6">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle className="w-6 h-6 text-green-600" />
-                        <div>
-                          <p className="font-semibold text-green-900 dark:text-green-100">
-                            Connected to {config.platform === "moodle" ? "Moodle" : "Canvas"}
-                          </p>
-                          <p className="text-sm text-green-800 dark:text-green-200">{config.credentials.baseUrl}</p>
+                    <Card className="bg-green-50/80 dark:bg-green-950/80 border-green-200 dark:border-green-800 backdrop-blur-sm">
+                      <CardContent className="pt-6">
+                        <div className="flex items-center gap-3">
+                          <CheckCircle className="w-6 h-6 text-green-600" />
+                          <div>
+                            <p className="font-semibold text-green-900 dark:text-green-100">
+                              Connected to {config.platform === "moodle" ? "Moodle" : "Canvas"}
+                            </p>
+                            <p className="text-sm text-green-800 dark:text-green-200">{config.credentials.baseUrl}</p>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
                   </ScrollReveal>
                 )}
               </div>
 
               <ScrollReveal delay={200}>
-              <HoverCard>
-              <Card className="bg-card/50 backdrop-blur-sm border-border/50">
-                <CardHeader>
-                  <CardTitle>Sync Courses</CardTitle>
-                  <CardDescription>Sync your InnoVision courses to your LMS</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {!config?.enabled ? (
-                    <div className="text-center p-8 text-muted-foreground">
-                      <p>Configure LMS integration to sync courses</p>
-                    </div>
-                  ) : courses.length > 0 ? (
-                    <div className="space-y-3">
-                      {courses.map((course) => (
-                        <div
-                          key={course.id}
-                          className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
-                        >
-                          <div className="flex-1">
-                            <h4 className="font-semibold">{course.courseTitle?.split(":")[0] || "Untitled Course"}</h4>
-                            <p className="text-sm text-muted-foreground line-clamp-1">{course.courseDescription}</p>
-                          </div>
-                          <Button size="sm" onClick={() => syncCourse(course)} disabled={syncing}>
-                            {syncing ? (
-                              <>
-                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                Syncing...
-                              </>
-                            ) : (
-                              <>
-                                <RefreshCw className="w-4 h-4 mr-2" />
-                                Sync
-                              </>
-                            )}
-                          </Button>
+                <HoverCard>
+                  <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+                    <CardHeader>
+                      <CardTitle>Sync Courses</CardTitle>
+                      <CardDescription>Sync your InnoVision courses to your LMS</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      {!config?.enabled ? (
+                        <div className="text-center p-8 text-muted-foreground">
+                          <p>Configure LMS integration to sync courses</p>
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center p-8 text-muted-foreground">
-                      <p>No courses available to sync</p>
-                      <Link href="/generate">
-                        <Button className="mt-4">Create Course</Button>
-                      </Link>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-              </HoverCard>
+                      ) : courses.length > 0 ? (
+                        <div className="space-y-3">
+                          {courses.map((course) => (
+                            <div
+                              key={course.id}
+                              className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+                            >
+                              <div className="flex-1">
+                                <h4 className="font-semibold">{course.courseTitle?.split(":")[0] || "Untitled Course"}</h4>
+                                <p className="text-sm text-muted-foreground line-clamp-1">{course.courseDescription}</p>
+                              </div>
+                              <Button size="sm" onClick={() => syncCourse(course)} disabled={syncing}>
+                                {syncing ? (
+                                  <>
+                                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                    Syncing...
+                                  </>
+                                ) : (
+                                  <>
+                                    <RefreshCw className="w-4 h-4 mr-2" />
+                                    Sync
+                                  </>
+                                )}
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="text-center p-8 text-muted-foreground">
+                          <p>No courses available to sync</p>
+                          <Link href="/generate">
+                            <Button className="mt-4">Create Course</Button>
+                          </Link>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </HoverCard>
               </ScrollReveal>
             </div>
 
             <ScrollReveal delay={250}>
-            <Card className="bg-blue-50/80 dark:bg-blue-950/80 border-blue-200 dark:border-blue-800 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-blue-900 dark:text-blue-100">Integration Features</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-blue-800 dark:text-blue-200">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Moodle Integration</h4>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>Sync courses to Moodle</li>
-                      <li>Export grades to gradebook</li>
-                      <li>Import enrolled students</li>
-                      <li>Web services API support</li>
-                    </ul>
+              <Card className="bg-blue-50/80 dark:bg-blue-950/80 border-blue-200 dark:border-blue-800 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="text-blue-900 dark:text-blue-100">Integration Features</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-blue-800 dark:text-blue-200">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <h4 className="font-semibold mb-2">Moodle Integration</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Sync courses to Moodle</li>
+                        <li>Export grades to gradebook</li>
+                        <li>Import enrolled students</li>
+                        <li>Web services API support</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2">Canvas Integration</h4>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Create Canvas courses</li>
+                        <li>Sync assignments and grades</li>
+                        <li>Import course rosters</li>
+                        <li>REST API integration</li>
+                      </ul>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Canvas Integration</h4>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>Create Canvas courses</li>
-                      <li>Sync assignments and grades</li>
-                      <li>Import course rosters</li>
-                      <li>REST API integration</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
             </ScrollReveal>
           </>
         )}

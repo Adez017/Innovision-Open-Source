@@ -69,24 +69,24 @@ const LeaderBoard = ({ leaderboard }) => {
       <div className=" ">
         {leader[0]?.email
           ? leader.map((user, index) => {
-              if (index > 2) {
-                return (
-                  <div key={user.email} className="border-t flex justify-between py-1.5 px-2 last-of-type:border-b-0">
-                    <div className="flex gap-3">
-                      <span>#{index + 1}</span> {user.name.split(" ")[0]}
-                    </div>
-                    <div>{user.xp} xp</div>
+            if (index > 2) {
+              return (
+                <div key={user.email} className="border-t flex justify-between py-1.5 px-2 last-of-type:border-b-0">
+                  <div className="flex gap-3">
+                    <span>#{index + 1}</span> {user.name.split(" ")[0]}
                   </div>
-                );
-              }
-            })
-          : Array(7)
-              .fill(0)
-              .map((e, index) => (
-                <div key={index} className="border-t flex justify-between py-1.5 px-2 last-of-type:border-b-0">
-                  <Skeleton className={"w-full h-5"}></Skeleton>
+                  <div>{user.xp} xp</div>
                 </div>
-              ))}
+              );
+            }
+          })
+          : Array(7)
+            .fill(0)
+            .map((e, index) => (
+              <div key={index} className="border-t flex justify-between py-1.5 px-2 last-of-type:border-b-0">
+                <Skeleton className={"w-full h-5"}></Skeleton>
+              </div>
+            ))}
       </div>
     </div>
   );

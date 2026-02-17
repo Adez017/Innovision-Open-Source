@@ -91,7 +91,7 @@ const AdvancedHero = () => {
 
       <div className="container relative z-10 mx-auto px-4 md:px-6 py-20">
         <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
-          
+
           {/* Small text above */}
           <p className="hero-subtitle text-sm md:text-base text-gray-500 mb-6 tracking-wide">
             50,000+ Active Learners Worldwide

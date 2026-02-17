@@ -128,14 +128,14 @@ Topic: ${prompt}
         let stats = statsDoc.exists
           ? statsDoc.data()
           : {
-              xp: 0,
-              level: 1,
-              streak: 1,
-              badges: [],
-              rank: 0,
-              achievements: [],
-              lastActive: new Date().toISOString(),
-            };
+            xp: 0,
+            level: 1,
+            streak: 1,
+            badges: [],
+            rank: 0,
+            achievements: [],
+            lastActive: new Date().toISOString(),
+          };
 
         const newXP = (stats.xp || 0) + xpGained;
         const newLevel = Math.floor(newXP / 500) + 1;
@@ -212,7 +212,7 @@ export async function POST(req) {
     const eligibility = await canGenerateCourse(session.user.email);
     if (!eligibility.canGenerate) {
       return NextResponse.json(
-        { 
+        {
           message: eligibility.reason,
           isPremium: eligibility.isPremium,
           courseCount: eligibility.courseCount,

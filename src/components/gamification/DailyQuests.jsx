@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AnimatedProgress } from "@/components/ui/animated-progress";
-import { 
+import {
   BookOpen, BookMarked, GraduationCap, Sparkles, Zap, Crown,
   Trophy, ClipboardCheck, Flame, Compass, Wand2, Clock, Timer,
   Gift, CheckCircle2, Star
@@ -35,7 +35,7 @@ export default function DailyQuests({ userId }) {
     try {
       const res = await fetch(`/api/gamification/daily-quests?userId=${userId}`);
       const data = await res.json();
-      
+
       if (data.quests) {
         setQuests(data.quests);
         setTotalXPEarned(data.totalXPEarned || 0);
@@ -72,13 +72,13 @@ export default function DailyQuests({ userId }) {
         });
 
         toast.success(`+${data.xpAwarded} XP claimed!`);
-        
+
         // Update local state
-        setQuests(prev => prev.map(q => 
+        setQuests(prev => prev.map(q =>
           q.id === questId ? { ...q, claimed: true } : q
         ));
         setTotalXPEarned(prev => prev + data.xpAwarded);
-        
+
         // Refresh XP context
         getXp();
       } else {
@@ -145,34 +145,31 @@ export default function DailyQuests({ userId }) {
         {quests.map((quest, index) => {
           const IconComponent = getQuestIcon(quest.icon);
           const progressPercent = (quest.progress / quest.target) * 100;
-          
+
           return (
             <div
               key={quest.id}
-              className={`p-3 rounded-lg border transition-all duration-300 ${
-                quest.claimed 
-                  ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800" 
-                  : quest.completed
+              className={`p-3 rounded-lg border transition-all duration-300 ${quest.claimed
+                ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800"
+                : quest.completed
                   ? "bg-yellow-50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800 animate-pulse"
                   : "bg-card border-border hover:border-primary/30"
-              }`}
+                }`}
             >
               <div className="flex items-start gap-3">
                 {/* Icon */}
-                <div className={`p-2 rounded-lg ${
-                  quest.claimed 
-                    ? "bg-green-100 dark:bg-green-900/30" 
-                    : quest.completed
+                <div className={`p-2 rounded-lg ${quest.claimed
+                  ? "bg-green-100 dark:bg-green-900/30"
+                  : quest.completed
                     ? "bg-yellow-100 dark:bg-yellow-900/30"
                     : "bg-muted"
-                }`}>
-                  <IconComponent className={`h-5 w-5 ${
-                    quest.claimed 
-                      ? "text-green-600" 
-                      : quest.completed
+                  }`}>
+                  <IconComponent className={`h-5 w-5 ${quest.claimed
+                    ? "text-green-600"
+                    : quest.completed
                       ? "text-yellow-600"
                       : "text-muted-foreground"
-                  }`} />
+                    }`} />
                 </div>
 
                 {/* Content */}
@@ -181,15 +178,14 @@ export default function DailyQuests({ userId }) {
                     <h4 className={`font-medium text-sm ${quest.claimed ? "line-through text-muted-foreground" : ""}`}>
                       {quest.title}
                     </h4>
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                      quest.claimed
-                        ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                        : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
-                    }`}>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${quest.claimed
+                      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                      : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
+                      }`}>
                       +{quest.xpReward} XP
                     </span>
                   </div>
-                  
+
                   <p className="text-xs text-muted-foreground mb-2">
                     {quest.description}
                   </p>
@@ -216,7 +212,7 @@ export default function DailyQuests({ userId }) {
                     size="sm"
                     onClick={() => claimReward(quest.id)}
                     disabled={claiming === quest.id}
-                    className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-semibold"
+                    className="bg-linear-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-semibold"
                   >
                     {claiming === quest.id ? (
                       <div className="h-4 w-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
@@ -230,7 +226,7 @@ export default function DailyQuests({ userId }) {
                 )}
 
                 {quest.claimed && (
-                  <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
+                  <CheckCircle2 className="h-5 w-5 text-green-500 shrink-0" />
                 )}
               </div>
             </div>
@@ -239,7 +235,7 @@ export default function DailyQuests({ userId }) {
 
         {/* Bonus for completing all */}
         {completedCount === 3 && claimedCount === 3 && (
-          <div className="mt-4 p-3 rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-center">
+          <div className="mt-4 p-3 rounded-lg bg-linear-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-center">
             <div className="flex items-center justify-center gap-2 mb-1">
               <Star className="h-4 w-4 text-purple-500" />
               <span className="font-semibold text-sm">All Quests Complete!</span>

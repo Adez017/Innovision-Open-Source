@@ -7,7 +7,7 @@
 export async function generateAudioScript(chapterContent, options = {}) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
-    
+
     if (!apiKey) {
       throw new Error("GEMINI_API_KEY not configured");
     }
@@ -59,7 +59,7 @@ Return only the script text, optimized for audio narration. Do not include any J
 export async function generateVideoStoryboard(chapterContent, options = {}) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
-    
+
     if (!apiKey) {
       throw new Error("GEMINI_API_KEY not configured");
     }
@@ -108,10 +108,10 @@ Return ONLY valid JSON (no markdown, no extra text) with this exact structure:
 
     const data = await response.json();
     let text = data.candidates[0].content.parts[0].text;
-    
+
     // Clean up the response
     text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-    
+
     return JSON.parse(text);
   } catch (error) {
     console.error("Video storyboard generation error:", error);
@@ -125,7 +125,7 @@ Return ONLY valid JSON (no markdown, no extra text) with this exact structure:
 export async function generateImagePrompts(topic, count = 5) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
-    
+
     if (!apiKey) {
       throw new Error("GEMINI_API_KEY not configured");
     }
@@ -160,7 +160,7 @@ Return as JSON array: ["prompt1", "prompt2", ...]`;
     const data = await response.json();
     let text = data.candidates[0].content.parts[0].text;
     text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-    
+
     return JSON.parse(text);
   } catch (error) {
     console.error("Image prompt generation error:", error);

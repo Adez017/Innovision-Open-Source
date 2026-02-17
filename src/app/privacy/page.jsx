@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        
+
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-2xl mb-6">
             <Shield className="w-10 h-10 text-primary" />
@@ -21,26 +21,26 @@ export default function PrivacyPolicy() {
           <h2 className="text-2xl font-bold mb-4">The Short Version</h2>
           <div className="space-y-3 text-muted-foreground">
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>We collect only what's needed to provide you with a great learning experience</p>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>We never sell your personal data to third parties</p>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>You have full control over your data - access, export, or delete anytime</p>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-primary mt-1 shrink-0" />
               <p>We use industry-standard encryption and security practices</p>
             </div>
           </div>
         </div>
 
         <div className="prose prose-lg max-w-none">
-          
+
           <section className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -179,8 +179,8 @@ export default function PrivacyPolicy() {
             <h2 className="text-3xl font-bold mb-4">Age Requirements</h2>
             <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-5">
               <p className="text-muted-foreground m-0">
-                <strong className="text-foreground">You must be at least 13 years old</strong> to use InnoVision. 
-                If you're a parent and believe your child under 13 has created an account, please contact us 
+                <strong className="text-foreground">You must be at least 13 years old</strong> to use InnoVision.
+                If you're a parent and believe your child under 13 has created an account, please contact us
                 immediately at <a href="mailto:privacy@innovision.com" className="text-primary hover:underline">privacy@innovision.com</a>
               </p>
             </div>

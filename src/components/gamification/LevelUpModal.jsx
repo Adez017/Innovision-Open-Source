@@ -17,12 +17,12 @@ const LEVEL_BADGES = {
   100: { icon: Crown, color: "text-red-500", bg: "bg-red-500/20", title: "Legend" },
 };
 
-export default function LevelUpModal({ 
-  isOpen, 
-  onClose, 
-  newLevel, 
+export default function LevelUpModal({
+  isOpen,
+  onClose,
+  newLevel,
   xpGained = 0,
-  totalXP = 0 
+  totalXP = 0
 }) {
   const [showParticles, setShowParticles] = useState(false);
   const [badgeRevealed, setBadgeRevealed] = useState(false);
@@ -33,9 +33,9 @@ export default function LevelUpModal({
   // Animation springs
   const modalSpring = useSpring({
     from: { opacity: 0, transform: "scale(0.5) translateY(50px)" },
-    to: { 
-      opacity: isOpen ? 1 : 0, 
-      transform: isOpen ? "scale(1) translateY(0px)" : "scale(0.5) translateY(50px)" 
+    to: {
+      opacity: isOpen ? 1 : 0,
+      transform: isOpen ? "scale(1) translateY(0px)" : "scale(0.5) translateY(50px)"
     },
     config: config.wobbly,
   });
@@ -49,9 +49,9 @@ export default function LevelUpModal({
 
   const badgeSpring = useSpring({
     from: { opacity: 0, transform: "scale(0) rotate(-180deg)" },
-    to: { 
-      opacity: badgeRevealed ? 1 : 0, 
-      transform: badgeRevealed ? "scale(1) rotate(0deg)" : "scale(0) rotate(-180deg)" 
+    to: {
+      opacity: badgeRevealed ? 1 : 0,
+      transform: badgeRevealed ? "scale(1) rotate(0deg)" : "scale(0) rotate(-180deg)"
     },
     config: config.wobbly,
   });
@@ -67,7 +67,7 @@ export default function LevelUpModal({
   useEffect(() => {
     if (isOpen) {
       setShowParticles(true);
-      
+
       // Fire confetti
       const duration = 3000;
       const end = Date.now() + duration;
@@ -115,16 +115,16 @@ export default function LevelUpModal({
   return (
     <>
       <ParticleEffect active={showParticles} particleCount={60} duration={3000} />
-      
+
       {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] flex items-center justify-center"
+      <div
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-90 flex items-center justify-center"
         onClick={onClose}
       >
         {/* Modal */}
         <animated.div
           style={{ ...modalSpring, ...glowSpring }}
-          className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border-2 border-yellow-500/50"
+          className="relative bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border-2 border-yellow-500/50"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
@@ -142,11 +142,11 @@ export default function LevelUpModal({
               <p className="text-yellow-500 font-bold text-lg tracking-widest mb-2 flex items-center justify-center gap-2">
                 <Sparkles className="h-5 w-5" /> LEVEL UP! <Sparkles className="h-5 w-5" />
               </p>
-              
+
               {/* Animated level number */}
               <div className="relative inline-block">
-                <animated.span 
-                  className="text-8xl font-black bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent"
+                <animated.span
+                  className="text-8xl font-black bg-linear-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent"
                 >
                   {levelSpring.number.to(n => Math.floor(n))}
                 </animated.span>
@@ -181,8 +181,8 @@ export default function LevelUpModal({
                 {500 - (totalXP % 500)} XP to Level {newLevel + 1}
               </p>
               <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
-                <div 
-                  className="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-1000"
+                <div
+                  className="bg-linear-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-1000"
                   style={{ width: `${(totalXP % 500) / 5}%` }}
                 />
               </div>
@@ -191,7 +191,7 @@ export default function LevelUpModal({
             {/* Continue button */}
             <Button
               onClick={onClose}
-              className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold py-3"
+              className="w-full bg-linear-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold py-3"
             >
               <Sparkles className="h-4 w-4 mr-2" />
               Continue Learning

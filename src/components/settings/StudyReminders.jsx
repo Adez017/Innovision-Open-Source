@@ -47,7 +47,7 @@ export default function StudyReminders() {
     setIsSupported(isNotificationSupported());
     setPermission(getNotificationPermission());
     setReminders(getReminders());
-    
+
     // Start the reminder checker
     if (getNotificationPermission() === "granted") {
       startReminderChecker();
@@ -57,11 +57,11 @@ export default function StudyReminders() {
   const handleRequestPermission = async () => {
     const result = await requestNotificationPermission();
     setPermission(result.permission || "denied");
-    
+
     if (result.granted) {
       toast.success("Notifications enabled!");
       startReminderChecker();
-      
+
       // Send a test notification
       sendNotification("Notifications Enabled! 🎉", {
         body: "You'll now receive study reminders at your scheduled times.",
@@ -101,7 +101,7 @@ export default function StudyReminders() {
 
   const handleToggleReminder = (id) => {
     toggleReminder(id);
-    setReminders(reminders.map(r => 
+    setReminders(reminders.map(r =>
       r.id === id ? { ...r, enabled: !r.enabled } : r
     ));
   };
@@ -173,18 +173,18 @@ export default function StudyReminders() {
             )}
             <div>
               <p className="font-medium">
-                {permission === "granted" 
-                  ? "Notifications Enabled" 
+                {permission === "granted"
+                  ? "Notifications Enabled"
                   : permission === "denied"
-                  ? "Notifications Blocked"
-                  : "Notifications Not Enabled"}
+                    ? "Notifications Blocked"
+                    : "Notifications Not Enabled"}
               </p>
               <p className="text-sm text-muted-foreground">
                 {permission === "granted"
                   ? "You'll receive study reminders"
                   : permission === "denied"
-                  ? "Please enable in browser settings"
-                  : "Enable to receive study reminders"}
+                    ? "Please enable in browser settings"
+                    : "Enable to receive study reminders"}
               </p>
             </div>
           </div>
@@ -198,13 +198,13 @@ export default function StudyReminders() {
               <Button onClick={sendTestNotification} variant="outline" size="sm">
                 Test
               </Button>
-              <Button 
+              <Button
                 onClick={() => {
                   const message = getRandomReminderMessage();
                   sendNotification(message.title, { body: message.body });
                   toast.success("Notification sent!");
-                }} 
-                variant="outline" 
+                }}
+                variant="outline"
                 size="sm"
               >
                 Send Now
@@ -221,7 +221,7 @@ export default function StudyReminders() {
                 <Plus className="h-4 w-4" />
                 Add New Reminder
               </h4>
-              
+
               {/* Time Selection */}
               <div className="space-y-2">
                 <Label className="flex items-center gap-2">
@@ -291,7 +291,7 @@ export default function StudyReminders() {
             {/* Existing Reminders */}
             <div className="space-y-3">
               <h4 className="font-medium">Your Reminders</h4>
-              
+
               {reminders.length === 0 ? (
                 <div className="text-center py-8 text-muted-foreground">
                   <Bell className="h-8 w-8 mx-auto mb-2 opacity-50" />
@@ -303,9 +303,8 @@ export default function StudyReminders() {
                   {reminders.map((reminder) => (
                     <div
                       key={reminder.id}
-                      className={`flex items-center justify-between p-3 rounded-lg border ${
-                        reminder.enabled ? "bg-card" : "bg-muted/50 opacity-60"
-                      }`}
+                      className={`flex items-center justify-between p-3 rounded-lg border ${reminder.enabled ? "bg-card" : "bg-muted/50 opacity-60"
+                        }`}
                     >
                       <div className="flex items-center gap-3">
                         <Switch

@@ -29,8 +29,8 @@ export default function QuickCurriculumCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <Button 
-          onClick={() => router.push('/generate')} 
+        <Button
+          onClick={() => router.push('/generate')}
           className="w-full"
           variant="default"
         >

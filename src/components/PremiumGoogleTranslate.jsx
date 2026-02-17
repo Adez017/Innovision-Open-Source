@@ -83,7 +83,7 @@ const PremiumGoogleTranslate = () => {
 
   const startTrialTimer = (startTime) => {
     const tenMinutes = 10 * 60 * 1000;
-    
+
     const updateTimer = () => {
       const elapsed = Date.now() - startTime;
       const remaining = tenMinutes - elapsed;
@@ -144,7 +144,7 @@ const PremiumGoogleTranslate = () => {
   if (trialExpired && !isPremium) {
     return (
       <>
-        <div className="p-3 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
+        <div className="p-3 bg-linear-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
             <Crown className="h-4 w-4 text-yellow-600" />
             <p className="text-sm font-semibold">Premium Feature</p>

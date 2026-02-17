@@ -85,7 +85,7 @@ export async function createProject(userEmail, projectData) {
       currentMilestone: 0,
       progress: 0
     };
-    
+
     await setDoc(projectRef, project);
     return { id: projectRef.id, ...project };
   } catch (error) {
@@ -125,21 +125,21 @@ export async function findMentors(projectSkills, userLevel) {
   const mentorsRef = collection(db, "mentors");
   const snapshot = await getDocs(mentorsRef);
   const mentors = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  
+
   // Score mentors based on skill match and availability
   const scoredMentors = mentors.map(mentor => {
-    const skillMatch = projectSkills.filter(skill => 
+    const skillMatch = projectSkills.filter(skill =>
       mentor.skills?.includes(skill)
     ).length / projectSkills.length;
-    
+
     const levelMatch = mentor.experienceLevel >= userLevel ? 1 : 0.5;
     const availabilityScore = mentor.available ? 1 : 0;
-    
+
     const score = (skillMatch * 0.5) + (levelMatch * 0.3) + (availabilityScore * 0.2);
-    
+
     return { ...mentor, matchScore: score };
   });
-  
+
   return scoredMentors.sort((a, b) => b.matchScore - a.matchScore).slice(0, 5);
 }
 
@@ -156,15 +156,15 @@ export async function submitProjectForReview(projectId, submissionData) {
     score: null,
     feedback: null
   };
-  
+
   await setDoc(reviewRef, review);
-  
+
   // Update project status
   await updateDoc(doc(db, "projects", projectId), {
     status: "under_review",
     updatedAt: Date.now()
   });
-  
+
   return { id: reviewRef.id, ...review };
 }
 
@@ -224,17 +224,17 @@ export const reviewRubric = {
  */
 export function calculateProjectScore(scores) {
   let totalScore = 0;
-  
+
   reviewRubric.categories.forEach((category, catIndex) => {
     let categoryScore = 0;
     category.criteria.forEach((criterion, critIndex) => {
       const score = scores[catIndex]?.[critIndex] || 0;
       categoryScore += score;
     });
-    
+
     const categoryAverage = categoryScore / category.criteria.length;
     totalScore += categoryAverage * category.weight;
   });
-  
+
   return Math.round(totalScore * 10) / 10;
 }

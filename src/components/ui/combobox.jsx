@@ -55,9 +55,8 @@ export function SearchableSelect({ options, value, onValueChange, placeholder = 
             filteredOptions.slice(0, 50).map((option, index) => (
               <div
                 key={index}
-                className={`px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm flex items-center gap-2 ${
-                  value === option ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium' : ''
-                }`}
+                className={`px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm flex items-center gap-2 ${value === option ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium' : ''
+                  }`}
                 onClick={() => {
                   onValueChange(option);
                   setSearch("");

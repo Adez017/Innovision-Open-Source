@@ -3,8 +3,8 @@ import { useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { 
-  Sparkles, Palette, Upload, Youtube, Home, BookOpen, Code2, 
+import {
+  Sparkles, Palette, Upload, Youtube, Home, BookOpen, Code2,
   Trophy, Zap, BarChart3, MessageSquare, Flame, Globe, Crown,
   ArrowRight, Check
 } from "lucide-react";
@@ -121,7 +121,7 @@ export default function SheryiansLanding() {
             <p className="text-sm text-gray-500 mb-6 tracking-wide">
               50,000+ Active Learners Worldwide
             </p>
-            
+
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight mb-6 leading-tight">
               <span className="text-white">Learn Any Topic</span>
               <br />
@@ -196,11 +196,10 @@ export default function SheryiansLanding() {
               {pricing.map((plan, i) => (
                 <div
                   key={i}
-                  className={`p-8 border rounded-2xl transition-all duration-300 bg-black ${
-                    plan.popular
-                      ? 'border-blue-500 bg-blue-500/5'
-                      : 'border-white/10 hover:border-white/20'
-                  }`}
+                  className={`p-8 border rounded-2xl transition-all duration-300 bg-black ${plan.popular
+                    ? 'border-blue-500 bg-blue-500/5'
+                    : 'border-white/10 hover:border-white/20'
+                    }`}
                 >
                   {plan.popular && (
                     <div className="text-xs text-blue-500 font-medium mb-4 uppercase tracking-wider">
@@ -215,18 +214,17 @@ export default function SheryiansLanding() {
                   <ul className="space-y-3 mb-8">
                     {plan.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-2 text-sm text-gray-400">
-                        <Check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                        <Check className="h-4 w-4 text-blue-500 mt-0.5 shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <Link href="/login">
                     <Button
-                      className={`w-full h-11 rounded-full font-normal ${
-                        plan.popular
-                          ? 'bg-blue-500 text-white hover:bg-blue-600'
-                          : 'bg-transparent border border-white/20 hover:bg-white/10'
-                      }`}
+                      className={`w-full h-11 rounded-full font-normal ${plan.popular
+                        ? 'bg-blue-500 text-white hover:bg-blue-600'
+                        : 'bg-transparent border border-white/20 hover:bg-white/10'
+                        }`}
                     >
                       Get Started
                     </Button>

@@ -126,14 +126,14 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-background relative">
       <PageBackground variant="profile" />
       <GridPattern opacity={0.02} />
-      
+
       <div className="max-w-7xl mx-auto p-6 relative z-10">
         {/* Trial Banner */}
         <TrialBanner onStatusChange={handleStatusChange} />
-        
+
         {/* Premium Dialog */}
-        <PremiumDialog 
-          open={showPremiumDialog} 
+        <PremiumDialog
+          open={showPremiumDialog}
           onOpenChange={setShowPremiumDialog}
           feature={blockedFeature}
         />
@@ -187,10 +187,10 @@ export default function ProfilePage() {
                 <LockedFeature featureName="Overview Dashboard" hasAccess={hasAccess} showPreview={true}>
                   {/* Motivational Quote */}
                   <MotivationalQuote />
-                  
+
                   {/* Learning Stats Dashboard */}
                   {user?.email && <StatsCard userId={user.email} />}
-                  
+
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="lg:col-span-2">
                       {user?.email && <GamificationDashboard userId={user.email} />}
@@ -199,11 +199,11 @@ export default function ProfilePage() {
                       {user?.email && <DailyQuests userId={user.email} />}
                     </div>
                   </div>
-                  
+
                   {/* Badge Collection Gallery */}
-                  <BadgeGallery 
-                    earnedBadges={userData?.badges || []} 
-                    userName={userData?.name || user?.displayName || "User"} 
+                  <BadgeGallery
+                    earnedBadges={userData?.badges || []}
+                    userName={userData?.name || user?.displayName || "User"}
                   />
                 </LockedFeature>
               </TabsContent>
@@ -229,7 +229,7 @@ export default function ProfilePage() {
               <TabsContent value="courses" className="space-y-4">
                 {/* Bookmarks Section */}
                 <Bookmarks />
-                
+
                 <Card>
                   <CardHeader>
                     <CardTitle>Recent Courses</CardTitle>
@@ -275,103 +275,103 @@ export default function ProfilePage() {
               {/* Research Tab - Data Export */}
               <TabsContent value="research" className="space-y-4">
                 <LockedFeature featureName="Research Data Export" hasAccess={hasAccess} showPreview={true}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Interaction Dataset */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Interaction Dataset */}
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Database className="h-5 w-5 text-blue-500" />
+                          Interaction Dataset
+                        </CardTitle>
+                        <CardDescription>
+                          Anonymized user interaction data including clicks, time spent, and navigation patterns
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-center gap-2">
+                            <Shield className="h-4 w-4 text-green-500" />
+                            <span>Fully anonymized</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <FileText className="h-4 w-4" />
+                            <span>JSON format</span>
+                          </div>
+                        </div>
+                        <Button onClick={() => exportDataset("interactions")} disabled={exporting} className="w-full">
+                          <Download className="h-4 w-4 mr-2" />
+                          Export Interactions
+                        </Button>
+                      </CardContent>
+                    </Card>
+
+                    {/* Outcome Dataset */}
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <TrendingUp className="h-5 w-5 text-green-500" />
+                          Outcome Dataset
+                        </CardTitle>
+                        <CardDescription>
+                          Learning outcomes, quiz scores, completion rates, and performance metrics
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-center gap-2">
+                            <Shield className="h-4 w-4 text-green-500" />
+                            <span>Fully anonymized</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <FileText className="h-4 w-4" />
+                            <span>JSON format</span>
+                          </div>
+                        </div>
+                        <Button onClick={() => exportDataset("outcomes")} disabled={exporting} className="w-full">
+                          <Download className="h-4 w-4 mr-2" />
+                          Export Outcomes
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  {/* Privacy Notice */}
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <Database className="h-5 w-5 text-blue-500" />
-                        Interaction Dataset
+                        <Shield className="h-5 w-5 text-green-500" />
+                        Data Privacy & Anonymization
                       </CardTitle>
-                      <CardDescription>
-                        Anonymized user interaction data including clicks, time spent, and navigation patterns
-                      </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-center gap-2">
+                    <CardContent>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-center gap-2">
                           <Shield className="h-4 w-4 text-green-500" />
-                          <span>Fully anonymized</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <FileText className="h-4 w-4" />
-                          <span>JSON format</span>
-                        </div>
-                      </div>
-                      <Button onClick={() => exportDataset("interactions")} disabled={exporting} className="w-full">
-                        <Download className="h-4 w-4 mr-2" />
-                        Export Interactions
-                      </Button>
+                          All personal identifiers removed
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          User IDs replaced with random hashes
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          No email addresses or names included
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          Timestamps rounded to nearest hour
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          IP addresses excluded
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-green-500" />
+                          GDPR and COPPA compliant
+                        </li>
+                      </ul>
                     </CardContent>
                   </Card>
-
-                  {/* Outcome Dataset */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <TrendingUp className="h-5 w-5 text-green-500" />
-                        Outcome Dataset
-                      </CardTitle>
-                      <CardDescription>
-                        Learning outcomes, quiz scores, completion rates, and performance metrics
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-center gap-2">
-                          <Shield className="h-4 w-4 text-green-500" />
-                          <span>Fully anonymized</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <FileText className="h-4 w-4" />
-                          <span>JSON format</span>
-                        </div>
-                      </div>
-                      <Button onClick={() => exportDataset("outcomes")} disabled={exporting} className="w-full">
-                        <Download className="h-4 w-4 mr-2" />
-                        Export Outcomes
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Privacy Notice */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Shield className="h-5 w-5 text-green-500" />
-                      Data Privacy & Anonymization
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-center gap-2">
-                        <Shield className="h-4 w-4 text-green-500" />
-                        All personal identifiers removed
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Shield className="h-4 w-4 text-green-500" />
-                        User IDs replaced with random hashes
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Shield className="h-4 w-4 text-green-500" />
-                        No email addresses or names included
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Shield className="h-4 w-4 text-green-500" />
-                        Timestamps rounded to nearest hour
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Shield className="h-4 w-4 text-green-500" />
-                        IP addresses excluded
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Shield className="h-4 w-4 text-green-500" />
-                        GDPR and COPPA compliant
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
                 </LockedFeature>
               </TabsContent>
 

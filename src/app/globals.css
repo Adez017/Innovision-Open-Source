@@ -9,6 +9,24 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ===== Custom Scrollbar (Global) ===== */
+
+/* Custom Scrollbar: Transparent Track */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(17, 24, 39, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+      #8b5cf6,
+      #3b82f6);
+  border-radius: 999px;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -123,27 +141,28 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
-  
+
   /* Accessibility */
   .high-contrast {
     filter: contrast(2);
   }
-  
+
   .reduce-motion *,
   .reduce-motion *::before,
   .reduce-motion *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   *:focus-visible {
     outline: 3px solid #0066cc;
     outline-offset: 2px;
   }
-  
+
   .skip-to-content {
     position: absolute;
     top: -40px;
@@ -153,15 +172,16 @@
     padding: 8px;
     z-index: 100;
   }
-  
+
   .skip-to-content:focus {
     top: 0;
   }
 }
 
-.samp{
+.samp {
   background-color: rgb(9, 113, 232);
 }
+
 .custom-scroll::-webkit-scrollbar {
   width: 4px;
 }
@@ -172,7 +192,7 @@
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: #0971e8; 
+  background: #0971e8;
 }
 
 body {
@@ -180,20 +200,20 @@ body {
 }
 
 .VIpgJd-ZVi9od-l4eHX-hSRGPd {
-  display: none ;
+  display: none;
 }
 
-.VIpgJd-ZVi9od-ORHb-OEVmcd{
-  display: none ;
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none;
 }
 
 .goog-te-gadget {
   display: block;
 }
 
-.goog-te-combo{
+.goog-te-combo {
   background: var(--background);
-  border: 1px solid ;
+  border: 1px solid;
   padding: 5px;
   border-radius: 5px;
 }
@@ -207,6 +227,7 @@ body {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
+
   100% {
     transform: translateY(-30px) scale(0);
     opacity: 0;
@@ -218,18 +239,23 @@ body {
 }
 
 @keyframes fire-flicker {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1) rotate(-2deg);
     filter: brightness(1);
   }
+
   25% {
     transform: scale(1.05) rotate(1deg);
     filter: brightness(1.1);
   }
+
   50% {
     transform: scale(0.98) rotate(-1deg);
     filter: brightness(0.95);
   }
+
   75% {
     transform: scale(1.02) rotate(2deg);
     filter: brightness(1.05);
@@ -246,25 +272,27 @@ body {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
 }
 
 .shimmer-effect {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.3) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%);
   animation: shimmer 2s infinite;
 }
 
 @keyframes progress-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
   }
@@ -276,16 +304,14 @@ body {
 
 /* Striped progress bar */
 .bg-stripes {
-  background-image: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.15) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0.15) 75%,
-    transparent 75%,
-    transparent
-  );
+  background-image: linear-gradient(45deg,
+      rgba(255, 255, 255, 0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.15) 75%,
+      transparent 75%,
+      transparent);
   background-size: 1rem 1rem;
   animation: stripes 1s linear infinite;
 }
@@ -294,6 +320,7 @@ body {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 1rem 0;
   }
@@ -306,12 +333,15 @@ body {
     opacity: 0;
     transform: translateY(10px) scale(0.95);
   }
+
   50% {
     transform: translateY(-3px) scale(1.02);
   }
+
   70% {
     transform: translateY(1px) scale(0.99);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -323,12 +353,15 @@ body {
     opacity: 0;
     transform: translateY(-10px) scale(0.95);
   }
+
   50% {
     transform: translateY(3px) scale(1.02);
   }
+
   70% {
     transform: translateY(-1px) scale(0.99);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -340,12 +373,15 @@ body {
     opacity: 0;
     transform: translateX(10px) scale(0.95);
   }
+
   50% {
     transform: translateX(-3px) scale(1.02);
   }
+
   70% {
     transform: translateX(1px) scale(0.99);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -357,12 +393,15 @@ body {
     opacity: 0;
     transform: translateX(-10px) scale(0.95);
   }
+
   50% {
     transform: translateX(3px) scale(1.02);
   }
+
   70% {
     transform: translateX(-1px) scale(0.99);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -392,12 +431,15 @@ body {
     opacity: 0;
     transform: translateX(100%) scale(0.95);
   }
+
   60% {
     transform: translateX(-10px) scale(1.02);
   }
+
   80% {
     transform: translateX(5px) scale(0.99);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -413,6 +455,7 @@ body {
     opacity: 1;
     transform: translateX(0);
   }
+
   100% {
     opacity: 0;
     transform: translateX(100%);
@@ -425,9 +468,12 @@ body {
 
 /* Achievement glow effect */
 @keyframes achievement-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
   }
@@ -444,17 +490,22 @@ body {
     opacity: 0;
     transform: scale(0.5) translateY(20px);
   }
+
   20% {
     opacity: 1;
     transform: scale(1.2) translateY(-10px);
   }
+
   40% {
     transform: scale(0.95) translateY(0);
   }
+
   60% {
     transform: scale(1.05) translateY(-5px);
   }
-  80%, 100% {
+
+  80%,
+  100% {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
@@ -465,10 +516,13 @@ body {
 }
 
 @keyframes combo-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 currentColor;
   }
+
   50% {
     transform: scale(1.05);
     box-shadow: 0 0 20px 5px currentColor;
@@ -484,6 +538,7 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translateY(-60px) scale(0);
@@ -498,6 +553,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -530,9 +586,11 @@ body {
   0% {
     transform: scale(0);
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
   }
@@ -545,39 +603,33 @@ body {
 
 /* Night Mode - Blue Light Filter */
 .night-mode {
-  filter: sepia(15%) saturate(85%) brightness(95%);
+  filter: sepia(60%) hue-rotate(-12deg) saturate(90%) brightness(92%);
 }
-
-/* Exclude certain elements from night mode filter */
+/* Elements that MUST stay normal (logos, screenshots, etc.) */
 .night-mode .exclude-night-filter {
   filter: none;
 }
 
-/* Extra dark backgrounds for night mode */
+/* Do NOT override your theme backgrounds here.
+   Let :root / .dark tokens handle light vs dark. */
 .night-mode.dark body,
-.night-mode.dark .bg-background {
-  background-color: #080808 !important;
-}
-
-.night-mode.dark .bg-card {
-  background-color: #0c0c0c !important;
-}
-
+.night-mode.dark .bg-background,
+.night-mode.dark .bg-card,
 .night-mode.dark .bg-muted {
-  background-color: #141414 !important;
+  background-color: transparent !important;
 }
 
-/* Warmer text colors in night mode */
-.night-mode .text-muted-foreground {
-  color: #b0a090 !important;
-}
-
-/* Softer borders */
+/* Keep border colors from the design system */
 .night-mode .border {
-  border-color: #1a1a1a !important;
+  border-color: inherit !important;
 }
 
-/* Night mode indicator animation */
+/* Slightly warmer muted text but still readable */
+.night-mode .text-muted-foreground {
+  color: color-mix(in oklch, currentColor 80%, oklch(0.78 0.06 70)) !important;
+}
+
+/* Night mode indicator animation (same name as before) */
 @keyframes night-pulse {
   0%, 100% {
     opacity: 1;
@@ -597,6 +649,7 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     transform: translateY(6px);
@@ -613,6 +666,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -626,15 +680,20 @@ body {
 
 /* Custom animations for Sheryians-style effects */
 @keyframes blob {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
+
   25% {
     transform: translate(20px, -50px) scale(1.1);
   }
+
   50% {
     transform: translate(-20px, 20px) scale(0.9);
   }
+
   75% {
     transform: translate(50px, 50px) scale(1.05);
   }
@@ -644,6 +703,7 @@ body {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(8px);
   }
@@ -654,6 +714,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

@@ -22,7 +22,7 @@ export async function GET(req, { params }) {
         );
 
         const docSnap = await getDoc(docRef);
-        
+
         if (!docSnap.exists()) {
             return NextResponse.json({
                 exists: false,
@@ -31,7 +31,7 @@ export async function GET(req, { params }) {
         }
 
         const data = docSnap.data();
-        
+
         return NextResponse.json({
             exists: true,
             hasContent: !!data.content,

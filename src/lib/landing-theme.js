@@ -219,7 +219,7 @@ export const getTiltStyle = (mouseX, mouseY, centerX = 150, centerY = 150) => {
   const { perspective, maxRotation, scale } = landingTheme.effects.tilt;
   const rotateX = (mouseY - centerY) / maxRotation;
   const rotateY = (mouseX - centerX) / maxRotation;
-  
+
   return {
     transform: `perspective(${perspective}) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`,
   };

@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { 
+import {
   Trophy, Star, Flame, Zap, Crown, Award, Medal, Target,
   BookOpen, GraduationCap, Sparkles, Heart, Users, Clock,
   TrendingUp, CheckCircle2, Gift, Rocket
@@ -80,14 +80,14 @@ export function showAchievementToast({
       <div
         className={`
           flex items-center gap-4 p-4 rounded-xl
-          bg-gradient-to-r ${style.gradient}
+          bg-linear-to-r ${style.gradient}
           shadow-2xl border border-white/20
           animate-slide-in-right
-          min-w-[320px] max-w-[400px]
+          min-w-[320px] max-w-100
         `}
       >
         {/* Icon */}
-        <div className="flex-shrink-0 w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+        <div className="shrink-0 w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
           <IconComponent className="h-7 w-7 text-white" />
         </div>
 
@@ -110,7 +110,7 @@ export function showAchievementToast({
 
         {/* XP Badge */}
         {xp > 0 && (
-          <div className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 text-center">
+          <div className="shrink-0 bg-white/20 backdrop-blur-sm rounded-lg px-3 py-2 text-center">
             <div className="text-white font-bold text-lg">+{xp}</div>
             <div className="text-white/70 text-xs">XP</div>
           </div>

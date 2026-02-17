@@ -39,7 +39,7 @@ export default function CourseDetailPage() {
   };
 
   const handleEnroll = async () => {
-    if (!session) {
+    if (!user) {
       toast.error("Please login to enroll");
       router.push("/login");
       return;
@@ -134,7 +134,7 @@ export default function CourseDetailPage() {
         {/* Course Content */}
         <div className="space-y-6">
           <h2 className="text-2xl font-bold">Course Content</h2>
-          
+
           {course.chapters && course.chapters.length > 0 ? (
             <div className="space-y-3">
               {course.chapters.map((chapter, index) => (

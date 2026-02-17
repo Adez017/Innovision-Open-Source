@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 
 // Reveal entire element on scroll
-export const ScrollReveal = ({ 
-  children, 
-  className = "", 
+export const ScrollReveal = ({
+  children,
+  className = "",
   delay = 0,
   direction = "up" // up, down, left, right, scale
 }) => {
@@ -54,11 +54,11 @@ export const ScrollReveal = ({
 };
 
 // Reveal text word by word
-export const WordReveal = ({ 
-  text, 
+export const WordReveal = ({
+  text,
   className = "",
   wordClassName = "",
-  staggerDelay = 50 
+  staggerDelay = 50
 }) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -99,11 +99,11 @@ export const WordReveal = ({
 };
 
 // Reveal text letter by letter
-export const LetterReveal = ({ 
-  text, 
+export const LetterReveal = ({
+  text,
   className = "",
   letterClassName = "",
-  staggerDelay = 30 
+  staggerDelay = 30
 }) => {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -144,8 +144,8 @@ export const LetterReveal = ({
 };
 
 // Stagger children reveal
-export const StaggerReveal = ({ 
-  children, 
+export const StaggerReveal = ({
+  children,
   className = "",
   staggerDelay = 100,
   direction = "up"
@@ -198,8 +198,8 @@ export const StaggerReveal = ({
 };
 
 // Line reveal (text appears with a line wipe)
-export const LineReveal = ({ 
-  children, 
+export const LineReveal = ({
+  children,
   className = ""
 }) => {
   const ref = useRef(null);

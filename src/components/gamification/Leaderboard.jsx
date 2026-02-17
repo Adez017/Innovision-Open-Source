@@ -18,7 +18,7 @@ export default function Leaderboard({ currentUserId }) {
 
   useEffect(() => {
     fetchLeaderboard();
-    
+
     // Refresh leaderboard every 10 seconds for real-time updates
     const interval = setInterval(fetchLeaderboard, 10000);
     return () => clearInterval(interval);
@@ -28,7 +28,7 @@ export default function Leaderboard({ currentUserId }) {
     try {
       const res = await fetch("/api/gamification/leaderboard");
       const data = await res.json();
-      
+
       if (data.error) {
         setLeaderboard({
           daily: [],
@@ -37,17 +37,17 @@ export default function Leaderboard({ currentUserId }) {
         });
         return;
       }
-      
+
       // Track rank changes for animations
       if (!isFirstLoad.current) {
         const newPreviousRanks = {};
         const newAnimating = new Set();
-        
+
         ["daily", "weekly", "allTime"].forEach(period => {
           data[period]?.forEach((user, idx) => {
             const prevRank = previousRanks[`${period}_${user.id}`];
             const newRank = idx + 1;
-            
+
             if (prevRank !== undefined && prevRank !== newRank) {
               newAnimating.add(`${period}_${user.id}`);
               // Clear animation after 2 seconds
@@ -59,11 +59,11 @@ export default function Leaderboard({ currentUserId }) {
                 });
               }, 2000);
             }
-            
+
             newPreviousRanks[`${period}_${user.id}`] = newRank;
           });
         });
-        
+
         setAnimatingUsers(newAnimating);
         setPreviousRanks(newPreviousRanks);
       } else {
@@ -77,7 +77,7 @@ export default function Leaderboard({ currentUserId }) {
         setPreviousRanks(initialRanks);
         isFirstLoad.current = false;
       }
-      
+
       setLeaderboard(data);
     } catch (error) {
       setLeaderboard({
@@ -89,7 +89,7 @@ export default function Leaderboard({ currentUserId }) {
   };
 
   const getRankIcon = (rank) => {
-    switch(rank) {
+    switch (rank) {
       case 1: return <Crown className="h-6 w-6 text-yellow-500" />;
       case 2: return <Medal className="h-6 w-6 text-gray-400" />;
       case 3: return <Award className="h-6 w-6 text-amber-600" />;
@@ -100,7 +100,7 @@ export default function Leaderboard({ currentUserId }) {
   const getRankChange = (userId, period, currentRank) => {
     const prevRank = previousRanks[`${period}_${userId}`];
     if (prevRank === undefined || prevRank === currentRank) return null;
-    
+
     const change = prevRank - currentRank;
     if (change > 0) {
       return (
@@ -132,7 +132,7 @@ export default function Leaderboard({ currentUserId }) {
 
     // Find current user's rank
     const currentUserRank = users.findIndex(u => u.id === currentUserId) + 1;
-    
+
     return (
       <div className="space-y-2">
         {/* Current user's rank summary if not in top 10 */}
@@ -150,18 +150,18 @@ export default function Leaderboard({ currentUserId }) {
           const rank = idx + 1;
           const isAnimating = animatingUsers.has(`${period}_${user.id}`);
           const rankChange = getRankChange(user.id, period, rank);
-          
+
           return (
             <div
               key={user.id}
               className={`
                 flex items-center gap-3 p-3 rounded-lg transition-all duration-300
-                ${isCurrentUser 
-                  ? "bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 border-2 border-blue-400 dark:border-blue-600 shadow-md" 
+                ${isCurrentUser
+                  ? "bg-linear-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 border-2 border-blue-400 dark:border-blue-600 shadow-md"
                   : "border border-border hover:bg-accent/50"
                 }
                 ${isAnimating ? "animate-pulse scale-[1.02]" : ""}
-                ${rank <= 3 ? "bg-gradient-to-r from-yellow-50/50 to-orange-50/50 dark:from-yellow-950/20 dark:to-orange-950/20" : ""}
+                ${rank <= 3 ? "bg-linear-to-r from-yellow-50/50 to-orange-50/50 dark:from-yellow-950/20 dark:to-orange-950/20" : ""}
               `}
             >
               {/* Rank */}
@@ -169,7 +169,7 @@ export default function Leaderboard({ currentUserId }) {
                 {getRankIcon(rank)}
                 {rankChange}
               </div>
-              
+
               {/* Avatar */}
               <div className="relative">
                 <Avatar className={`${rank <= 3 ? "ring-2 ring-yellow-400" : ""} ${isCurrentUser ? "ring-2 ring-blue-500" : ""}`}>
@@ -184,7 +184,7 @@ export default function Leaderboard({ currentUserId }) {
                   </div>
                 )}
               </div>
-              
+
               {/* User info */}
               <div className="flex-1 min-w-0">
                 <div className="font-semibold flex items-center gap-2 truncate">
@@ -203,7 +203,7 @@ export default function Leaderboard({ currentUserId }) {
                   <span>{user.coursesCompleted || 0} courses</span>
                 </div>
               </div>
-              
+
               {/* XP */}
               <div className="text-right">
                 <div className={`font-bold text-lg ${rank === 1 ? "text-yellow-600 dark:text-yellow-400" : ""}`}>

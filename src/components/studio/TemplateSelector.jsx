@@ -476,7 +476,7 @@ export default function TemplateSelector({ onSelect }) {
           {TEMPLATES.map((template) => {
             const Icon = template.icon;
             return (
-              <Card 
+              <Card
                 key={template.id}
                 className="cursor-pointer hover:border-blue-400 transition-all"
                 onClick={() => onSelect(template)}

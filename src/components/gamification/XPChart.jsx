@@ -10,7 +10,7 @@ export default function XPChart({ userId }) {
   useEffect(() => {
     if (userId) {
       fetchXPData();
-      
+
       // Refresh XP chart every 10 seconds for real-time updates
       const interval = setInterval(fetchXPData, 10000);
       return () => clearInterval(interval);
@@ -61,32 +61,31 @@ export default function XPChart({ userId }) {
         ) : (
           <>
             {data.map((item, index) => {
-          const heightPercent = (item.xp / maxXP) * 100;
-          const isToday = index === data.length - 1;
+              const heightPercent = (item.xp / maxXP) * 100;
+              const isToday = index === data.length - 1;
 
-          return (
-            <div key={item.day} className="flex items-center gap-2">
-              <div className="w-10 text-xs font-medium text-muted-foreground">
-                {item.day}
-              </div>
-              <div className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-full h-6 relative overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-500 ${
-                    isToday 
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500' 
-                      : 'bg-gradient-to-r from-green-400 to-green-500'
-                  }`}
-                  style={{ width: `${heightPercent}%` }}
-                />
-                <div className="absolute inset-0 flex items-center px-2">
-                  <span className="text-xs font-bold text-white drop-shadow">
-                    {item.xp} XP
-                  </span>
+              return (
+                <div key={item.day} className="flex items-center gap-2">
+                  <div className="w-10 text-xs font-medium text-muted-foreground">
+                    {item.day}
+                  </div>
+                  <div className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-full h-6 relative overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${isToday
+                        ? 'bg-linear-to-r from-blue-500 to-purple-500'
+                        : 'bg-linear-to-r from-green-400 to-green-500'
+                        }`}
+                      style={{ width: `${heightPercent}%` }}
+                    />
+                    <div className="absolute inset-0 flex items-center px-2">
+                      <span className="text-xs font-bold text-white drop-shadow">
+                        {item.xp} XP
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
           </>
         )}
       </CardContent>

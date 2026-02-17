@@ -11,8 +11,8 @@ export async function POST(request) {
     }
 
     if (!process.env.GEMINI_API_KEY) {
-      return NextResponse.json({ 
-        error: "GEMINI_API_KEY not configured. Please add it to your .env file." 
+      return NextResponse.json({
+        error: "GEMINI_API_KEY not configured. Please add it to your .env file."
       }, { status: 500 });
     }
 
@@ -22,7 +22,7 @@ export async function POST(request) {
     // - Synthesia
     // - D-ID
     // - Runway ML
-    
+
     return NextResponse.json({
       storyboard,
       videoUrl: null, // Will be populated by video generation service
@@ -30,8 +30,8 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error("Video generation error:", error);
-    return NextResponse.json({ 
-      error: error.message || "Failed to generate video storyboard" 
+    return NextResponse.json({
+      error: error.message || "Failed to generate video storyboard"
     }, { status: 500 });
   }
 }

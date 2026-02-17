@@ -4,11 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Lock, Crown } from "lucide-react";
 
-export default function LockedFeature({ 
-  featureName = "This feature", 
-  children, 
+export default function LockedFeature({
+  featureName = "This feature",
+  children,
   hasAccess = false,
-  showPreview = false 
+  showPreview = false
 }) {
   const router = useRouter();
 
@@ -18,7 +18,7 @@ export default function LockedFeature({
 
   // Lock card component
   const LockCard = () => (
-    <Card className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border-2 border-yellow-500/30 max-w-md w-full mx-auto">
+    <Card className="bg-linear-to-br from-yellow-500/10 to-orange-500/10 border-2 border-yellow-500/30 max-w-md w-full mx-auto">
       <CardContent className="pt-6 text-center">
         <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
           <Lock className="h-8 w-8 text-yellow-600" />
@@ -43,7 +43,7 @@ export default function LockedFeature({
 
   // Just show the lock card centered, no preview
   return (
-    <div className="flex items-center justify-center py-8 min-h-[400px]">
+    <div className="flex items-center justify-center py-8 min-h-100">
       <LockCard />
     </div>
   );

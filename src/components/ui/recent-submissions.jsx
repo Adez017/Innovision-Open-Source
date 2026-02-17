@@ -3,7 +3,7 @@ import { Skeleton } from "./skeleton";
 import Link from "next/link";
 
 export function RecentCourses({ courses, loading }) {
-    if(loading) return (
+    if (loading) return (
         <div className="flex flex-col gap-2">
             <Skeleton className={"flex h-12"}></Skeleton>
             <Skeleton className={"flex h-12"}></Skeleton>
@@ -19,7 +19,13 @@ export function RecentCourses({ courses, loading }) {
                 >
                     <div className="flex items-center justify-between">
                         <Link
-                            href={`/roadmap/${course.id}`}
+                            href={
+                                course.courseType === "ingested"
+                                    ? `/ingested-course/${course.id}`
+                                    : course.courseType === "youtube"
+                                        ? `/youtube-course/${course.id}`
+                                        : `/roadmap/${course.id}`
+                            }
                             className="font-medium hover:underline"
                         >
                             {course.courseTitle}
@@ -49,7 +55,7 @@ export function RecentCourses({ courses, loading }) {
                         </div>
                     </div>
                 </div>
-            )) : <div className="flex justify-center">You have no recent or completed courses</div> }
+            )) : <div className="flex justify-center">You have no recent or completed courses</div>}
         </div>
     );
 }

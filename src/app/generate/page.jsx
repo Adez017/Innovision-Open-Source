@@ -50,10 +50,9 @@ const SelectionCard = ({ options, selectedValue, onSelect, title }) => {
             onClick={() => onSelect(option.value)}
             className={`
               p-4 border rounded-xl w-36 cursor-pointer transition-all duration-300
-              ${
-                selectedValue === option.value
-                  ? "border-blue-400 bg-blue-500/10 ring-1 ring-blue-400 scale-[1.02]"
-                  : "border-border/50 hover:bg-accent/60 hover:border-blue-400/50"
+              ${selectedValue === option.value
+                ? "border-blue-400 bg-blue-500/10 ring-1 ring-blue-400 scale-[1.02]"
+                : "border-border/50 hover:bg-accent/60 hover:border-blue-400/50"
               }
             `}
           >
@@ -181,9 +180,8 @@ export default function Page() {
     setIsSubmitting(true);
 
     const streamInfo = curriculumData.stream ? ` (${curriculumData.stream} stream)` : "";
-    const prompt = `Generate a comprehensive curriculum course for ${
-      curriculumData.subject
-    } for ${curriculumData.classLevel.replace("_", " ")}${streamInfo} (${curriculumData.board} board). 
+    const prompt = `Generate a comprehensive curriculum course for ${curriculumData.subject
+      } for ${curriculumData.classLevel.replace("_", " ")}${streamInfo} (${curriculumData.board} board). 
         Cover these topics: ${filledTopics.join(", ")}. 
         Include detailed explanations, examples, and age-appropriate learning activities.`;
 
@@ -269,9 +267,8 @@ export default function Page() {
 
     setIsSubmitting(true);
 
-    const prompt = `Generate a comprehensive engineering course for ${engineeringData.subject} in ${
-      engineeringData.branch
-    }, ${engineeringData.semester} at ${engineeringData.college}. 
+    const prompt = `Generate a comprehensive engineering course for ${engineeringData.subject} in ${engineeringData.branch
+      }, ${engineeringData.semester} at ${engineeringData.college}. 
         Cover these modules: ${filledModules.join(", ")}. 
         Include detailed explanations, examples, and practical applications for each module.`;
 
@@ -509,7 +506,7 @@ Return valid JSON only.`;
     <div className="min-h-screen bg-background relative">
       <PageBackground />
       <GridPattern opacity={0.02} />
-      
+
       {isSubmitting && (
         <div className="w-full h-screen flex flex-col gap-2 items-center justify-center fixed inset-0 z-50 bg-background/95 backdrop-blur-xl">
           <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-4">
@@ -542,14 +539,14 @@ Return valid JSON only.`;
                 <BookOpen className="h-4 w-4" />
                 Curriculum
                 {!premiumStatus.isPremium && (
-                  <span className="ml-1 text-xs bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-1.5 py-0.5 rounded-full font-semibold">PRO</span>
+                  <span className="ml-1 text-xs bg-linear-to-r from-yellow-500 to-orange-500 text-black px-1.5 py-0.5 rounded-full font-semibold">PRO</span>
                 )}
               </TabsTrigger>
               <TabsTrigger value="engineering" className="flex items-center gap-2 data-[state=active]:bg-background">
                 <GraduationCap className="h-4 w-4" />
                 Engineering
                 {!premiumStatus.isPremium && (
-                  <span className="ml-1 text-xs bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-1.5 py-0.5 rounded-full font-semibold">PRO</span>
+                  <span className="ml-1 text-xs bg-linear-to-r from-yellow-500 to-orange-500 text-black px-1.5 py-0.5 rounded-full font-semibold">PRO</span>
                 )}
               </TabsTrigger>
             </TabsList>
@@ -570,502 +567,499 @@ Return valid JSON only.`;
                               className={"focus-visible:ring-blue-200 focus-visible:border-blue-400 bg-background/50"}
                               placeholder="e.g., Trigonometry, Web development"
                               {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
 
-                  <div className="flex gap-6 max-sm:flex-col">
-                    <FormField
-                      control={form.control}
-                      name="knowledgeLevel"
-                      render={({ field }) => (
-                        <FormItem>
-                          <SelectionCard
-                            options={knowledgeLevelOptions}
-                            selectedValue={field.value}
-                            onSelect={field.onChange}
-                            title={
-                              <>
-                                <GraduationCap className="h-4 w-4 inline-block mr-2" />
-                                Current Knowledge Level
-                              </>
+                    <div className="flex gap-6 max-sm:flex-col">
+                      <FormField
+                        control={form.control}
+                        name="knowledgeLevel"
+                        render={({ field }) => (
+                          <FormItem>
+                            <SelectionCard
+                              options={knowledgeLevelOptions}
+                              selectedValue={field.value}
+                              onSelect={field.onChange}
+                              title={
+                                <>
+                                  <GraduationCap className="h-4 w-4 inline-block mr-2" />
+                                  Current Knowledge Level
+                                </>
+                              }
+                            />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="timeCommitment"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex items-center h-max gap-2">
+                              <Clock className="h-4 w-4" />
+                              Time Commitment
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select time commitment" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="1-2-hours">1-2 hours per day</SelectItem>
+                                <SelectItem value="2-3-hours">2-3 hours per day</SelectItem>
+                                <SelectItem value="3-4-hours">3-4 hours per day</SelectItem>
+                                <SelectItem value="4-5-hours">4-5 hours per day</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <Separator />
+
+                    <div className="flex gap-6 max-sm:flex-col">
+                      <FormField
+                        control={form.control}
+                        name="difficultyLevel"
+                        render={({ field }) => (
+                          <FormItem>
+                            <SelectionCard
+                              options={difficultyLevelOptions}
+                              selectedValue={field.value}
+                              onSelect={field.onChange}
+                              title={
+                                <>
+                                  <Flag className="h-4 w-4 inline-block mr-2" />
+                                  Preferred Difficulty Level
+                                </>
+                              }
+                            />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="completionTime"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex items-center gap-2">
+                              <Calendar className="h-4 w-4" />
+                              Target Completion Time
+                            </FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select completion time" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="1-week">1 Week</SelectItem>
+                                <SelectItem value="2-weeks">2 Weeks</SelectItem>
+                                <SelectItem value="1-month">1 Month</SelectItem>
+                                <SelectItem value="2-months">2 Months</SelectItem>
+                                <SelectItem value="3-months">3 Months</SelectItem>
+                                <SelectItem value="6-months">6 Months</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                      {isSubmitting ? "Generating Roadmap..." : "Generate My Learning Roadmap"}
+                    </Button>
+                  </form>
+                </Form>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="curriculum">
+              <Card className="p-6 border-0 shadow-none">
+                {!premiumStatus.isPremium && (
+                  <div className="mb-6 p-4 bg-linear-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <div className="shrink-0 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                        <span className="text-black font-bold text-lg">★</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-lg mb-1">Premium Feature</h3>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Curriculum generation is available only for Premium users. Upgrade now for just ₹100/month!
+                        </p>
+                        <Button
+                          onClick={() => router.push("/premium")}
+                          className="bg-yellow-500 hover:bg-yellow-600 text-black"
+                        >
+                          Upgrade to Premium
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className="space-y-6">
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <label className="text-sm font-medium">Class Level</label>
+                      <Select
+                        value={curriculumData.classLevel}
+                        onValueChange={(value) =>
+                          setCurriculumData((prev) => ({
+                            ...prev,
+                            classLevel: value,
+                            stream: "",
+                            subject: "",
+                          }))
+                        }
+                      >
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="Select class" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {classLevels.map((cls) => (
+                            <SelectItem key={cls} value={cls}>
+                              {cls.replace("_", " ")}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium">Board</label>
+                      <Select
+                        value={curriculumData.board}
+                        onValueChange={(value) =>
+                          setCurriculumData((prev) => ({
+                            ...prev,
+                            board: value,
+                            stream: "",
+                            subject: "",
+                          }))
+                        }
+                      >
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="Select board" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {boards.map((board) => (
+                            <SelectItem key={board} value={board}>
+                              {board}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Stream Selection for Class 11 & 12 */}
+                  {availableStreams && (
+                    <div>
+                      <label className="text-sm font-medium">Stream</label>
+                      <p className="text-xs text-muted-foreground mb-2">Select your stream</p>
+                      <div className="flex flex-wrap gap-2">
+                        {availableStreams.map((stream) => (
+                          <button
+                            key={stream}
+                            type="button"
+                            onClick={() =>
+                              setCurriculumData((prev) => ({
+                                ...prev,
+                                stream: stream,
+                                subject: "",
+                              }))
                             }
-                          />
-                        </FormItem>
-                      )}
-                    />
+                            className={`px-4 py-2 rounded-lg border transition-all ${curriculumData.stream === stream
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-background hover:bg-accent"
+                              }`}
+                          >
+                            {stream}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
-                    <FormField
-                      control={form.control}
-                      name="timeCommitment"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="flex items-center h-max gap-2">
-                            <Clock className="h-4 w-4" />
-                            Time Commitment
-                          </FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select time commitment" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="1-2-hours">1-2 hours per day</SelectItem>
-                              <SelectItem value="2-3-hours">2-3 hours per day</SelectItem>
-                              <SelectItem value="3-4-hours">3-4 hours per day</SelectItem>
-                              <SelectItem value="4-5-hours">4-5 hours per day</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormItem>
-                      )}
-                    />
+                  {/* Subject Selection */}
+                  <div>
+                    <label className="text-sm font-medium">Select Subject</label>
+                    <p className="text-xs text-muted-foreground mb-2">Choose from available subjects</p>
+                    {!curriculumData.classLevel || !curriculumData.board ? (
+                      <div className="text-center py-8 border rounded-lg bg-muted/20">
+                        <p className="text-sm text-muted-foreground">Select class and board to view subjects</p>
+                      </div>
+                    ) : availableStreams && !curriculumData.stream ? (
+                      <div className="text-center py-8 border rounded-lg bg-muted/20">
+                        <p className="text-sm text-muted-foreground">Select a stream to view subjects</p>
+                      </div>
+                    ) : availableCurriculumSubjects.length === 0 ? (
+                      <div className="text-center py-8 border rounded-lg bg-muted/20">
+                        <p className="text-sm text-muted-foreground">No subjects available</p>
+                      </div>
+                    ) : (
+                      <div className="max-h-48 overflow-y-auto border rounded-lg p-2 bg-muted/10">
+                        <div className="flex flex-wrap gap-1.5">
+                          {availableCurriculumSubjects.map((subject) => (
+                            <button
+                              key={subject.id}
+                              type="button"
+                              onClick={() => {
+                                const subjectTopics =
+                                  subject.topics && subject.topics.length > 0 ? subject.topics : ["", "", ""];
+                                setCurriculumData((prev) => ({
+                                  ...prev,
+                                  subject: subject.name,
+                                  topics: subjectTopics,
+                                }));
+                              }}
+                              className={`text-xs px-2.5 py-1.5 rounded-md transition-all ${curriculumData.subject === subject.name
+                                ? "bg-primary text-primary-foreground shadow-sm"
+                                : "bg-background hover:bg-accent border"
+                                }`}
+                            >
+                              {subject.name}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <Separator />
 
-                  <div className="flex gap-6 max-sm:flex-col">
-                    <FormField
-                      control={form.control}
-                      name="difficultyLevel"
-                      render={({ field }) => (
-                        <FormItem>
-                          <SelectionCard
-                            options={difficultyLevelOptions}
-                            selectedValue={field.value}
-                            onSelect={field.onChange}
-                            title={
-                              <>
-                                <Flag className="h-4 w-4 inline-block mr-2" />
-                                Preferred Difficulty Level
-                              </>
-                            }
+                  <div>
+                    <label className="text-sm font-medium">Topics to Cover</label>
+                    <p className="text-xs text-muted-foreground mb-3">Define the topics for this subject</p>
+                    <div className="space-y-2">
+                      {curriculumData.topics.map((topic, index) => (
+                        <div key={index} className="flex gap-2">
+                          <Input
+                            placeholder={`Topic ${index + 1}`}
+                            value={topic}
+                            onChange={(e) => updateCurriculumTopic(index, e.target.value)}
+                            className="flex-1"
                           />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="completionTime"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4" />
-                            Target Completion Time
-                          </FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select completion time" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="1-week">1 Week</SelectItem>
-                              <SelectItem value="2-weeks">2 Weeks</SelectItem>
-                              <SelectItem value="1-month">1 Month</SelectItem>
-                              <SelectItem value="2-months">2 Months</SelectItem>
-                              <SelectItem value="3-months">3 Months</SelectItem>
-                              <SelectItem value="6-months">6 Months</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? "Generating Roadmap..." : "Generate My Learning Roadmap"}
-                  </Button>
-                </form>
-              </Form>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="curriculum">
-            <Card className="p-6 border-0 shadow-none">
-              {!premiumStatus.isPremium && (
-                <div className="mb-6 p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
-                      <span className="text-black font-bold text-lg">★</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-lg mb-1">Premium Feature</h3>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Curriculum generation is available only for Premium users. Upgrade now for just ₹100/month!
-                      </p>
-                      <Button
-                        onClick={() => router.push("/premium")}
-                        className="bg-yellow-500 hover:bg-yellow-600 text-black"
-                      >
-                        Upgrade to Premium
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div className="space-y-6">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <label className="text-sm font-medium">Class Level</label>
-                    <Select
-                      value={curriculumData.classLevel}
-                      onValueChange={(value) =>
-                        setCurriculumData((prev) => ({
-                          ...prev,
-                          classLevel: value,
-                          stream: "",
-                          subject: "",
-                        }))
-                      }
-                    >
-                      <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select class" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {classLevels.map((cls) => (
-                          <SelectItem key={cls} value={cls}>
-                            {cls.replace("_", " ")}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium">Board</label>
-                    <Select
-                      value={curriculumData.board}
-                      onValueChange={(value) =>
-                        setCurriculumData((prev) => ({
-                          ...prev,
-                          board: value,
-                          stream: "",
-                          subject: "",
-                        }))
-                      }
-                    >
-                      <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select board" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {boards.map((board) => (
-                          <SelectItem key={board} value={board}>
-                            {board}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {/* Stream Selection for Class 11 & 12 */}
-                {availableStreams && (
-                  <div>
-                    <label className="text-sm font-medium">Stream</label>
-                    <p className="text-xs text-muted-foreground mb-2">Select your stream</p>
-                    <div className="flex flex-wrap gap-2">
-                      {availableStreams.map((stream) => (
-                        <button
-                          key={stream}
-                          type="button"
-                          onClick={() =>
-                            setCurriculumData((prev) => ({
-                              ...prev,
-                              stream: stream,
-                              subject: "",
-                            }))
-                          }
-                          className={`px-4 py-2 rounded-lg border transition-all ${
-                            curriculumData.stream === stream
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "bg-background hover:bg-accent"
-                          }`}
-                        >
-                          {stream}
-                        </button>
+                          {curriculumData.topics.length > 1 && (
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => removeCurriculumTopic(index)}
+                            >
+                              ×
+                            </Button>
+                          )}
+                        </div>
                       ))}
+                    </div>
+                    <Button type="button" variant="outline" size="sm" onClick={addCurriculumTopic} className="mt-2">
+                      + Add Topic
+                    </Button>
+                  </div>
+
+                  <Button onClick={handleCurriculumSubmit} className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? "Generating Course..." : "Generate Curriculum Course"}
+                  </Button>
+                </div>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="engineering">
+              <Card className="p-6 border-0 shadow-none">
+                {!premiumStatus.isPremium && (
+                  <div className="mb-6 p-4 bg-linear-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <div className="shrink-0 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                        <span className="text-black font-bold text-lg">★</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-lg mb-1">Premium Feature</h3>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Engineering course generation is available only for Premium users. Upgrade now for just ₹100/month!
+                        </p>
+                        <Button
+                          onClick={() => router.push("/premium")}
+                          className="bg-yellow-500 hover:bg-yellow-600 text-black"
+                        >
+                          Upgrade to Premium
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 )}
-
-                {/* Subject Selection */}
-                <div>
-                  <label className="text-sm font-medium">Select Subject</label>
-                  <p className="text-xs text-muted-foreground mb-2">Choose from available subjects</p>
-                  {!curriculumData.classLevel || !curriculumData.board ? (
-                    <div className="text-center py-8 border rounded-lg bg-muted/20">
-                      <p className="text-sm text-muted-foreground">Select class and board to view subjects</p>
-                    </div>
-                  ) : availableStreams && !curriculumData.stream ? (
-                    <div className="text-center py-8 border rounded-lg bg-muted/20">
-                      <p className="text-sm text-muted-foreground">Select a stream to view subjects</p>
-                    </div>
-                  ) : availableCurriculumSubjects.length === 0 ? (
-                    <div className="text-center py-8 border rounded-lg bg-muted/20">
-                      <p className="text-sm text-muted-foreground">No subjects available</p>
-                    </div>
-                  ) : (
-                    <div className="max-h-48 overflow-y-auto border rounded-lg p-2 bg-muted/10">
-                      <div className="flex flex-wrap gap-1.5">
-                        {availableCurriculumSubjects.map((subject) => (
-                          <button
-                            key={subject.id}
-                            type="button"
-                            onClick={() => {
-                              const subjectTopics =
-                                subject.topics && subject.topics.length > 0 ? subject.topics : ["", "", ""];
-                              setCurriculumData((prev) => ({
-                                ...prev,
-                                subject: subject.name,
-                                topics: subjectTopics,
-                              }));
-                            }}
-                            className={`text-xs px-2.5 py-1.5 rounded-md transition-all ${
-                              curriculumData.subject === subject.name
-                                ? "bg-primary text-primary-foreground shadow-sm"
-                                : "bg-background hover:bg-accent border"
-                            }`}
-                          >
-                            {subject.name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <Separator />
-
-                <div>
-                  <label className="text-sm font-medium">Topics to Cover</label>
-                  <p className="text-xs text-muted-foreground mb-3">Define the topics for this subject</p>
-                  <div className="space-y-2">
-                    {curriculumData.topics.map((topic, index) => (
-                      <div key={index} className="flex gap-2">
-                        <Input
-                          placeholder={`Topic ${index + 1}`}
-                          value={topic}
-                          onChange={(e) => updateCurriculumTopic(index, e.target.value)}
-                          className="flex-1"
-                        />
-                        {curriculumData.topics.length > 1 && (
+                <div className="space-y-6">
+                  {/* College and Branch Selection */}
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <label className="text-sm font-medium">College Name</label>
+                      <Popover open={openCollege} onOpenChange={setOpenCollege}>
+                        <PopoverTrigger asChild>
                           <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => removeCurriculumTopic(index)}
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openCollege}
+                            className="w-full justify-between mt-2 h-10"
                           >
-                            ×
+                            <span className="truncate">{engineeringData.college || "Search college..."}</span>
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                           </Button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                  <Button type="button" variant="outline" size="sm" onClick={addCurriculumTopic} className="mt-2">
-                    + Add Topic
-                  </Button>
-                </div>
-
-                <Button onClick={handleCurriculumSubmit} className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Generating Course..." : "Generate Curriculum Course"}
-                </Button>
-              </div>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="engineering">
-            <Card className="p-6 border-0 shadow-none">
-              {!premiumStatus.isPremium && (
-                <div className="mb-6 p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
-                      <span className="text-black font-bold text-lg">★</span>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-100 p-0">
+                          <Command>
+                            <CommandInput placeholder="Search college..." />
+                            <CommandEmpty>No college found.</CommandEmpty>
+                            <CommandGroup className="max-h-64 overflow-auto">
+                              {KARNATAKA_COLLEGES.map((college) => (
+                                <CommandItem
+                                  key={college}
+                                  value={college}
+                                  onSelect={() => {
+                                    setEngineeringData((prev) => ({ ...prev, college: college }));
+                                    setOpenCollege(false);
+                                  }}
+                                >
+                                  <Check
+                                    className={cn(
+                                      "mr-2 h-4 w-4",
+                                      engineeringData.college === college ? "opacity-100" : "opacity-0"
+                                    )}
+                                  />
+                                  {college}
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-lg mb-1">Premium Feature</h3>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Engineering course generation is available only for Premium users. Upgrade now for just ₹100/month!
-                      </p>
-                      <Button
-                        onClick={() => router.push("/premium")}
-                        className="bg-yellow-500 hover:bg-yellow-600 text-black"
+
+                    <div>
+                      <label className="text-sm font-medium">Branch</label>
+                      <Select
+                        value={engineeringData.branch}
+                        onValueChange={(value) => setEngineeringData((prev) => ({ ...prev, branch: value, subject: "" }))}
                       >
-                        Upgrade to Premium
-                      </Button>
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="Select branch" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {ENGINEERING_BRANCHES.map((branch) => (
+                            <SelectItem key={branch} value={branch}>
+                              {branch}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
-                </div>
-              )}
-              <div className="space-y-6">
-                {/* College and Branch Selection */}
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <label className="text-sm font-medium">College Name</label>
-                    <Popover open={openCollege} onOpenChange={setOpenCollege}>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          aria-expanded={openCollege}
-                          className="w-full justify-between mt-2 h-10"
-                        >
-                          <span className="truncate">{engineeringData.college || "Search college..."}</span>
-                          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-[400px] p-0">
-                        <Command>
-                          <CommandInput placeholder="Search college..." />
-                          <CommandEmpty>No college found.</CommandEmpty>
-                          <CommandGroup className="max-h-64 overflow-auto">
-                            {KARNATAKA_COLLEGES.map((college) => (
-                              <CommandItem
-                                key={college}
-                                value={college}
-                                onSelect={() => {
-                                  setEngineeringData((prev) => ({ ...prev, college: college }));
-                                  setOpenCollege(false);
-                                }}
-                              >
-                                <Check
-                                  className={cn(
-                                    "mr-2 h-4 w-4",
-                                    engineeringData.college === college ? "opacity-100" : "opacity-0"
-                                  )}
-                                />
-                                {college}
-                              </CommandItem>
-                            ))}
-                          </CommandGroup>
-                        </Command>
-                      </PopoverContent>
-                    </Popover>
-                  </div>
 
+                  {/* Semester Selection */}
                   <div>
-                    <label className="text-sm font-medium">Branch</label>
+                    <label className="text-sm font-medium">Semester</label>
                     <Select
-                      value={engineeringData.branch}
-                      onValueChange={(value) => setEngineeringData((prev) => ({ ...prev, branch: value, subject: "" }))}
+                      value={engineeringData.semester}
+                      onValueChange={(value) => setEngineeringData((prev) => ({ ...prev, semester: value, subject: "" }))}
                     >
                       <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select branch" />
+                        <SelectValue placeholder="Select semester" />
                       </SelectTrigger>
                       <SelectContent>
-                        {ENGINEERING_BRANCHES.map((branch) => (
-                          <SelectItem key={branch} value={branch}>
-                            {branch}
+                        {SEMESTERS.map((sem) => (
+                          <SelectItem key={sem} value={sem}>
+                            {sem}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
-                </div>
 
-                {/* Semester Selection */}
-                <div>
-                  <label className="text-sm font-medium">Semester</label>
-                  <Select
-                    value={engineeringData.semester}
-                    onValueChange={(value) => setEngineeringData((prev) => ({ ...prev, semester: value, subject: "" }))}
-                  >
-                    <SelectTrigger className="mt-2">
-                      <SelectValue placeholder="Select semester" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {SEMESTERS.map((sem) => (
-                        <SelectItem key={sem} value={sem}>
-                          {sem}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Subject Selection */}
-                <div>
-                  <label className="text-sm font-medium">Select Subject</label>
-                  <p className="text-xs text-muted-foreground mb-2">Choose from available subjects</p>
-                  {!engineeringData.branch || !engineeringData.semester ? (
-                    <div className="text-center py-8 border rounded-lg bg-muted/20">
-                      <p className="text-sm text-muted-foreground">Select branch and semester to view subjects</p>
-                    </div>
-                  ) : availableSubjects.length === 0 ? (
-                    <div className="text-center py-8 border rounded-lg bg-muted/20">
-                      <p className="text-sm text-muted-foreground">No subjects available</p>
-                    </div>
-                  ) : (
-                    <div className="max-h-48 overflow-y-auto border rounded-lg p-2 bg-muted/10">
-                      <div className="flex flex-wrap gap-1.5">
-                        {availableSubjects.map((subject) => (
-                          <button
-                            key={subject}
-                            type="button"
-                            onClick={() => setEngineeringData((prev) => ({ ...prev, subject: subject }))}
-                            className={`text-xs px-2.5 py-1.5 rounded-md transition-all ${
-                              engineeringData.subject === subject
+                  {/* Subject Selection */}
+                  <div>
+                    <label className="text-sm font-medium">Select Subject</label>
+                    <p className="text-xs text-muted-foreground mb-2">Choose from available subjects</p>
+                    {!engineeringData.branch || !engineeringData.semester ? (
+                      <div className="text-center py-8 border rounded-lg bg-muted/20">
+                        <p className="text-sm text-muted-foreground">Select branch and semester to view subjects</p>
+                      </div>
+                    ) : availableSubjects.length === 0 ? (
+                      <div className="text-center py-8 border rounded-lg bg-muted/20">
+                        <p className="text-sm text-muted-foreground">No subjects available</p>
+                      </div>
+                    ) : (
+                      <div className="max-h-48 overflow-y-auto border rounded-lg p-2 bg-muted/10">
+                        <div className="flex flex-wrap gap-1.5">
+                          {availableSubjects.map((subject) => (
+                            <button
+                              key={subject}
+                              type="button"
+                              onClick={() => setEngineeringData((prev) => ({ ...prev, subject: subject }))}
+                              className={`text-xs px-2.5 py-1.5 rounded-md transition-all ${engineeringData.subject === subject
                                 ? "bg-primary text-primary-foreground shadow-sm"
                                 : "bg-background hover:bg-accent border"
-                            }`}
-                          >
-                            {subject}
-                          </button>
-                        ))}
+                                }`}
+                            >
+                              {subject}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-
-                <Separator />
-
-                {/* Modules Section */}
-                <div>
-                  <label className="text-sm font-medium">Course Modules</label>
-                  <p className="text-xs text-muted-foreground mb-3">Define the topics/modules for this subject</p>
-                  <div className="space-y-2">
-                    {engineeringData.modules.map((module, index) => (
-                      <div key={index} className="flex gap-2">
-                        <Input
-                          placeholder={`Module ${index + 1}`}
-                          value={module}
-                          onChange={(e) => updateModule(index, e.target.value)}
-                          className="flex-1"
-                        />
-                        {engineeringData.modules.length > 1 && (
-                          <Button type="button" variant="ghost" size="icon" onClick={() => removeModule(index)}>
-                            ×
-                          </Button>
-                        )}
-                      </div>
-                    ))}
+                    )}
                   </div>
-                  <Button type="button" variant="outline" size="sm" onClick={addModule} className="mt-2">
-                    + Add Module
+
+                  <Separator />
+
+                  {/* Modules Section */}
+                  <div>
+                    <label className="text-sm font-medium">Course Modules</label>
+                    <p className="text-xs text-muted-foreground mb-3">Define the topics/modules for this subject</p>
+                    <div className="space-y-2">
+                      {engineeringData.modules.map((module, index) => (
+                        <div key={index} className="flex gap-2">
+                          <Input
+                            placeholder={`Module ${index + 1}`}
+                            value={module}
+                            onChange={(e) => updateModule(index, e.target.value)}
+                            className="flex-1"
+                          />
+                          {engineeringData.modules.length > 1 && (
+                            <Button type="button" variant="ghost" size="icon" onClick={() => removeModule(index)}>
+                              ×
+                            </Button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <Button type="button" variant="outline" size="sm" onClick={addModule} className="mt-2">
+                      + Add Module
+                    </Button>
+                  </div>
+
+                  {/* PDF Upload */}
+                  <div>
+                    <label className="text-sm font-medium">Syllabus PDF (Optional)</label>
+                    <Input
+                      type="file"
+                      accept=".pdf"
+                      onChange={(e) => setEngineeringData((prev) => ({ ...prev, pdfFile: e.target.files[0] }))}
+                      className="mt-2"
+                    />
+                  </div>
+
+                  <Button onClick={handleEngineeringSubmit} className="w-full bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 transition-all duration-300" disabled={isSubmitting}>
+                    {isSubmitting ? "Generating Course..." : "Generate Engineering Course"}
                   </Button>
                 </div>
-
-                {/* PDF Upload */}
-                <div>
-                  <label className="text-sm font-medium">Syllabus PDF (Optional)</label>
-                  <Input
-                    type="file"
-                    accept=".pdf"
-                    onChange={(e) => setEngineeringData((prev) => ({ ...prev, pdfFile: e.target.files[0] }))}
-                    className="mt-2"
-                  />
-                </div>
-
-                <Button onClick={handleEngineeringSubmit} className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 transition-all duration-300" disabled={isSubmitting}>
-                  {isSubmitting ? "Generating Course..." : "Generate Engineering Course"}
-                </Button>
-              </div>
-            </Card>
-          </TabsContent>
-        </Tabs>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </ScrollReveal>
       </div>
     </div>

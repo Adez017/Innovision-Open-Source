@@ -13,7 +13,7 @@ export default function Match({ task, roadmapId, chapterNumber }) {
   const [selectedLeft, setSelectedLeft] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [selectedRight, setSelectedRight] = useState(null);
-  const [matches, setMatches] = useState(Array(task.terms.lhs.length).fill(-1));
+  const [matches, setMatches] = useState(Array((task?.terms?.lhs || []).length).fill(-1));
   const [submitted, setSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState([]);
   const [score, setScore] = useState(0);
@@ -25,12 +25,14 @@ export default function Match({ task, roadmapId, chapterNumber }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    leftRefs.current = leftRefs.current.slice(0, task.terms.lhs.length);
-    rightRefs.current = rightRefs.current.slice(0, task.terms.rhs.length);
-    if (task.isAnswered) {
-      setIsCorrect(task.isCorrect);
-      setScore(task.isCorrect.filter(Boolean).length);
-      setMatches(task.userAnswer);
+    const lhsLength = (task?.terms?.lhs || []).length;
+    const rhsLength = (task?.terms?.rhs || []).length;
+    leftRefs.current = leftRefs.current.slice(0, lhsLength);
+    rightRefs.current = rightRefs.current.slice(0, rhsLength);
+    if (task?.isAnswered) {
+      setIsCorrect(task.isCorrect || []);
+      setScore((task.isCorrect || []).filter(Boolean).length);
+      setMatches(task.userAnswer || []);
       setSubmitted(task.isAnswered);
     }
   }, []);
@@ -61,7 +63,7 @@ export default function Match({ task, roadmapId, chapterNumber }) {
           right: leftRect.right - containerRect.left,
           top: leftRect.top - containerRect.top,
           bottom: leftRect.bottom - containerRect.top,
-          toJSON: () => {},
+          toJSON: () => { },
         };
 
         const to = {
@@ -73,7 +75,7 @@ export default function Match({ task, roadmapId, chapterNumber }) {
           right: rightRect.right - containerRect.left,
           top: rightRect.top - containerRect.top,
           bottom: rightRect.bottom - containerRect.top,
-          toJSON: () => {},
+          toJSON: () => { },
         };
 
         let color = "#0971e8";
@@ -138,35 +140,43 @@ export default function Match({ task, roadmapId, chapterNumber }) {
       return;
     }
     setSubmitting(true);
-    const correctAnswers = task.answer;
 
-    const correctnessArray = matches.map((rightIndex, leftIndex) => {
-      return correctAnswers[leftIndex] === rightIndex;
-    });
+    try {
+      const correctAnswers = task?.answer || [];
 
-    const res = await fetch(`/api/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        task,
-        isCorrect: correctnessArray,
-        roadmap: roadmapId,
-        chapter: chapterNumber,
-        userAnswer: matches,
-      }),
-    });
-    if (res.ok) {
-      setIsCorrect(correctnessArray);
-      const correctCount = correctnessArray.filter(Boolean).length;
-      setScore(correctCount);
-      setSubmitted(true);
+      const correctnessArray = matches.map((rightIndex, leftIndex) => {
+        return correctAnswers[leftIndex] === rightIndex;
+      });
 
-      // XP is now awarded server-side in /api/tasks
-      getXp();
-    } else {
-      toast.error("Failed to submit task, Try again.");
+      const res = await fetch(`/api/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          task,
+          isCorrect: correctnessArray,
+          roadmap: roadmapId,
+          chapter: chapterNumber,
+          userAnswer: matches,
+        }),
+      });
+
+      if (res.ok) {
+        setIsCorrect(correctnessArray);
+        const correctCount = correctnessArray.filter(Boolean).length;
+        setScore(correctCount);
+        setSubmitted(true);
+
+        // XP is now awarded server-side in /api/tasks
+        getXp();
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        toast.error(errorData.error || "Failed to submit task. Try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting match:", error);
+      toast.error("Network error. Please check your connection and try again.");
     }
     setSubmitting(false);
   };

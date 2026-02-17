@@ -4,13 +4,13 @@ import { cn } from "@/lib/utils"
 
 const TabsContext = React.createContext({
   value: "",
-  onValueChange: () => {},
+  onValueChange: () => { },
 })
 
 export const Tabs = ({ defaultValue, value: controlledValue, onValueChange, className, children, ...props }) => {
   const [internalValue, setInternalValue] = React.useState(defaultValue || "")
   const value = controlledValue !== undefined ? controlledValue : internalValue
-  
+
   const handleValueChange = React.useCallback((newValue) => {
     if (controlledValue === undefined) {
       setInternalValue(newValue)

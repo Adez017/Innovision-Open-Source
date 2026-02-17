@@ -58,7 +58,7 @@ export default function ResearchPlatform() {
                   <span>JSON format</span>
                 </div>
               </div>
-              <Button 
+              <Button
                 onClick={() => exportDataset('interactions')}
                 disabled={exporting}
                 className="w-full"
@@ -91,7 +91,7 @@ export default function ResearchPlatform() {
                   <span>JSON format</span>
                 </div>
               </div>
-              <Button 
+              <Button
                 onClick={() => exportDataset('outcomes')}
                 disabled={exporting}
                 className="w-full"

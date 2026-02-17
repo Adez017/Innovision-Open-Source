@@ -47,7 +47,7 @@ export const sendNotification = (title, options = {}) => {
 
   try {
     const notification = new Notification(title, defaultOptions);
-    
+
     notification.onclick = () => {
       window.focus();
       notification.close();
@@ -64,7 +64,7 @@ export const sendNotification = (title, options = {}) => {
 // Get saved reminders
 export const getReminders = () => {
   if (typeof window === "undefined") return [];
-  
+
   try {
     const saved = localStorage.getItem(NOTIFICATION_KEY);
     return saved ? JSON.parse(saved) : [];
@@ -169,10 +169,10 @@ let reminderInterval = null;
 
 export const startReminderChecker = () => {
   if (reminderInterval) return;
-  
+
   // Check every minute
   reminderInterval = setInterval(checkReminders, 60000);
-  
+
   // Also check immediately
   checkReminders();
 };

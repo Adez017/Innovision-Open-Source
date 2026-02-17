@@ -76,13 +76,12 @@ export function ContestHistory() {
               <td className="px-4 py-3">{contest.rating}</td>
               <td className="px-4 py-3">
                 <div
-                  className={`flex items-center ${
-                    contest.ratingChange > 0
+                  className={`flex items-center ${contest.ratingChange > 0
                       ? "text-green-500"
                       : contest.ratingChange < 0
                         ? "text-red-500"
                         : "text-muted-foreground"
-                  }`}
+                    }`}
                 >
                   {contest.ratingChange > 0 ? (
                     <ArrowUp className="mr-1 h-4 w-4" />

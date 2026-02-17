@@ -21,27 +21,27 @@ async function completeChapter(chapter, roadmapId, user) {
         let stats = statsDoc.exists
           ? statsDoc.data()
           : {
-              xp: 0,
-              level: 1,
-              streak: 1,
-              badges: [],
-              rank: 0,
-              achievements: [],
-              lastActive: new Date().toISOString(),
-            };
+            xp: 0,
+            level: 1,
+            streak: 1,
+            badges: [],
+            rank: 0,
+            achievements: [],
+            lastActive: new Date().toISOString(),
+          };
 
         const newXP = (stats.xp || 0) + xpGained;
         const newLevel = Math.floor(newXP / 500) + 1;
-        
+
         // Check for badges
         const currentBadges = stats.badges || [];
         const newBadges = [...currentBadges];
-        
+
         // First course badge - awarded on first chapter completion
         if (!currentBadges.includes("first_course")) {
           newBadges.push("first_course");
         }
-        
+
         // Check streak badges
         const streak = stats.streak || 1;
         if (streak >= 7 && !currentBadges.includes("week_streak")) {
@@ -160,33 +160,33 @@ export async function POST(req) {
             let stats = statsDoc.exists
               ? statsDoc.data()
               : {
-                  xp: 0,
-                  level: 1,
-                  streak: 1,
-                  badges: [],
-                  rank: 0,
-                  achievements: [],
-                  lastActive: new Date().toISOString(),
-                };
+                xp: 0,
+                level: 1,
+                streak: 1,
+                badges: [],
+                rank: 0,
+                achievements: [],
+                lastActive: new Date().toISOString(),
+              };
 
             const newXP = (stats.xp || 0) + xpGained;
             const newLevel = Math.floor(newXP / 500) + 1;
-            
+
             // Check for new badges
             const currentBadges = stats.badges || [];
             const newBadges = [...currentBadges];
-            
+
             // Perfect score badge - awarded on first correct quiz answer
             if (!currentBadges.includes("perfect_score")) {
               newBadges.push("perfect_score");
             }
-            
+
             // Night Owl badge - studying between 12 AM - 4 AM
             const hour = new Date().getHours();
             if (hour >= 0 && hour < 4 && !currentBadges.includes("night_owl")) {
               newBadges.push("night_owl");
             }
-            
+
             // Early Bird badge - studying between 4 AM - 6 AM
             if (hour >= 4 && hour < 6 && !currentBadges.includes("early_bird")) {
               newBadges.push("early_bird");

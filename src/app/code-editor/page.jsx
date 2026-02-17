@@ -97,10 +97,10 @@ export default function CodeEditor() {
     <div className="min-h-screen bg-background p-6 relative">
       <PageBackground />
       <GridPattern opacity={0.02} />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
-        <PageHeader 
-          title="Code Editor & AI Website Builder" 
+        <PageHeader
+          title="Code Editor & AI Website Builder"
           description="Write, run, and test code in multiple languages or generate websites with AI"
           icon={Code}
           iconColor="text-cyan-500"
@@ -109,9 +109,9 @@ export default function CodeEditor() {
 
         {!premiumStatus.isPremium && (
           <ScrollReveal delay={100}>
-            <div className="mb-6 p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-xl backdrop-blur-sm">
+            <div className="mb-6 p-4 bg-linear-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-xl backdrop-blur-sm">
               <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/25">
+                <div className="shrink-0 w-10 h-10 bg-linear-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/25">
                   <Crown className="h-5 w-5 text-black" />
                 </div>
                 <div className="flex-1">
@@ -121,7 +121,7 @@ export default function CodeEditor() {
                   </p>
                   <Button
                     onClick={() => router.push("/premium")}
-                    className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black transition-all duration-300 hover:scale-105"
+                    className="bg-linear-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black transition-all duration-300 hover:scale-105"
                   >
                     Upgrade to Premium - ₹100/month
                   </Button>
@@ -158,7 +158,7 @@ export default function CodeEditor() {
                           Code Editor
                         </CardTitle>
                         <Select value={language} onValueChange={setLanguage}>
-                          <SelectTrigger className="w-[180px] bg-background/50">
+                          <SelectTrigger className="w-45 bg-background/50">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
@@ -176,9 +176,9 @@ export default function CodeEditor() {
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
                         placeholder={`Write your ${language} code here...`}
-                        className="font-mono min-h-[400px] bg-background/50"
+                        className="font-mono min-h-100 bg-background/50"
                       />
-                      <Button onClick={runCode} className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 transition-all duration-300">
+                      <Button onClick={runCode} className="w-full bg-linear-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 transition-all duration-300">
                         <Play className="h-4 w-4 mr-2" />
                         Run Code
                       </Button>
@@ -193,7 +193,7 @@ export default function CodeEditor() {
                       <CardTitle>Output</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <pre className="bg-muted/50 p-4 rounded-xl min-h-[400px] overflow-auto font-mono text-sm border border-border/50">
+                      <pre className="bg-muted/50 p-4 rounded-xl min-h-100 overflow-auto font-mono text-sm border border-border/50">
                         {output || "Output will appear here..."}
                       </pre>
                     </CardContent>
@@ -221,9 +221,9 @@ export default function CodeEditor() {
                         value={websitePrompt}
                         onChange={(e) => setWebsitePrompt(e.target.value)}
                         placeholder="Example: Create a portfolio website with a hero section, about me, projects gallery, and contact form. Use modern design with blue and white colors."
-                        className="min-h-[300px] bg-background/50"
+                        className="min-h-75 bg-background/50"
                       />
-                      <Button onClick={generateWebsite} disabled={isGenerating} className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                      <Button onClick={generateWebsite} disabled={isGenerating} className="w-full bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                         <Sparkles className="h-4 w-4 mr-2" />
                         {isGenerating ? "Generating..." : "Generate Website"}
                       </Button>
@@ -238,7 +238,7 @@ export default function CodeEditor() {
                       <div className="flex items-center justify-between">
                         <CardTitle>Generated Code</CardTitle>
                         {generatedWebsite && (
-                          <Button size="sm" onClick={downloadWebsite} className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
+                          <Button size="sm" onClick={downloadWebsite} className="bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
                             <Download className="h-4 w-4 mr-2" />
                             Download
                           </Button>
@@ -248,18 +248,18 @@ export default function CodeEditor() {
                     <CardContent>
                       {generatedWebsite ? (
                         <div className="space-y-4">
-                          <Textarea value={generatedWebsite} readOnly className="font-mono min-h-[300px] bg-background/50" />
+                          <Textarea value={generatedWebsite} readOnly className="font-mono min-h-75 bg-background/50" />
                           <div className="border border-border/50 rounded-xl p-4 bg-white">
                             <p className="text-sm text-muted-foreground mb-2">Preview:</p>
                             <iframe
                               srcDoc={generatedWebsite}
-                              className="w-full h-[300px] border rounded-lg"
+                              className="w-full h-75 border rounded-lg"
                               title="Website Preview"
                             />
                           </div>
                         </div>
                       ) : (
-                        <div className="flex items-center justify-center h-[400px] text-muted-foreground">
+                        <div className="flex items-center justify-center h-100 text-muted-foreground">
                           <div className="text-center">
                             <Globe className="h-12 w-12 mx-auto mb-4 opacity-50" />
                             <p>Generated website will appear here...</p>

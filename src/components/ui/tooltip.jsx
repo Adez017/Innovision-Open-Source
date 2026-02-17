@@ -74,7 +74,7 @@ function TooltipContent({
         {children}
         <TooltipPrimitive.Arrow
           className={cn(
-            "z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]",
+            "z-50 size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-[2px]",
             variant === "default" && "bg-primary fill-primary",
             variant === "dark" && "bg-gray-900 fill-gray-900",
             variant === "light" && "bg-white fill-white border-l border-b border-gray-200",
@@ -83,7 +83,7 @@ function TooltipContent({
             variant === "warning" && "bg-yellow-500 fill-yellow-500",
             variant === "error" && "bg-red-500 fill-red-500",
             variant === "info" && "bg-blue-500 fill-blue-500",
-          )} 
+          )}
         />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>)
@@ -107,7 +107,7 @@ function AnimatedTooltip({
       </TooltipTrigger>
       <TooltipContent variant={variant} side={side} className={className}>
         <div className="flex items-center gap-2">
-          {icon && <span className="flex-shrink-0">{icon}</span>}
+          {icon && <span className="shrink-0">{icon}</span>}
           <span>{content}</span>
         </div>
       </TooltipContent>

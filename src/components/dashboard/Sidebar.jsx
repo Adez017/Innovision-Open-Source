@@ -21,26 +21,26 @@ const Sidebar = ({ user, rank, difficultyLevel, leaderboard, onUserUpdate }) => 
     // Format date safely
     const formatJoinDate = (dateValue) => {
         if (!dateValue) return null;
-        
+
         try {
             // Handle Firestore Timestamp
             if (dateValue.seconds) {
                 const date = new Date(dateValue.seconds * 1000);
                 return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
             }
-            
+
             // Handle Firestore Timestamp with _seconds (serialized format)
             if (dateValue._seconds) {
                 const date = new Date(dateValue._seconds * 1000);
                 return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
             }
-            
+
             // Handle numeric timestamp (milliseconds)
             if (typeof dateValue === 'number') {
                 const date = new Date(dateValue);
                 return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
             }
-            
+
             // Handle ISO string or regular date
             const date = new Date(dateValue);
             if (isNaN(date.getTime())) {
@@ -175,8 +175,8 @@ const Sidebar = ({ user, rank, difficultyLevel, leaderboard, onUserUpdate }) => 
                     </div>
                 </CardContent>
                 <CardFooter className="pt-2">
-                    <Button 
-                        className="w-full" 
+                    <Button
+                        className="w-full"
                         size="sm"
                         onClick={() => setEditModalOpen(true)}
                     >
@@ -213,7 +213,7 @@ const Sidebar = ({ user, rank, difficultyLevel, leaderboard, onUserUpdate }) => 
             </Card>
 
             {/* Edit Profile Modal */}
-            <EditProfileModal 
+            <EditProfileModal
                 open={editModalOpen}
                 onOpenChange={setEditModalOpen}
                 user={user}

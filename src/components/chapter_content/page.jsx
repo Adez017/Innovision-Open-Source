@@ -17,7 +17,7 @@ import { loader } from "../ui/Custom/ToastLoader";
 // Calculate reading time based on word count (200 words per minute average)
 const calculateReadingTime = (content) => {
     if (!content) return 0;
-    
+
     // Handle different content types
     let text = "";
     if (typeof content === "string") {
@@ -35,11 +35,11 @@ const calculateReadingTime = (content) => {
             text += " " + content.chapterTitle;
         }
     }
-    
+
     // Remove HTML tags and extra whitespace
     const cleanText = text.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
     const wordCount = cleanText.split(" ").filter(word => word.length > 0).length;
-    
+
     // Calculate minutes (200 words per minute)
     const minutes = Math.ceil(wordCount / 200);
     return Math.max(1, minutes); // Minimum 1 minute
@@ -224,15 +224,14 @@ const Page = ({ chapter, roadmapId }) => {
             window.scrollTo(0, 0);
         } else if (
             selectedIndex ===
-                chapterData?.subtopics?.length + tasks?.length - 1 &&
+            chapterData?.subtopics?.length + tasks?.length - 1 &&
             chapter < roadmap.chapters.length
         ) {
             showLoader();
             const params = new URLSearchParams(searchParams);
             params.set("subtopic", 0);
             router.push(
-                `/chapter-test/${roadmapId}/${
-                    Number(chapter) + 1
+                `/chapter-test/${roadmapId}/${Number(chapter) + 1
                 }/?${params.toString()}`,
                 { scroll: false }
             );
@@ -389,12 +388,12 @@ const Page = ({ chapter, roadmapId }) => {
                                     {Math.round(
                                         ((selectedIndex + 1) /
                                             subtopics.length) *
-                                            100
+                                        100
                                     )}
                                     % complete
                                 </span>
                             </div>
-                            <AnimatedProgress 
+                            <AnimatedProgress
                                 value={((selectedIndex + 1) / subtopics.length) * 100}
                                 color="blue"
                                 size="default"
@@ -414,12 +413,12 @@ const Page = ({ chapter, roadmapId }) => {
                                             subtopics.length +
                                             1) /
                                             tasks.length) *
-                                            100
+                                        100
                                     )}
                                     % complete
                                 </span>
                             </div>
-                            <AnimatedProgress 
+                            <AnimatedProgress
                                 value={((selectedIndex - subtopics.length + 1) / tasks.length) * 100}
                                 color="green"
                                 size="default"
@@ -454,21 +453,21 @@ const Page = ({ chapter, roadmapId }) => {
                             variant={"outline"}
                             disabled={
                                 selectedIndex ===
-                                    chapterData?.subtopics?.length +
-                                        tasks?.length -
-                                        1 && chapter >= roadmap.chapters.length
+                                chapterData?.subtopics?.length +
+                                tasks?.length -
+                                1 && chapter >= roadmap.chapters.length
                             }
                         >
                             <span>
                                 {selectedIndex ===
-                                chapterData?.subtopics?.length - 1
+                                    chapterData?.subtopics?.length - 1
                                     ? "Go to task"
                                     : selectedIndex ===
-                                      chapterData?.subtopics?.length +
-                                          tasks?.length -
-                                          1
-                                    ? "Next Chapter"
-                                    : "Next"}
+                                        chapterData?.subtopics?.length +
+                                        tasks?.length -
+                                        1
+                                        ? "Next Chapter"
+                                        : "Next"}
                             </span>
                             <ArrowRight className="h-5 w-5 ml-2" />
                         </Button>

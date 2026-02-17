@@ -14,8 +14,8 @@ export async function POST(request) {
 
     if (!process.env.GEMINI_API_KEY) {
       console.error("GEMINI_API_KEY not found in environment");
-      return NextResponse.json({ 
-        error: "GEMINI_API_KEY not configured. Please add it to your .env file." 
+      return NextResponse.json({
+        error: "GEMINI_API_KEY not configured. Please add it to your .env file."
       }, { status: 500 });
     }
 
@@ -27,7 +27,7 @@ export async function POST(request) {
     // - Google Cloud Text-to-Speech
     // - Amazon Polly
     // - ElevenLabs
-    
+
     return NextResponse.json({
       script,
       audioUrl: null, // Will be populated by TTS service
@@ -36,7 +36,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Audio generation error details:", error);
     console.error("Error stack:", error.stack);
-    return NextResponse.json({ 
+    return NextResponse.json({
       error: error.message || "Failed to generate audio script",
       details: error.toString()
     }, { status: 500 });

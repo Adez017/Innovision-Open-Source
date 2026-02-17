@@ -6,19 +6,19 @@ import { Calendar } from "lucide-react";
 export default function StreakCalendar({ userId }) {
   const [activityData, setActivityData] = useState({});
   const [loading, setLoading] = useState(true);
-  
+
   const today = new Date();
   const daysPerWeek = 7;
-  
+
   // Calculate start date (1 year ago from today)
   const oneYearAgo = new Date(today);
   oneYearAgo.setFullYear(today.getFullYear() - 1);
   oneYearAgo.setDate(today.getDate() + 1); // Start from tomorrow last year
-  
+
   // Find the Sunday before or on the start date
   const startDate = new Date(oneYearAgo);
   startDate.setDate(startDate.getDate() - startDate.getDay());
-  
+
   // Calculate total days and weeks
   const daysDiff = Math.ceil((today - startDate) / (1000 * 60 * 60 * 24));
   const weeks = Math.ceil(daysDiff / 7);
@@ -26,7 +26,7 @@ export default function StreakCalendar({ userId }) {
   useEffect(() => {
     if (userId) {
       fetchActivityData();
-      
+
       // Refresh activity calendar every 15 seconds for real-time updates
       const interval = setInterval(fetchActivityData, 15000);
       return () => clearInterval(interval);
@@ -84,90 +84,89 @@ export default function StreakCalendar({ userId }) {
           </div>
         ) : (
           <div className="space-y-1">
-          {/* Month labels */}
-          <div className="flex gap-[2px] mb-1">
-            <div className="w-4"></div>
-            <div className="flex gap-[2px]">
-              {Array.from({ length: weeks }).map((_, weekIndex) => {
-                const weekStart = new Date(startDate);
-                weekStart.setDate(weekStart.getDate() + (weekIndex * 7));
-                
-                const prevWeekStart = new Date(weekStart);
-                prevWeekStart.setDate(prevWeekStart.getDate() - 7);
-                
-                // Show month label if this week is in a different month than previous week
-                const showLabel = weekIndex === 0 || weekStart.getMonth() !== prevWeekStart.getMonth();
-                const monthLabel = showLabel ? weekStart.toLocaleDateString('en-US', { month: 'short' }) : '';
-                
-                return (
-                  <div
-                    key={weekIndex}
-                    className="text-[9px] text-muted-foreground w-[10px]"
-                  >
-                    {monthLabel}
+            {/* Month labels */}
+            <div className="flex gap-0.5 mb-1">
+              <div className="w-4"></div>
+              <div className="flex gap-0.5">
+                {Array.from({ length: weeks }).map((_, weekIndex) => {
+                  const weekStart = new Date(startDate);
+                  weekStart.setDate(weekStart.getDate() + (weekIndex * 7));
+
+                  const prevWeekStart = new Date(weekStart);
+                  prevWeekStart.setDate(prevWeekStart.getDate() - 7);
+
+                  // Show month label if this week is in a different month than previous week
+                  const showLabel = weekIndex === 0 || weekStart.getMonth() !== prevWeekStart.getMonth();
+                  const monthLabel = showLabel ? weekStart.toLocaleDateString('en-US', { month: 'short' }) : '';
+
+                  return (
+                    <div
+                      key={weekIndex}
+                      className="text-[9px] text-muted-foreground w-2.5"
+                    >
+                      {monthLabel}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Heatmap grid */}
+            <div className="flex gap-0.5">
+              {/* Day labels */}
+              <div className="flex flex-col gap-0.5">
+                {Array.from({ length: daysPerWeek }).map((_, dayIndex) => (
+                  <div key={dayIndex} className="w-4 h-2.5 flex items-center">
+                    <span className="text-[8px] text-muted-foreground">
+                      {dayIndex % 2 === 1 ? getDayLabel(dayIndex) : ''}
+                    </span>
                   </div>
-                );
-              })}
-            </div>
-          </div>
+                ))}
+              </div>
 
-          {/* Heatmap grid */}
-          <div className="flex gap-[2px]">
-            {/* Day labels */}
-            <div className="flex flex-col gap-[2px]">
-              {Array.from({ length: daysPerWeek }).map((_, dayIndex) => (
-                <div key={dayIndex} className="w-4 h-[10px] flex items-center">
-                  <span className="text-[8px] text-muted-foreground">
-                    {dayIndex % 2 === 1 ? getDayLabel(dayIndex) : ''}
-                  </span>
-                </div>
-              ))}
-            </div>
+              {/* Weeks grid */}
+              <div className="flex gap-0.5">
+                {Array.from({ length: weeks }).map((_, weekIndex) => (
+                  <div key={weekIndex} className="flex flex-col gap-0.5">
+                    {Array.from({ length: daysPerWeek }).map((_, dayIndex) => {
+                      const date = new Date(startDate);
+                      date.setDate(date.getDate() + (weekIndex * 7) + dayIndex);
 
-            {/* Weeks grid */}
-            <div className="flex gap-[2px]">
-              {Array.from({ length: weeks }).map((_, weekIndex) => (
-                <div key={weekIndex} className="flex flex-col gap-[2px]">
-                  {Array.from({ length: daysPerWeek }).map((_, dayIndex) => {
-                    const date = new Date(startDate);
-                    date.setDate(date.getDate() + (weekIndex * 7) + dayIndex);
-                    
-                    // Only show if date is within the year range and not in the future
-                    const isInRange = date >= oneYearAgo && date <= today;
-                    const dateStr = date.toISOString().split('T')[0];
-                    const count = isInRange ? (activityData[dateStr] || 0) : 0;
-                    
-                    return (
-                      <div
-                        key={dayIndex}
-                        className={`w-[10px] h-[10px] rounded-sm ${
-                          isInRange 
-                            ? getIntensityColor(count) 
+                      // Only show if date is within the year range and not in the future
+                      const isInRange = date >= oneYearAgo && date <= today;
+                      const dateStr = date.toISOString().split('T')[0];
+                      const count = isInRange ? (activityData[dateStr] || 0) : 0;
+
+                      return (
+                        <div
+                          key={dayIndex}
+                          className={`w-2.5 h-2.5 rounded-sm ${isInRange
+                            ? getIntensityColor(count)
                             : 'bg-transparent'
-                        } transition-all hover:ring-1 hover:ring-blue-400 cursor-pointer`}
-                        title={isInRange ? `${dateStr}: ${count} activities` : ''}
-                      />
-                    );
-                  })}
-                </div>
-              ))}
+                            } transition-all hover:ring-1 hover:ring-blue-400 cursor-pointer`}
+                          title={isInRange ? `${dateStr}: ${count} activities` : ''}
+                        />
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Legend */}
-          <div className="flex items-center justify-end gap-1 pt-1 text-[8px] text-muted-foreground">
-            <span>Less</span>
-            <div className="flex gap-[2px]">
-              {[0, 1, 2, 3, 4].map((level) => (
-                <div
-                  key={level}
-                  className={`w-[10px] h-[10px] rounded-sm ${getIntensityColor(level)}`}
-                />
-              ))}
+            {/* Legend */}
+            <div className="flex items-center justify-end gap-1 pt-1 text-[8px] text-muted-foreground">
+              <span>Less</span>
+              <div className="flex gap-0.5">
+                {[0, 1, 2, 3, 4].map((level) => (
+                  <div
+                    key={level}
+                    className={`w-2.5 h-2.5 rounded-sm ${getIntensityColor(level)}`}
+                  />
+                ))}
+              </div>
+              <span>More</span>
             </div>
-            <span>More</span>
           </div>
-        </div>
         )}
       </CardContent>
     </Card>

@@ -6,26 +6,26 @@ export const PageBackground = ({ variant = "default" }) => {
   const variants = {
     default: (
       <>
-        <div className="fixed top-0 left-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="fixed bottom-0 right-1/4 w-[350px] h-[350px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed top-0 left-1/4 w-100 h-100 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed bottom-0 right-1/4 w-87.5 h-87.5 bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
       </>
     ),
     premium: (
       <>
-        <div className="fixed top-0 left-1/4 w-[400px] h-[400px] bg-yellow-500/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="fixed bottom-0 right-1/4 w-[350px] h-[350px] bg-orange-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed top-0 left-1/4 w-100 h-100 bg-yellow-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed bottom-0 right-1/4 w-87.5 h-87.5 bg-orange-500/10 rounded-full blur-[120px] pointer-events-none" />
       </>
     ),
     courses: (
       <>
-        <div className="fixed top-0 right-1/4 w-[400px] h-[400px] bg-green-500/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="fixed bottom-1/4 left-0 w-[350px] h-[350px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed top-0 right-1/4 w-100 h-100 bg-green-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed bottom-1/4 left-0 w-87.5 h-87.5 bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
       </>
     ),
     profile: (
       <>
-        <div className="fixed top-1/4 left-0 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="fixed bottom-0 right-0 w-[350px] h-[350px] bg-pink-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed top-1/4 left-0 w-100 h-100 bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="fixed bottom-0 right-0 w-87.5 h-87.5 bg-pink-500/5 rounded-full blur-[120px] pointer-events-none" />
       </>
     ),
   };
@@ -37,7 +37,7 @@ export const PageBackground = ({ variant = "default" }) => {
 export const GridPattern = ({ opacity = 0.05 }) => (
   <>
     {/* Light mode grid */}
-    <div 
+    <div
       className="fixed inset-0 pointer-events-none z-0 dark:hidden"
       style={{
         backgroundImage: `linear-gradient(rgba(0,0,0,${opacity}) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,${opacity}) 1px, transparent 1px)`,
@@ -45,7 +45,7 @@ export const GridPattern = ({ opacity = 0.05 }) => (
       }}
     />
     {/* Dark mode grid */}
-    <div 
+    <div
       className="fixed inset-0 pointer-events-none z-0 hidden dark:block"
       style={{
         backgroundImage: `linear-gradient(rgba(255,255,255,${opacity}) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,${opacity}) 1px, transparent 1px)`,
@@ -56,9 +56,9 @@ export const GridPattern = ({ opacity = 0.05 }) => (
 );
 
 // Scroll reveal wrapper
-export const ScrollReveal = ({ 
-  children, 
-  className = "", 
+export const ScrollReveal = ({
+  children,
+  className = "",
   delay = 0,
   direction = "up"
 }) => {
@@ -108,8 +108,8 @@ export const ScrollReveal = ({
 };
 
 // Stagger children animation - preserves flex/grid layout
-export const StaggerChildren = ({ 
-  children, 
+export const StaggerChildren = ({
+  children,
   className = "",
   staggerDelay = 80
 }) => {
@@ -157,13 +157,13 @@ export const HoverCard = ({ children, className = "" }) => (
 );
 
 // Page header with animation
-export const PageHeader = ({ 
-  title, 
-  description, 
+export const PageHeader = ({
+  title,
+  description,
   icon: Icon,
   iconColor = "text-blue-500",
   badge,
-  children 
+  children
 }) => (
   <ScrollReveal className="mb-8">
     <div className="flex flex-col items-start gap-2">
@@ -178,10 +178,10 @@ export const PageHeader = ({
             <Icon className="h-6 w-6" />
           </div>
         )}
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{title}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-tight">{title}</h1>
       </div>
       {description && (
-        <p className="text-muted-foreground text-lg mt-1">{description}</p>
+        <p className="text-muted-foreground text-base sm:text-lg mt-1">{description}</p>
       )}
       {children}
     </div>

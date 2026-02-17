@@ -1,8 +1,17 @@
 import { NextResponse } from "next/server";
-import { adminDb } from "@/lib/firebase-admin";
+import { getAdminDb } from "@/lib/firebase-admin";
 
 export async function GET(request) {
   try {
+    const adminDb = getAdminDb();
+
+    if (!adminDb) {
+      return NextResponse.json({
+        error: "Firebase Admin not initialized",
+        details: "Check server logs for initialization errors"
+      }, { status: 500 });
+    }
+
     const coursesRef = adminDb.collection("published_courses");
     const q = coursesRef.where("status", "==", "published");
     const querySnapshot = await q.get();
@@ -25,8 +34,18 @@ export async function GET(request) {
     return NextResponse.json({
       success: true,
       courses,
+      count: courses.length,
+      debug: {
+        adminDbInitialized: !!adminDb,
+        queryExecuted: true
+      }
     });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch courses", details: error.message }, { status: 500 });
+    console.error("API Error:", error);
+    return NextResponse.json({
+      error: "Failed to fetch courses",
+      details: error.message,
+      stack: error.stack
+    }, { status: 500 });
   }
 }

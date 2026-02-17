@@ -15,12 +15,12 @@ const HorizontalScroll = ({ children, className = "" }) => {
       const rect = container.getBoundingClientRect();
       const scrollWidth = scrollContent.scrollWidth - window.innerWidth;
       const viewportHeight = window.innerHeight;
-      
+
       // Calculate how far we've scrolled through the section
       const start = rect.top + window.scrollY - viewportHeight;
       const end = rect.bottom + window.scrollY - viewportHeight;
       const current = window.scrollY;
-      
+
       if (current >= start && current <= end) {
         const progress = (current - start) / (end - start);
         setScrollProgress(Math.max(0, Math.min(1, progress)));
@@ -33,12 +33,12 @@ const HorizontalScroll = ({ children, className = "" }) => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`relative h-[300vh] ${className}`}
     >
@@ -59,7 +59,7 @@ const HorizontalScroll = ({ children, className = "" }) => {
 
 // Individual scroll item
 export const HorizontalScrollItem = ({ children, className = "" }) => (
-  <div className={`flex-shrink-0 w-[80vw] md:w-[60vw] lg:w-[40vw] ${className}`}>
+  <div className={`shrink-0 w-[80vw] md:w-[60vw] lg:w-[40vw] ${className}`}>
     {children}
   </div>
 );

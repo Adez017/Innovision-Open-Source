@@ -16,13 +16,13 @@ const CSSFireAnimation = ({ size = "md", intensity = 1 }) => {
   return (
     <div className={`relative ${sizeClasses[size]} flex items-center justify-center`}>
       {/* Base flame */}
-      <div 
+      <div
         className="absolute animate-pulse"
-        style={{ 
+        style={{
           animationDuration: `${0.5 / intensity}s`,
         }}
       >
-        <Flame 
+        <Flame
           className={`${sizeClasses[size]} text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]`}
           style={{
             filter: `drop-shadow(0 0 ${4 * intensity}px rgba(249,115,22,0.8))`,
@@ -30,7 +30,7 @@ const CSSFireAnimation = ({ size = "md", intensity = 1 }) => {
         />
       </div>
       {/* Glow effect */}
-      <div 
+      <div
         className="absolute rounded-full animate-ping opacity-30"
         style={{
           width: "80%",
@@ -63,8 +63,8 @@ const FireParticles = ({ count = 5 }) => {
   );
 };
 
-export default function StreakFire({ 
-  streak = 0, 
+export default function StreakFire({
+  streak = 0,
   size = "md",
   showLabel = true,
   showParticles = true,
@@ -157,7 +157,7 @@ export function useStreakFire(currentStreak) {
   useEffect(() => {
     // Check for milestone achievements
     const milestones = [7, 30, 100, 365];
-    
+
     for (const m of milestones) {
       if (previousStreak < m && currentStreak >= m) {
         setMilestone(m);

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "@/lib/auth-server";
 import Razorpay from "razorpay";
+import { z } from "zod";
 
 // Secret coupons - don't expose these publicly
 const COUPONS = {
@@ -44,15 +45,25 @@ export async function POST(req) {
     }
 
     // Get plan type and coupon from request body
-    let planType = "premium";
-    let couponCode = null;
-    try {
-      const body = await req.json();
-      planType = body.planType || "premium";
-      couponCode = body.couponCode?.toUpperCase()?.trim() || null;
-    } catch {
-      // Default to premium if no body
+    const body = await req.json();
+
+    // Define validation schema
+    const orderSchema = z.object({
+      planType: z.enum(["premium", "education"]).default("premium"),
+      couponCode: z.string().optional().nullable(),
+    });
+
+    const result = orderSchema.safeParse(body);
+
+    if (!result.success) {
+      return NextResponse.json(
+        { error: "Invalid input", details: result.error.format() },
+        { status: 400 }
+      );
     }
+
+    const { planType, couponCode: rawCoupon } = result.data;
+    const couponCode = rawCoupon?.toUpperCase()?.trim() || null;
 
     // Set base amount based on plan type
     // Premium: ₹100 (10000 paise)

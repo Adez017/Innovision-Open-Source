@@ -12,7 +12,7 @@ export async function POST(request) {
 
     // Get user's LMS configuration
     const config = await getLMSConfig(userId);
-    
+
     if (!config || !config.enabled) {
       return NextResponse.json({ error: "LMS integration not configured" }, { status: 400 });
     }

@@ -32,8 +32,8 @@ const CopyButton = ({ code }) => {
       className={`
         absolute top-2 right-2 p-2 rounded-md
         transition-all duration-200 ease-in-out
-        ${copied 
-          ? "bg-green-500/20 text-green-400" 
+        ${copied
+          ? "bg-green-500/20 text-green-400"
           : "bg-gray-700/50 text-gray-400 hover:bg-gray-600/50 hover:text-gray-200"
         }
       `}
@@ -56,20 +56,20 @@ const MarkDown = ({ content }) => {
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
           const codeString = String(children).trim();
-          
+
           return !inline && match ? (
             <div className="relative group my-4">
               {/* Language badge */}
               <div className="absolute top-0 left-0 px-3 py-1 text-xs font-medium text-gray-400 bg-gray-800 rounded-tl-md rounded-br-md">
                 {match[1]}
               </div>
-              
+
               {/* Copy button */}
               <CopyButton code={codeString} />
-              
+
               <SyntaxHighlighter
-                customStyle={{ 
-                  fontSize: "14px", 
+                customStyle={{
+                  fontSize: "14px",
                   borderRadius: "6px",
                   paddingTop: "2.5rem",
                 }}
@@ -82,8 +82,8 @@ const MarkDown = ({ content }) => {
               </SyntaxHighlighter>
             </div>
           ) : (
-            <code 
-              className={`${className || ""} text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded`} 
+            <code
+              className={`${className || ""} text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded`}
               {...props}
             >
               {children}

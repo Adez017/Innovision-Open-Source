@@ -1,10 +1,10 @@
 // Custom hook for offline functionality
 import { useEffect, useState } from "react";
-import { 
-  saveCourseOffline, 
-  getOfflineCourses, 
+import {
+  saveCourseOffline,
+  getOfflineCourses,
   saveProgressOffline,
-  syncOfflineData 
+  syncOfflineData
 } from "@/lib/offline";
 
 export function useOffline() {

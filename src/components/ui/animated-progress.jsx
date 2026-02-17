@@ -5,16 +5,16 @@ import { useSpring, animated, config } from "@react-spring/web";
 import { cn } from "@/lib/utils";
 
 const AnimatedProgress = React.forwardRef(
-  ({ 
-    className, 
-    value = 0, 
+  ({
+    className,
+    value = 0,
     showValue = false,
     color = "primary",
     size = "default",
     delay = 0,
     glow = false,
     striped = false,
-    ...props 
+    ...props
   }, ref) => {
     const [hasAnimated, setHasAnimated] = React.useState(false);
 
@@ -70,7 +70,7 @@ const AnimatedProgress = React.forwardRef(
             width: spring.width.to((w) => `${w}%`),
           }}
         />
-        
+
         {/* Shimmer effect */}
         {value > 0 && (
           <div className="absolute inset-0 overflow-hidden rounded-full">
@@ -140,9 +140,9 @@ const MultiProgress = React.forwardRef(
 MultiProgress.displayName = "MultiProgress";
 
 // Circular progress component
-const CircularProgress = ({ 
-  value = 0, 
-  size = 60, 
+const CircularProgress = ({
+  value = 0,
+  size = 60,
   strokeWidth = 6,
   color = "primary",
   showValue = true,

@@ -19,8 +19,8 @@ export function getMultiplier(streak) {
   return tier ? tier.multiplier : 1;
 }
 
-export default function ComboMultiplier({ 
-  combo = 0, 
+export default function ComboMultiplier({
+  combo = 0,
   show = false,
   position = "top-right" // top-right, top-center, bottom-right
 }) {
@@ -33,7 +33,7 @@ export default function ComboMultiplier({
     if (show && tier) {
       setIsVisible(true);
       setAnimationKey(prev => prev + 1);
-      
+
       // Hide after animation
       const timeout = setTimeout(() => {
         setIsVisible(false);
@@ -54,7 +54,7 @@ export default function ComboMultiplier({
   };
 
   return (
-    <div 
+    <div
       key={animationKey}
       className={`fixed ${positionClasses[position]} z-50 pointer-events-none`}
     >
@@ -99,7 +99,7 @@ export default function ComboMultiplier({
 // Inline combo indicator for quiz UI
 export function ComboIndicator({ combo = 0, className = "" }) {
   const tier = getComboTier(combo);
-  
+
   if (!tier) return null;
 
   const IconComponent = tier.icon;
@@ -116,7 +116,7 @@ export function ComboIndicator({ combo = 0, className = "" }) {
 // Mini combo badge
 export function ComboBadge({ combo = 0 }) {
   const tier = getComboTier(combo);
-  
+
   if (!tier) return null;
 
   return (

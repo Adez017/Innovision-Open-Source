@@ -21,120 +21,120 @@ import { useAuth } from "@/contexts/auth";
 
 // All available badges
 const ALL_BADGES = [
-  { 
-    id: "first_course", 
-    name: "First Steps", 
-    icon: Target, 
+  {
+    id: "first_course",
+    name: "First Steps",
+    icon: Target,
     description: "Complete your first course",
     requirement: "Complete 1 course",
     xpReward: 50,
     rarity: "common",
     color: "from-green-400 to-emerald-500"
   },
-  { 
-    id: "week_streak", 
-    name: "Dedicated", 
-    icon: Flame, 
+  {
+    id: "week_streak",
+    name: "Dedicated",
+    icon: Flame,
     description: "Maintain a 7-day learning streak",
     requirement: "7 consecutive days of learning",
     xpReward: 100,
     rarity: "uncommon",
     color: "from-orange-400 to-red-500"
   },
-  { 
-    id: "month_streak", 
-    name: "Unstoppable", 
-    icon: Flame, 
+  {
+    id: "month_streak",
+    name: "Unstoppable",
+    icon: Flame,
     description: "Maintain a 30-day learning streak",
     requirement: "30 consecutive days of learning",
     xpReward: 500,
     rarity: "legendary",
     color: "from-red-500 to-pink-600"
   },
-  { 
-    id: "perfect_score", 
-    name: "Perfectionist", 
-    icon: Award, 
+  {
+    id: "perfect_score",
+    name: "Perfectionist",
+    icon: Award,
     description: "Get 100% on a quiz",
     requirement: "Score 100% on any quiz",
     xpReward: 35,
     rarity: "uncommon",
     color: "from-yellow-400 to-orange-500"
   },
-  { 
-    id: "fast_learner", 
-    name: "Speed Demon", 
-    icon: Rocket, 
+  {
+    id: "fast_learner",
+    name: "Speed Demon",
+    icon: Rocket,
     description: "Complete a course in one day",
     requirement: "Finish an entire course within 24 hours",
     xpReward: 75,
     rarity: "rare",
     color: "from-purple-400 to-indigo-500"
   },
-  { 
-    id: "night_owl", 
-    name: "Night Owl", 
-    icon: Moon, 
+  {
+    id: "night_owl",
+    name: "Night Owl",
+    icon: Moon,
     description: "Study after midnight",
     requirement: "Complete a lesson between 12 AM - 4 AM",
     xpReward: 15,
     rarity: "common",
     color: "from-indigo-400 to-purple-600"
   },
-  { 
-    id: "early_bird", 
-    name: "Early Bird", 
-    icon: Sun, 
+  {
+    id: "early_bird",
+    name: "Early Bird",
+    icon: Sun,
     description: "Study before 6 AM",
     requirement: "Complete a lesson between 4 AM - 6 AM",
     xpReward: 15,
     rarity: "common",
     color: "from-amber-300 to-yellow-500"
   },
-  { 
-    id: "social", 
-    name: "Social Butterfly", 
-    icon: Users, 
+  {
+    id: "social",
+    name: "Social Butterfly",
+    icon: Users,
     description: "Help 10 students",
     requirement: "Assist 10 other learners",
     xpReward: 100,
     rarity: "rare",
     color: "from-pink-400 to-rose-500"
   },
-  { 
-    id: "master", 
-    name: "Master", 
-    icon: Crown, 
+  {
+    id: "master",
+    name: "Master",
+    icon: Crown,
     description: "Reach level 10",
     requirement: "Earn 10,000 XP total",
     xpReward: 200,
     rarity: "epic",
     color: "from-yellow-400 to-amber-600"
   },
-  { 
-    id: "scholar", 
-    name: "Scholar", 
-    icon: GraduationCap, 
+  {
+    id: "scholar",
+    name: "Scholar",
+    icon: GraduationCap,
     description: "Complete 10 courses",
     requirement: "Finish 10 different courses",
     xpReward: 150,
     rarity: "rare",
     color: "from-blue-400 to-cyan-500"
   },
-  { 
-    id: "bookworm", 
-    name: "Bookworm", 
-    icon: BookOpen, 
+  {
+    id: "bookworm",
+    name: "Bookworm",
+    icon: BookOpen,
     description: "Read 100 lessons",
     requirement: "Complete 100 lessons total",
     xpReward: 100,
     rarity: "uncommon",
     color: "from-teal-400 to-green-500"
   },
-  { 
-    id: "legend", 
-    name: "Legend", 
-    icon: Trophy, 
+  {
+    id: "legend",
+    name: "Legend",
+    icon: Trophy,
     description: "Reach level 50",
     requirement: "Earn 50,000 XP total",
     xpReward: 1000,
@@ -162,7 +162,7 @@ export default function BadgeGallery({ earnedBadges: propBadges = [], userName =
   useEffect(() => {
     async function fetchBadges() {
       if (!user?.email) return;
-      
+
       try {
         const res = await fetch(`/api/gamification/stats?userId=${user.email}`);
         const data = await res.json();
@@ -173,7 +173,7 @@ export default function BadgeGallery({ earnedBadges: propBadges = [], userName =
         console.error("Error fetching badges:", error);
       }
     }
-    
+
     fetchBadges();
     // Refresh badges every 30 seconds
     const interval = setInterval(fetchBadges, 30000);
@@ -261,8 +261,8 @@ export default function BadgeGallery({ earnedBadges: propBadges = [], userName =
                         absolute inset-0 backface-hidden rounded-xl p-2
                         flex flex-col items-center justify-center
                         border-2 transition-all duration-300
-                        ${earned 
-                          ? `bg-gradient-to-br ${badge.color} ${rarity.border} shadow-lg hover:shadow-xl hover:scale-105` 
+                        ${earned
+                          ? `bg-linear-to-br ${badge.color} ${rarity.border} shadow-lg hover:shadow-xl hover:scale-105`
                           : "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600"
                         }
                       `}
@@ -338,7 +338,7 @@ export default function BadgeGallery({ earnedBadges: propBadges = [], userName =
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-3">
                   <div className={`
-                    p-3 rounded-xl bg-gradient-to-br ${selectedBadge.color}
+                    p-3 rounded-xl bg-linear-to-br ${selectedBadge.color}
                     ${isEarned(selectedBadge.id) ? "" : "grayscale opacity-50"}
                   `}>
                     <selectedBadge.icon className="h-8 w-8 text-white" />
@@ -359,7 +359,7 @@ export default function BadgeGallery({ earnedBadges: propBadges = [], userName =
                 </DialogTitle>
                 <DialogDescription className="pt-4 space-y-4">
                   <p>{selectedBadge.description}</p>
-                  
+
                   <div className="bg-muted p-3 rounded-lg">
                     <div className="text-xs text-muted-foreground mb-1">Requirement</div>
                     <div className="font-medium">{selectedBadge.requirement}</div>
@@ -370,7 +370,7 @@ export default function BadgeGallery({ earnedBadges: propBadges = [], userName =
                       <div className="text-xs text-muted-foreground">Reward</div>
                       <div className="font-bold text-lg text-green-600">+{selectedBadge.xpReward} XP</div>
                     </div>
-                    
+
                     {isEarned(selectedBadge.id) && (
                       <div className="flex gap-2">
                         <Button

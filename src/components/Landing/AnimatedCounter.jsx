@@ -33,10 +33,10 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = "", prefix = "" }) => 
     const updateCount = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Easing function (ease-out)
       const easeOut = 1 - Math.pow(1 - progress, 3);
-      
+
       const currentCount = Math.floor(startValue + (end - startValue) * easeOut);
       setCount(currentCount);
 

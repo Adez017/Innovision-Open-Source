@@ -11,7 +11,7 @@ export async function POST(req) {
                 { status: 401 }
             );
         }
-        
+
         return NextResponse.json({ message: "Chapter added successfully" });
     } catch (error) {
         return NextResponse.json({ message: error.message }, { status: 500 });

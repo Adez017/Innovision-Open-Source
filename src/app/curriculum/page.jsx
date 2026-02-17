@@ -42,9 +42,9 @@ export default function CurriculumPage() {
       </div>
 
       {!premiumStatus.isPremium && (
-        <div className="mb-6 p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
+        <div className="mb-6 p-4 bg-linear-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-lg">
           <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+            <div className="shrink-0 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
               <Crown className="h-5 w-5 text-black" />
             </div>
             <div className="flex-1">

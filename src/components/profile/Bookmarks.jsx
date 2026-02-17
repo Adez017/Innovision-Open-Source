@@ -50,7 +50,29 @@ export default function Bookmarks() {
   };
 
   const goToChapter = (bookmark) => {
-    router.push(`/chapter-test/${bookmark.roadmapId}/${bookmark.chapterNumber}`);
+    const type = bookmark.courseType || "roadmap";
+    const id = bookmark.courseId || bookmark.roadmapId;
+    const chapter = bookmark.chapterNumber;
+    const chapterId = bookmark.chapterId;
+
+    if (type === "ingested") {
+      if (chapterId) {
+        router.push(`/ingested-course/${id}/${chapterId}`);
+      } else if (chapter && chapter !== 0) {
+        router.push(`/ingested-course/${id}/${chapter}`);
+      } else {
+        router.push(`/ingested-course/${id}`);
+      }
+    } else if (type === "youtube") {
+      router.push(`/youtube-course/${id}`);
+    } else {
+      // Default to roadmap pattern
+      if (chapter && chapter !== 0) {
+        router.push(`/chapter-test/${id}/${chapter}`);
+      } else {
+        router.push(`/roadmap/${id}`);
+      }
+    }
   };
 
   const formatDate = (dateString) => {

@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { 
-  Bold, Italic, Underline, List, ListOrdered, 
-  Heading1, Heading2, Code, Quote, Sparkles 
+import {
+  Bold, Italic, Underline, List, ListOrdered,
+  Heading1, Heading2, Code, Quote, Sparkles
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -32,10 +32,10 @@ export default function WYSIWYGEditor({ chapter, onUpdate }) {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const selectedText = content.substring(start, end);
-    
+
     let formattedText = selectedText;
-    
-    switch(format) {
+
+    switch (format) {
       case 'bold':
         formattedText = `**${selectedText}**`;
         break;
@@ -55,7 +55,7 @@ export default function WYSIWYGEditor({ chapter, onUpdate }) {
         formattedText = `> ${selectedText}`;
         break;
     }
-    
+
     const newContent = content.substring(0, start) + formattedText + content.substring(end);
     setContent(newContent);
   };
@@ -131,9 +131,9 @@ export default function WYSIWYGEditor({ chapter, onUpdate }) {
             <Quote className="h-4 w-4" />
           </Button>
           <div className="flex-1" />
-          <Button 
-            size="sm" 
-            variant="default" 
+          <Button
+            size="sm"
+            variant="default"
             onClick={enhanceWithAI}
             disabled={isAIGenerating}
           >
@@ -150,7 +150,7 @@ export default function WYSIWYGEditor({ chapter, onUpdate }) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Write your chapter content here... (Markdown supported)"
-            className="w-full min-h-[400px] p-4 border rounded-md font-mono text-sm"
+            className="w-full min-h-100 p-4 border rounded-md font-mono text-sm"
           />
         </div>
 

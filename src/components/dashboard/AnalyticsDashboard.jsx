@@ -37,7 +37,7 @@ export default function AnalyticsDashboard({ instructorId }) {
   }
 
   const { overview = {}, engagement = {}, performance = {}, content = {} } = analytics || {};
-  
+
   // Provide default values
   const safeOverview = {
     totalStudents: 0,
@@ -46,13 +46,13 @@ export default function AnalyticsDashboard({ instructorId }) {
     totalXpEarned: 0,
     ...overview
   };
-  
+
   const safeEngagement = {
     taskCompletionRate: 0,
     avgSessionDuration: 0,
     ...engagement
   };
-  
+
   const safePerformance = {
     avgScore: 0,
     topPerformers: [],
@@ -63,8 +63,8 @@ export default function AnalyticsDashboard({ instructorId }) {
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Instructor Analytics</h1>
-        <select 
-          value={timeRange} 
+        <select
+          value={timeRange}
           onChange={(e) => setTimeRange(e.target.value)}
           className="px-4 py-2 border border-input rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring"
         >
@@ -136,7 +136,7 @@ export default function AnalyticsDashboard({ instructorId }) {
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+              <div className="h-75 flex items-center justify-center text-muted-foreground">
                 No performance data yet
               </div>
             )}
@@ -155,8 +155,8 @@ export default function AnalyticsDashboard({ instructorId }) {
                   <span className="font-bold">{(safeEngagement.taskCompletionRate * 100).toFixed(1)}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-blue-600 h-2 rounded-full" 
+                  <div
+                    className="bg-blue-600 h-2 rounded-full"
                     style={{ width: `${safeEngagement.taskCompletionRate * 100}%` }}
                   />
                 </div>
@@ -173,8 +173,8 @@ export default function AnalyticsDashboard({ instructorId }) {
                   <span className="font-bold">{(safePerformance.avgScore * 100).toFixed(1)}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-green-600 h-2 rounded-full" 
+                  <div
+                    className="bg-green-600 h-2 rounded-full"
                     style={{ width: `${safePerformance.avgScore * 100}%` }}
                   />
                 </div>

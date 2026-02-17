@@ -2,11 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-export default function ParticleEffect({ 
-  active = false, 
+export default function ParticleEffect({
+  active = false,
   color = "#FFD700",
   particleCount = 50,
-  duration = 3000 
+  duration = 3000
 }) {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
@@ -16,7 +16,7 @@ export default function ParticleEffect({
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    
+
     // Set canvas size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -93,7 +93,7 @@ export default function ParticleEffect({
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[100]"
+      className="fixed inset-0 pointer-events-none z-100"
       style={{ background: "transparent" }}
     />
   );

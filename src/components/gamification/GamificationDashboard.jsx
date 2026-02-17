@@ -64,7 +64,8 @@ export default function GamificationDashboard({ userId }) {
   };
 
   const xpToNextLevel = 500;
-  const xpProgress = (xp % 500) / 5;
+  const safeXp = typeof xp === 'number' ? xp : 0;
+  const xpProgress = (safeXp % 500) / 5;
 
   return (
     <div className="space-y-4">
@@ -80,7 +81,7 @@ export default function GamificationDashboard({ userId }) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.level}</div>
-            <p className="text-xs text-muted-foreground">{xp} XP</p>
+            <p className="text-xs text-muted-foreground">{safeXp} XP</p>
           </CardContent>
         </Card>
 
@@ -138,9 +139,9 @@ export default function GamificationDashboard({ userId }) {
           </div>
         </CardHeader>
         <CardContent>
-          <AnimatedProgress 
-            value={xpProgress} 
-            color="xp" 
+          <AnimatedProgress
+            value={xpProgress}
+            color="xp"
             size="md"
             glow
             delay={300}
@@ -161,9 +162,8 @@ export default function GamificationDashboard({ userId }) {
               return (
                 <div
                   key={badge.id}
-                  className={`p-2 border rounded text-center transition-all ${
-                    earned ? "border-yellow-400 bg-yellow-50 dark:bg-yellow-950" : "opacity-40 grayscale"
-                  }`}
+                  className={`p-2 border rounded text-center transition-all ${earned ? "border-yellow-400 bg-yellow-50 dark:bg-yellow-950" : "opacity-40 grayscale"
+                    }`}
                   title={`${badge.name}: ${badge.description}`}
                 >
                   {IconComponent && <IconComponent className="h-6 w-6 mx-auto text-yellow-500" />}
@@ -185,7 +185,7 @@ export default function GamificationDashboard({ userId }) {
             <div className="space-y-2">
               {stats.achievements.slice(0, 3).map((achievement, idx) => (
                 <div key={idx} className="flex items-center gap-2 p-2 border rounded">
-                  <Medal className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+                  <Medal className="h-4 w-4 text-yellow-500 shrink-0" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">{achievement.title}</div>
                     <div className="text-xs text-muted-foreground truncate">{achievement.description}</div>

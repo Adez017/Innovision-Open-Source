@@ -38,7 +38,7 @@ const MorphingSVG = ({
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Easing function (ease-in-out)
       const eased = progress < 0.5
         ? 2 * progress * progress

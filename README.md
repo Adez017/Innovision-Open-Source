@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="https://github.com/ItsVikasA/Innovision-Open-Source/blob/main/OSCG26%20Label.jpg.jpeg" alt="OSCG26" width=""/>
+</p>
+
+<p align="center">
   <img src="./public/InnoVision_LOGO-removebg-preview.png" alt="InnoVision Logo" width="200"/>
 </p>
 
@@ -35,7 +39,7 @@ InnoVision is a cutting-edge AI-powered learning platform that dynamically gener
 
 **Live Website:** [https://innovision7.live](https://innovision7.live)
 
-**GitHub Repository:** [https://github.com/ItsVikasA/InnoVision](https://github.com/ItsVikasA/InnoVision)
+**GitHub Repository:** [https://github.com/ItsVikasA/Innovision-Open-Source.git](https://github.com/ItsVikasA/Innovision-Open-Source.git)
 
 ---
 

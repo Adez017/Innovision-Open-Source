@@ -3,7 +3,7 @@ import { getAllClasses, getCurriculumByClass } from '@/lib/curriculum-data';
 
 export default function TestCurriculum() {
   const classes = getAllClasses();
-  
+
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">Curriculum Data Test</h1>
