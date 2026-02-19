@@ -64,7 +64,7 @@ export default function page() {
                             .map((_, i) => (
                                 <Skeleton
                                     key={i}
-                                    className="w-[320px] h-[240px] rounded-xl"
+                                    className="w-[320px] h-[280px] rounded-xl"
                                 />
                             ))
                     ) : error ? (
@@ -117,7 +117,7 @@ export default function page() {
                             {/* Create New Course Card */}
                             <ScrollReveal delay={completedCourses.length * 50}>
                                 <HoverCard>
-                                    <Card className="w-[320px] h-[240px] relative flex items-center justify-center border-2 border-dashed border-border/50 bg-card/30 backdrop-blur-sm hover:border-blue-500/50 transition-colors">
+                                    <Card className="w-[320px] h-[280px] relative flex items-center justify-center border-2 border-dashed border-border/50 bg-card/30 backdrop-blur-sm hover:border-blue-500/50 transition-colors">
                                         <div className="flex flex-col items-center text-muted-foreground">
                                             <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-3">
                                                 <Plus strokeWidth={1.5} className="w-8 h-8 text-blue-500" />
