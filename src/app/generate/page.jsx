@@ -150,6 +150,7 @@ export default function Page() {
   }, [curriculumData, availableCurriculumSubjects]);
 
   const handleCurriculumSubmit = async () => {
+    if (isSubmitting) return;
     // Check premium status for curriculum generation
     if (!premiumStatus.isPremium) {
       toast.error("Curriculum generation is only available for Premium users. Upgrade to access!");
@@ -248,6 +249,7 @@ export default function Page() {
   };
 
   const handleEngineeringSubmit = async () => {
+    if (isSubmitting) return;
     // Check premium status for engineering generation
     if (!premiumStatus.isPremium) {
       toast.error("Engineering course generation is only available for Premium users. Upgrade to access!");
@@ -368,6 +370,7 @@ export default function Page() {
   });
 
   const onSubmit = async (data) => {
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
     if (!user) {

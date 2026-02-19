@@ -105,32 +105,49 @@ export default function page() {
                             {roadmaps
                                 .filter(r => r.process === "completed")
                                 .map((roadmap, index) => (
-                                    <ScrollReveal>
-                                        <HoverCard>
-                                            <Card className="w-[320px] h-[200px] relative flex items-center justify-center border-2 border-dashed border-border/50 bg-card/30 backdrop-blur-sm hover:border-blue-500/50 transition-colors">
-                                                <div className="flex flex-col items-center text-muted-foreground">
-                                                    <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-3">
-                                                        <Plus strokeWidth={1.5} className="w-8 h-8 text-blue-500" />
+                                    <ScrollReveal key={roadmap.id}>
+                                        <div className="relative group">
+                                            <HoverCard>
+                                                <Card className="w-[320px] h-[200px] relative border border-border/50 bg-card/30 backdrop-blur-sm hover:border-blue-500/50 transition-colors overflow-hidden">
+                                                    <CardHeader className="p-4 pb-2">
+                                                        <CardTitle className="line-clamp-2 text-lg leading-tight">
+                                                            {roadmap.courseTitle}
+                                                        </CardTitle>
+                                                    </CardHeader>
+                                                    <CardContent className="p-4 pt-2">
+                                                        <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+                                                            {roadmap.courseDescription}
+                                                        </p>
+                                                        <div className="flex items-center gap-2 text-xs text-muted-foreground absolute bottom-4 left-4">
+                                                            <span className={`px-2 py-0.5 rounded-full bg-secondary ${roadmap.difficulty === 'hard' ? 'text-red-500' :
+                                                                    roadmap.difficulty === 'medium' ? 'text-yellow-500' :
+                                                                        'text-green-500'
+                                                                }`}>
+                                                                {roadmap.difficulty || 'balanced'}
+                                                            </span>
+                                                        </div>
+                                                    </CardContent>
+
+                                                    <Link href={`/roadmap/${roadmap.id}`} className="absolute inset-0 rounded-xl ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                                        <span className="sr-only">View course</span>
+                                                    </Link>
+
+                                                    <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <DeleteRoadmap id={roadmap.id} onDelete={fetchRoadmaps} />
                                                     </div>
-                                                    <p className="text-lg text-center font-medium">
-                                                        Create your course
-                                                    </p>
-                                                </div>
-                                                <Link href={`/generate`} scroll={false}>
-                                                    <span className="absolute inset-0"></span>
-                                                </Link>
-                                            </Card>
-                                        </HoverCard>
+                                                </Card>
+                                            </HoverCard>
+                                        </div>
                                     </ScrollReveal>
                                 ))}
 
                             {/* Create Card */}
                             <ScrollReveal>
                                 <HoverCard>
-                                    <Card className="w-[320px] h-[200px] relative flex items-center justify-center border-2 border-dashed border-border/50 bg-card/30 backdrop-blur-sm hover:border-blue-500/50 transition-colors">
-                                        <div className="flex flex-col items-center text-muted-foreground">
-                                            <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-3">
-                                                <Plus strokeWidth={1.5} className="w-8 h-8 text-blue-500" />
+                                    <Card className="w-[320px] h-[200px] relative flex items-center justify-center border-2 border-dashed border-border/50 bg-card/30 backdrop-blur-sm hover:border-blue-500/50 transition-colors group cursor-pointer">
+                                        <div className="flex flex-col items-center text-muted-foreground group-hover:text-blue-500 transition-colors">
+                                            <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-3 group-hover:bg-blue-500/20 transition-colors">
+                                                <Plus strokeWidth={1.5} className="w-8 h-8" />
                                             </div>
                                             <p className="text-lg text-center font-medium">
                                                 Create your course
