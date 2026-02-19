@@ -2,15 +2,34 @@
 
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Clock, BookOpen, Trash2 } from "lucide-react";
+import { Clock, BookOpen, Trash2, CheckCircle2 } from "lucide-react";
 import { calculateEstimatedTime } from "@/lib/time-utils";
+import { Progress } from "@/components/ui/progress";
 import DeleteRoadmap from "./DeleteRoadmap";
 
 const CourseCard = ({ course, onDelete }) => {
-  const { id, courseTitle, courseDescription, chapterCount, difficulty } = course;
+  const { id, courseTitle, courseDescription, chapterCount, difficulty, chapters } = course;
+
+  // Calculate progress percentage
+  const calculateProgress = () => {
+    if (!chapters || chapters.length === 0) return 0;
+    const completedChapters = chapters.filter(ch => ch.completed).length;
+    return Math.round((completedChapters / chapters.length) * 100);
+  };
+
+  const progress = calculateProgress();
+  const completedChapters = chapters?.filter(ch => ch.completed).length || 0;
 
   // Calculate estimated time
   const estimatedTime = calculateEstimatedTime(chapterCount, difficulty);
+
+  // Get progress color based on percentage
+  const getProgressColor = (percentage) => {
+    if (percentage === 0) return "bg-gray-400";
+    if (percentage < 33) return "bg-red-500";
+    if (percentage < 67) return "bg-yellow-500";
+    return "bg-green-500";
+  };
 
   // Get difficulty badge color
   const getDifficultyColor = (diff) => {
@@ -40,7 +59,7 @@ const CourseCard = ({ course, onDelete }) => {
   };
 
   return (
-    <Card className="w-[320px] h-[240px] relative group hover:shadow-lg transition-all duration-300 hover:border-blue-500/50 bg-card/50 backdrop-blur-sm">
+    <Card className="w-[320px] h-[280px] relative group hover:shadow-lg transition-all duration-300 hover:border-blue-500/50 bg-card/50 backdrop-blur-sm">
       <Link href={`/roadmap/${id}`} className="absolute inset-0 z-0" />
       
       <CardHeader className="pb-3">
@@ -60,18 +79,41 @@ const CourseCard = ({ course, onDelete }) => {
       </CardHeader>
 
       <CardContent className="space-y-3">
-        {/* Chapter Count */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <BookOpen className="h-4 w-4" />
-          <span>
-            {chapterCount} {chapterCount === 1 ? "Chapter" : "Chapters"}
-          </span>
+        {/* Progress Bar */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
+              <span className="text-muted-foreground">Progress</span>
+            </div>
+            <span className={`font-semibold ${
+              progress === 100 ? 'text-green-600 dark:text-green-400' : 
+              progress > 0 ? 'text-blue-600 dark:text-blue-400' : 
+              'text-muted-foreground'
+            }`}>
+              {progress}%
+            </span>
+          </div>
+          <Progress 
+            value={progress} 
+            className="h-2"
+            indicatorClassName={getProgressColor(progress)}
+          />
+          <p className="text-xs text-muted-foreground">
+            {completedChapters} of {chapterCount} chapters completed
+          </p>
         </div>
 
-        {/* Estimated Time */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Clock className="h-4 w-4" />
-          <span>{estimatedTime}</span>
+        {/* Chapter Count & Time */}
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <div className="flex items-center gap-1.5">
+            <BookOpen className="h-4 w-4" />
+            <span>{chapterCount} {chapterCount === 1 ? "Chapter" : "Chapters"}</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Clock className="h-4 w-4" />
+            <span>{estimatedTime}</span>
+          </div>
         </div>
 
         {/* Difficulty Badge */}
@@ -83,6 +125,11 @@ const CourseCard = ({ course, onDelete }) => {
           >
             {getDifficultyLabel(difficulty)}
           </span>
+          {progress === 100 && (
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">
+              ✓ Completed
+            </span>
+          )}
         </div>
       </CardContent>
     </Card>
